@@ -56,7 +56,7 @@ function($, _, Backbone) {
     M.PostcardPhoto = Backbone.Model.extend({
         defaults: {
             photoSrc: , // local source to be filled up
-            photoWidth: 800,
+            photoWidth: 800, // to be determined by Gia
             photoHeight: 600,
             photoEffect: 1
         },
@@ -72,8 +72,8 @@ function($, _, Backbone) {
 
     M.Postcard = Backbone.Model.extend({
         defaults: {
-            postcardSender : '',
-            postcardReceiver : '',
+            postcardSender : '', //sender's id or sender's email address
+            postcardReceiver : '', // receiver's address
             postcardText : new M.PostcardText(),
             postcardTemplate : 1,
             postcardInSync : false,
@@ -121,4 +121,15 @@ function($, _, Backbone) {
         }
     });
 
+    M.User = Backbone.Model.extend({
+        // storing the user information
+        // user id
+        // user name
+        // user email
+        //  
+
+    });
+
+    return m;
 }
+);
