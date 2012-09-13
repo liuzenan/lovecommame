@@ -2,15 +2,12 @@ define([
   // Libraries.
   "zepto",
   "lodash",
-  "backbone",
-
-  // Plugins.
-  "plugins/backbone.layoutmanager"
+  "backbone"
 ],
 
 function($, _, Backbone) {
 
-    var M = {},
+    var M = M || {},
 
     M.PostcardText = Backbone.Model.extend({
         defaults: {

@@ -1,7 +1,8 @@
 require([
   // Application.
   "app",
-
+  "models",
+  "views",
   // Main Router.
   "router"
 ],
@@ -37,5 +38,9 @@ function(app, Router) {
       Backbone.history.navigate(href.attr, true);
     }
   });
+
+
+
+
 
 });
