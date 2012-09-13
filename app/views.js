@@ -4,8 +4,6 @@ define([
   "lodash",
   "backbone",
 
-  // Plugins.
-  "plugins/backbone.layoutmanager"
 ],
 
 function($, _, Backbone){
@@ -13,15 +11,27 @@ function($, _, Backbone){
 	var V = V || {};
 
 
+	V.Login = Backbone.View.extend({
 
+	});
+
+
+	V.Wall = Backbone.View.extend({
+
+	});
+
+
+	//postcard edit mode
 	V.PostCard_Edit = Backbone.View.extend({
-		className:
+
 	});
 
+
+	//postcard display mode
 	V.PostCard_Display = Backbone.View.extend({
-		className:
+
 	});
 
-	V.
+	return V;
 
 });

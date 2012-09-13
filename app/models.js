@@ -1,18 +1,40 @@
 define([
-  // Libraries.
-  "zepto",
-  "lodash",
-  "backbone"
+
+    //library
+    "backbone"
+
 ],
 
-function($, _, Backbone) {
+function(Backbone) {
 
-    var M = M || {},
+
+    var M = M || {};
+
+    M.TextStyle = Backbone.Model.extend({
+
+        defaults: {
+            fontSize: 18,
+            fontFamily: 'Times New Roman', // to be determined
+            fontColor: "#000000"
+        },
+
+        changeSize: function( size ){
+            this.set({ fontSize : size });
+        },
+
+        changeFamily: function( family ){
+            this.set({fontFamily : family});
+        },
+        
+        changeColor: function( color ){
+            this.set({fontColor : color});
+        }
+    });    
 
     M.PostcardText = Backbone.Model.extend({
         defaults: {
             textContent: '',
-            textStyle: new M.Text_Style()
+            textStyle: new M.TextStyle()
         },
 
         changeContent: function( content ){
@@ -32,30 +54,11 @@ function($, _, Backbone) {
         }
     });
 
-    M.TextStyle = Backbone.Model.extend({
 
-        defaults: {
-            fontSize: 18,
-            fontFamily: 'Times New Roman', // to be determined
-            fontColor: #FFFFFF
-        },
-
-        changeSize: function( size ){
-            this.set({ fontSize : size });
-        },
-
-        changeFamily: function( family ){
-            this.set({fontFamily : family});
-        },
-        
-        changeColor: function( color ){
-            this.set({fontColor : color});
-        }
-    });
 
     M.PostcardPhoto = Backbone.Model.extend({
         defaults: {
-            photoSrc: , // local source to be filled up
+            photoSrc: "", // local source to be filled up
             photoWidth: 800, // to be determined by Gia
             photoHeight: 600,
             photoEffect: 1
@@ -63,7 +66,7 @@ function($, _, Backbone) {
 
         changeSrc: function( source ){
             this.set({photoSrc : source});
-        }
+        },
 
         changeEffect: function( effect ){
             this.set({photoEffect : effect});
@@ -110,11 +113,11 @@ function($, _, Backbone) {
 
         changeReceiver: function( receiver ){
             this.set({postcardReceiver : receiver});
-        }
+        },
 
         sync: function(){
             this.set({postcardInSync : true})
-        }
+        },
 
         unsync: function(){
             this.set({postcardInSync : false});
@@ -130,6 +133,6 @@ function($, _, Backbone) {
 
     });
 
-    return m;
+    return M;
 }
 );
