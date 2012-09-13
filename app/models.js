@@ -10,12 +10,12 @@ define([
 
 function($, _, Backbone) {
 
-    var Model = {},
+    var M = {},
 
-    Model.PostcardText = Backbone.Model.extend({
+    M.PostcardText = Backbone.Model.extend({
         defaults: {
             textContent: '',
-            textStyle: new Text_Style()
+            textStyle: new M.Text_Style()
         },
 
         changeContent: function( content ){
@@ -35,7 +35,7 @@ function($, _, Backbone) {
         }
     });
 
-    Model.TextStyle = Backbone.Model.extend({
+    M.TextStyle = Backbone.Model.extend({
 
         defaults: {
             fontSize: 18,
@@ -56,7 +56,7 @@ function($, _, Backbone) {
         }
     });
 
-    Model.PostcardPhoto = Backbone.Model.extend({
+    M.PostcardPhoto = Backbone.Model.extend({
         defaults: {
             photoSrc: , // local source to be filled up
             photoWidth: 800,
@@ -73,14 +73,14 @@ function($, _, Backbone) {
         }
     });
 
-    Model.Postcard = Backbone.Model.extend({
+    M.Postcard = Backbone.Model.extend({
         defaults: {
             postcardSender : '',
             postcardReceiver : '',
-            postcardText : new PostcardText(),
+            postcardText : new M.PostcardText(),
             postcardTemplate : 1,
             postcardInSync : false,
-            postcardPhoto : new PostcardPhoto()
+            postcardPhoto : new M.PostcardPhoto()
         },
 
         changeTextContent: function( content ){
