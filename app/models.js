@@ -1,11 +1,12 @@
 define([
-
-    //library
-    "backbone"
+  // Libraries.
+  "zepto",
+  "lodash",
+  "backbone",
 
 ],
 
-function(Backbone) {
+function($, _, Backbone){
 
 
     var M = M || {};
@@ -33,8 +34,12 @@ function(Backbone) {
 
     M.PostcardText = Backbone.Model.extend({
         defaults: {
-            textContent: '',
-            textStyle: new M.TextStyle()
+            textContent: ''
+        },
+
+        initialize: function(){
+            textStyle = new M.TextStyle();
+            this.textStyle.parent = this;
         },
 
         changeContent: function( content ){
@@ -77,10 +82,15 @@ function(Backbone) {
         defaults: {
             postcardSender : '', //sender's id or sender's email address
             postcardReceiver : '', // receiver's address
-            postcardText : new M.PostcardText(),
             postcardTemplate : 1,
-            postcardInSync : false,
-            postcardPhoto : new M.PostcardPhoto()
+            postcardInSync : false
+        },
+
+        initialize: function(){
+            this.postcardText = new M.PostcardText();
+            this.postcardText.parent = this;
+            postcardPhoto = new M.PostcardPhoto();
+            this.postcardPhoto.parent = this;
         },
 
         changeTextContent: function( content ){
