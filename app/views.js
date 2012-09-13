@@ -32,7 +32,7 @@ function($, _, Backbone){
 	});
 
 
-	V.PostCard
+	
 
 	return V;
 
