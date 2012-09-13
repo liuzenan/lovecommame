@@ -1,111 +1,127 @@
-var PostcardText = Backbone.Model.extend({
-    defaults: {
-        textContent: '',
-        textStyle: new Text_Style()
-    },
+define([
+  // Libraries.
+  "zepto",
+  "lodash",
+  "backbone",
 
-    changeContent: function( content ){
-        this.set({ textContent : content });
-    },
+  // Plugins.
+  "plugins/backbone.layoutmanager"
+],
 
-    changeTextColor: function( color ){
-        this.get("textStyle").changeColor(color);
-    },
+function($, _, Backbone) {
 
-    changeTextSize: function( size ){
-        this.get("textStyle").changeSize(size);
-    },
+    var Model = {},
 
-    changeTextFamily: function( family ){
-        this.get("textStyle").changeFamily(family);
-    }
-});
+    Model.PostcardText = Backbone.Model.extend({
+        defaults: {
+            textContent: '',
+            textStyle: new Text_Style()
+        },
 
-var TextStyle = Backbone.Model.extend({
+        changeContent: function( content ){
+            this.set({ textContent : content });
+        },
 
-    defaults: {
-        fontSize: 18,
-        fontFamily: 'Times New Roman', // to be determined
-        fontColor: #FFFFFF
-    },
+        changeTextColor: function( color ){
+            this.get("textStyle").changeColor(color);
+        },
 
-    changeSize: function( size ){
-        this.set({ fontSize : size });
-    },
+        changeTextSize: function( size ){
+            this.get("textStyle").changeSize(size);
+        },
 
-    changeFamily: function( family ){
-        this.set({fontFamily : family});
-    },
-    
-    changeColor: function( color ){
-        this.set({fontColor : color});
-    }
-});
+        changeTextFamily: function( family ){
+            this.get("textStyle").changeFamily(family);
+        }
+    });
 
-var PostcardPhoto = Backbone.Model.extend({
-    defaults: {
-        photoSrc: , // local source to be filled up
-        photoWidth: 800,
-        photoHeight: 600,
-        photoEffect: 1
-    },
+    Model.TextStyle = Backbone.Model.extend({
 
-    changeSrc: function( source ){
-        this.set({photoSrc : source});
-    }
+        defaults: {
+            fontSize: 18,
+            fontFamily: 'Times New Roman', // to be determined
+            fontColor: #FFFFFF
+        },
 
-    changeEffect: function( effect ){
-        this.set({photoEffect : effect});
-    }
-});
+        changeSize: function( size ){
+            this.set({ fontSize : size });
+        },
 
-var Postcard = Backbone.Model.extend({
-    defaults: {
-        postcardSender : '',
-        postcardReceiver : '',
-        postcardText : new PostcardText(),
-        postcardTemplate : 1,
-        postcardInSync : false,
-        postcardPhoto : new PostcardPhoto()
-    },
+        changeFamily: function( family ){
+            this.set({fontFamily : family});
+        },
+        
+        changeColor: function( color ){
+            this.set({fontColor : color});
+        }
+    });
 
-    changeTextContent: function( content ){
-        this.get("postcardText").changeContent(content);
-    },
+    Model.PostcardPhoto = Backbone.Model.extend({
+        defaults: {
+            photoSrc: , // local source to be filled up
+            photoWidth: 800,
+            photoHeight: 600,
+            photoEffect: 1
+        },
 
-    changeTextColor: function( color ){
-        this.get("postcardText").changeTextColor(color);
-    },
+        changeSrc: function( source ){
+            this.set({photoSrc : source});
+        }
 
-    changeTextFamily: function( family ){
-        this.get("postcardText").changeTextFamily(family);
-    },
+        changeEffect: function( effect ){
+            this.set({photoEffect : effect});
+        }
+    });
 
-    changeTextSize: function( size ){
-        this.get("postcardText").changeTextSize(size);
-    },
+    Model.Postcard = Backbone.Model.extend({
+        defaults: {
+            postcardSender : '',
+            postcardReceiver : '',
+            postcardText : new PostcardText(),
+            postcardTemplate : 1,
+            postcardInSync : false,
+            postcardPhoto : new PostcardPhoto()
+        },
 
-    changePhotoSrc: function( src ){
-        this.get("postcardPhoto").changeSrc(src);
-    },
+        changeTextContent: function( content ){
+            this.get("postcardText").changeContent(content);
+        },
 
-    changePhotoEffect: function( effect ){
-        this.get("postcardPhoto").changeEffect(effect);
-    },
+        changeTextColor: function( color ){
+            this.get("postcardText").changeTextColor(color);
+        },
 
-    changeTemplate: function( template ){
-        this.set({postcardTemplate : template});
-    },
+        changeTextFamily: function( family ){
+            this.get("postcardText").changeTextFamily(family);
+        },
 
-    changeReceiver: function( receiver ){
-        this.set({postcardReceiver : receiver});
-    }
+        changeTextSize: function( size ){
+            this.get("postcardText").changeTextSize(size);
+        },
 
-    sync: function(){
-        this.set({postcardInSync : true})
-    }
+        changePhotoSrc: function( src ){
+            this.get("postcardPhoto").changeSrc(src);
+        },
 
-    unsync: function(){
-        this.set({postcardInSync : false});
-    }
-});
+        changePhotoEffect: function( effect ){
+            this.get("postcardPhoto").changeEffect(effect);
+        },
+
+        changeTemplate: function( template ){
+            this.set({postcardTemplate : template});
+        },
+
+        changeReceiver: function( receiver ){
+            this.set({postcardReceiver : receiver});
+        }
+
+        sync: function(){
+            this.set({postcardInSync : true})
+        }
+
+        unsync: function(){
+            this.set({postcardInSync : false});
+        }
+    });
+
+}
