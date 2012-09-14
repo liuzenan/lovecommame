@@ -72,7 +72,8 @@ function($, _, Backbone) {
 
     M.Postcard = Backbone.Model.extend({
         defaults: {
-            postcardSender : '', //sender's id or sender's email address
+            postcardSender : '', // sender's address
+            postcardSenderName : , // sender's name
             postcardReceiver : '', // receiver's address
             postcardText : new M.PostcardText(),
             postcardTemplate : 1,
