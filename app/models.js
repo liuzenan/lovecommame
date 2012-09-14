@@ -1,6 +1,6 @@
 define([
   // Libraries.
-  "zepto",
+  "jquery",
   "lodash",
   "backbone",
 
@@ -135,11 +135,10 @@ function($, _, Backbone){
     });
 
     M.User = Backbone.Model.extend({
-        // storing the user information
-        // user id
-        // user name
-        // user email
-        //  
+        defaults : {
+            title : "aaa",
+            body: "asdfasdf"
+        }
 
     });
 

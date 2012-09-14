@@ -1,11 +1,12 @@
 define([
   // Libraries.
-  "zepto",
+  "jquery",
   "lodash",
   "backbone",
 
   // Plugins.
-  "plugins/backbone.layoutmanager"
+  "plugins/backbone.layoutmanager",
+  "plugins/jgestures"
 ],
 
 function($, _, Backbone) {
@@ -49,7 +50,7 @@ function($, _, Backbone) {
           done(JST[path] = _.template(contents));
         });
       }
-    }
+    },
   });
 
   // Mix Backbone.Events, modules, and layout management into the app object.
