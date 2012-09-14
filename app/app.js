@@ -3,7 +3,6 @@ define([
   "zepto",
   "lodash",
   "backbone",
-  "json2",
 
   // Plugins.
   "plugins/backbone.layoutmanager"
