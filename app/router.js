@@ -1,15 +1,17 @@
 define([
-  // Application.
+  // The main application
   "app",
 
-    // Libs
+  // Libs
   "jquery",
   "backbone",
 
-  "modules/example"
+  // Modules
+  "modules/postcard",
+  "modules/user"
 ],
 
-function(app,$,Backbone,Example) {
+function(app,$,Backbone,Postcard, User) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -26,7 +28,7 @@ function(app,$,Backbone,Example) {
 
       console.log('before');
       app.useLayout("login").setViews({
-        "#container": new Example.Views.Index()
+        "#container": new Postcard.Views.Index()
       }).render();
 
       console.log('after');
@@ -50,6 +52,11 @@ function(app,$,Backbone,Example) {
 
     defaultRoute: function(other){
       console.log('default route');
+    },
+
+    initialize: function(){
+      this.user = new User.Model();
+      this.postcard
     }
 
   });

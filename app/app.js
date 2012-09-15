@@ -50,7 +50,7 @@ function($, _, Backbone) {
           done(JST[path] = _.template(contents));
         });
       }
-    },
+    }
   });
 
   // Mix Backbone.Events, modules, and layout management into the app object.
