@@ -1,26 +1,22 @@
 define([
   // The main application
   "app",
-
-  // Libs
-  "jquery",
-  "backbone",
-
   // Modules
   "modules/postcard",
-  "modules/user"
+  "modules/user",
+  "modules/friend",
 ],
 
-function(app,$,Backbone,Postcard, User) {
+function(app, Postcard, User, Friend) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
     routes: {
       "": "index",
       "signup" : "signUp",
-      "wall" : "getWall",
-      "postcard/:id" : "getPostcard",
-      "create" : "createPostCard",
+      "wall" : "wall",
+      "postcard/:id" : "postcard",
+      "create" : "create",
       "*other" : "defaultRoute"
     },
 
@@ -38,15 +34,15 @@ function(app,$,Backbone,Postcard, User) {
 
     },
 
-    getWall: function(){
+    wall: function(){
 
     },
 
-    getPostcard: function(){
+    postcard: function(id){
 
     },
 
-    createPostCard: function(){
+    create: function(){
 
     },
 
@@ -56,7 +52,9 @@ function(app,$,Backbone,Postcard, User) {
 
     initialize: function(){
       this.user = new User.Model();
-      this.postcard
+      this.postcards = new Postcard.Collection();
+      this.newPostcard = new Postcard.Model();
+      this.friends = new Friend.Collection();
     }
 
   });
