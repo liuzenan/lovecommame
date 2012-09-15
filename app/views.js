@@ -15,12 +15,37 @@ function($, _, Backbone,tpl_login,tpl_postcard_display,tpl_postcard_edit,tpl_wal
 
 	//login view
 	V.Login = Backbone.View.extend({
-		
+		el: $("#login"),
+
+		render: function(){},
+
+		events: {
+			"submit #loginForm": "authenticate",
+			"click #registBtn": "regist",
+		},
+
+		authenticate: function(){
+			// check if "remember me" is checked
+			// if checked, store the username and password in browser cache and start authentication
+			// if not checked, directly start authentication
+		},
+
+		regist: function(){
+			// directly start authentication? or redirect to another registration page?
+		}
 	});
 
 	//wall view
 	V.Wall = Backbone.View.extend({
+		el: $("#wall"),
 
+		render: function(){
+			// render the wall background?
+		},
+
+		events: {
+			// associate "swipe_left" and "swipe_right" with event handlers
+		}
 	});
 
 
@@ -55,9 +80,5 @@ function($, _, Backbone,tpl_login,tpl_postcard_display,tpl_postcard_edit,tpl_wal
 
 	});
 
-
-
-
 	return V;
-
 });
