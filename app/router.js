@@ -24,7 +24,7 @@ function(app, Postcard, User, Friend) {
 
       console.log('index');
       app.useLayout("login").setViews({
-
+        
       }).render();
     },
 

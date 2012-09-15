@@ -24,7 +24,7 @@ function(app, Backbone){
 			//safty check to ensure only valid data is used
 			if(obj.data.message !== "Not Found"){
 				this.status = "valid";
-				return obj.data;
+				return obj.data; // depend on the structure of the returned json
 			}
 
 			this.status = "invalid";

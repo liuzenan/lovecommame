@@ -37,7 +37,7 @@ function(app, Backbone) {
         },
 
         initialize: function(){
-            textStyle = new Postcard.TextStyle();
+            this.textStyle = new Postcard.TextStyle();
             this.textStyle.parent = this;
         },
 
@@ -89,7 +89,7 @@ function(app, Backbone) {
         initialize: function(){
             this.postcardText = new Postcard.PostcardText();
             this.postcardText.parent = this;
-            postcardPhoto = new Postcard.PostcardPhoto();
+            this.postcardPhoto = new Postcard.PostcardPhoto();
             this.postcardPhoto.parent = this;
         },
 
