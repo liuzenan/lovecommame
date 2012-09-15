@@ -11,14 +11,20 @@ function($, _, Backbone){
 
 	//login view
 	V.Login = Backbone.View.extend({
-<<<<<<< HEAD
-		el: $("#login"),
 
-		render: function(){},
-
-		events: {
+		template:"tpl_login",
+		event: {
+			"click" : "update", // needs more discussion here
 			"submit #loginForm": "authenticate",
-			"click #registBtn": "regist",
+			"click #registBtn": "regist"
+		},
+
+		update: function(e){
+			alert('updated');
+		},
+
+		render: function(layout){
+			return layout(this).render({user: this.model.toJSON()});
 		},
 
 		authenticate: function(){
@@ -30,21 +36,7 @@ function($, _, Backbone){
 		regist: function(){
 			// directly start authentication? or redirect to another registration page?
 		}
-=======
-		template:"tpl_login",
-		event: {
-			"click" : "update"
-		},
 
-		update: function(e){
-			alert('updated');
-		},
-
-		render: function(layout){
-			return layout(this).render({user: this.model.toJSON()});
-		}
-			
->>>>>>> a1b9a846fb7078932d825881114f77e9a04c052c
 	});
 
 	//wall view
