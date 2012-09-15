@@ -46,15 +46,15 @@ function(app, Backbone) {
         },
 
         changeTextColor: function( color ){
-            this.get("textStyle").changeColor(color);
+            this.textStyle.changeColor(color);
         },
 
         changeTextSize: function( size ){
-            this.get("textStyle").changeSize(size);
+            this.textStyle.changeSize(size);
         },
 
         changeTextFamily: function( family ){
-            this.get("textStyle").changeFamily(family);
+            this.textStyle.changeFamily(family);
         }
   });
 
@@ -94,27 +94,27 @@ function(app, Backbone) {
         },
 
         changeTextContent: function( content ){
-            this.get("postcardText").changeContent(content);
+            this.postcardText.changeContent(content);
         },
 
         changeTextColor: function( color ){
-            this.get("postcardText").changeTextColor(color);
+            this.postcardText.changeTextColor(color);
         },
 
         changeTextFamily: function( family ){
-            this.get("postcardText").changeTextFamily(family);
+            this.postcardText.changeTextFamily(family);
         },
 
         changeTextSize: function( size ){
-            this.get("postcardText").changeTextSize(size);
+            this.postcardText.changeTextSize(size);
         },
 
         changePhotoSrc: function( src ){
-            this.get("postcardPhoto").changeSrc(src);
+            this.postcardPhoto.changeSrc(src);
         },
 
         changePhotoEffect: function( effect ){
-            this.get("postcardPhoto").changeEffect(effect);
+            this.postcardPhoto.changeEffect(effect);
         },
 
         changeTemplate: function( template ){
@@ -134,7 +134,7 @@ function(app, Backbone) {
         }
   });
 
-
+  //to be implemented
   Postcard.Collection = Backbone.Collection.extend({
     model: Postcard.Model,
     cache: true,
@@ -144,7 +144,7 @@ function(app, Backbone) {
     }
 
     parse: function(obj){
-      
+
     }
 
     initialize:function(models, options){

@@ -22,15 +22,17 @@ function(app, Postcard, User, Friend) {
 
     index: function() {
 
-      console.log('before');
+      console.log('index');
       app.useLayout("login").setViews({
         "#container": new Postcard.Views.Index()
       }).render();
-
-      console.log('after');
     },
 
     signUp: function() {
+      console.log("signup");
+      app.useLayout("login").setViews({
+        "#container": new
+      })
 
     },
 
