@@ -38,5 +38,5 @@ function(app, Backbone){
 		}
 	});
 
-
+	return Friend;
 });

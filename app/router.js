@@ -24,14 +24,14 @@ function(app, Postcard, User, Friend) {
 
       console.log('index');
       app.useLayout("login").setViews({
-        "#container": new Postcard.Views.Index()
+
       }).render();
     },
 
     signUp: function() {
       console.log("signup");
       app.useLayout("login").setViews({
-        "#container": new
+
       })
 
     },

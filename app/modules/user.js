@@ -15,13 +15,15 @@ function(app, Backbone){
 	});
 
 	//User login view
-	User.View.Login = Backbone.View.extend({
+	User.Views.Login = Backbone.View.extend({
 
 	});
 
 	//User Sign up view
-	User.View.Signup = Backbone.View.extend({
+	User.Views.Signup = Backbone.View.extend({
 
 	});
+
+	return User;
 
 });

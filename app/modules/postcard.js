@@ -10,7 +10,7 @@ function(app, Backbone) {
   // Create a new module
   var Postcard = app.module();
   
-  Postcard.Model.TextStyle = Backbone.Model.extend({
+  Postcard.TextStyle = Backbone.Model.extend({
 
         defaults: {
             fontSize: 18,
@@ -31,13 +31,13 @@ function(app, Backbone) {
         }
   });    
 
-  Postcard.Model.PostcardText = Backbone.Model.extend({
+  Postcard.PostcardText = Backbone.Model.extend({
         defaults: {
             textContent: ''
         },
 
         initialize: function(){
-            textStyle = new Postcard.Model.TextStyle();
+            textStyle = new Postcard.TextStyle();
             this.textStyle.parent = this;
         },
 
@@ -60,9 +60,9 @@ function(app, Backbone) {
 
 
 
-  Postcard.Model.PostcardPhoto = Backbone.Model.extend({
+  Postcard.PostcardPhoto = Backbone.Model.extend({
         defaults: {
-            photoSrc: "", // local source to be filled up
+            photoSrc: '', // local source to be filled up
             photoWidth: 800, // to be determined by Gia
             photoHeight: 600,
             photoEffect: 1
@@ -79,17 +79,17 @@ function(app, Backbone) {
 
   Postcard.Model = Backbone.Model.extend({
         defaults: {
-            postcardSender : '', // sender's address
-            postcardSenderName : , // sender's name
+            postcardSender : "", // sender's address
+            postcardSenderName : "", // sender's name
             postcardReceiver : '', // receiver's address
             postcardTemplate : 1,
             postcardInSync : false
         },
 
         initialize: function(){
-            this.postcardText = new Postcard.Model.PostcardText();
+            this.postcardText = new Postcard.PostcardText();
             this.postcardText.parent = this;
-            postcardPhoto = new Postcard.Model.PostcardPhoto();
+            postcardPhoto = new Postcard.PostcardPhoto();
             this.postcardPhoto.parent = this;
         },
 
@@ -141,17 +141,45 @@ function(app, Backbone) {
 
     url: function(){
       return;
-    }
+    },
 
     parse: function(obj){
 
-    }
+    },
 
     initialize:function(models, options){
       if(options){
-        
+
       }
     }
+  });
+
+
+  //to be implemented
+  Postcard.Views.Wall = Backbone.View.extend({
+
+  });
+
+  //to be implemented
+  Postcard.Views.Detail = Backbone.View.extend({
+
+  });
+
+  //to be implemented
+  Postcard.Views.EditText = Backbone.View.extend({
+
+  });
+
+  Postcard.Views.UploadPhoto = Backbone.View.extend({
+
+  });
+
+  Postcard.Views.EditPhotoEffect = Backbone.View.extend({
+
+  });
+
+  Postcard.Views.Send = Backbone.View.extend({
+
   });
 
   // Required, return the module for AMD compliance
