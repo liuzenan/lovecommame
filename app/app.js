@@ -1,11 +1,12 @@
 define([
   // Libraries.
-  "zepto",
+  "jquery",
   "lodash",
   "backbone",
 
   // Plugins.
-  "plugins/backbone.layoutmanager"
+  "plugins/backbone.layoutmanager",
+  "plugins/jgestures"
 ],
 
 function($, _, Backbone) {

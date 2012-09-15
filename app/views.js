@@ -1,20 +1,17 @@
 define([
   // Libraries.
-  "zepto",
+  "jquery",
   "lodash",
-  "backbone",
-  "text!templates/tpl_login.html",
-  "text!templates/tpl_postcard_display.html",
-  "text!templates/tpl_postcard_edit.html",
-  "text!templates/tpl_wall.html"
+  "backbone"
 ],
 
-function($, _, Backbone,tpl_login,tpl_postcard_display,tpl_postcard_edit,tpl_wall){
+function($, _, Backbone){
 
 	var V = V || {};
 
 	//login view
 	V.Login = Backbone.View.extend({
+<<<<<<< HEAD
 		el: $("#login"),
 
 		render: function(){},
@@ -33,6 +30,21 @@ function($, _, Backbone,tpl_login,tpl_postcard_display,tpl_postcard_edit,tpl_wal
 		regist: function(){
 			// directly start authentication? or redirect to another registration page?
 		}
+=======
+		template:"tpl_login",
+		event: {
+			"click" : "update"
+		},
+
+		update: function(e){
+			alert('updated');
+		},
+
+		render: function(layout){
+			return layout(this).render({user: this.model.toJSON()});
+		}
+			
+>>>>>>> a1b9a846fb7078932d825881114f77e9a04c052c
 	});
 
 	//wall view

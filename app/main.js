@@ -1,13 +1,11 @@
 require([
   // Application.
   "app",
-  "models",
-  "views",
   // Main Router.
   "router"
 ],
 
-function(app,M,V,Router) {
+function(app,Router) {
 
   // Define your master router on the application namespace and trigger all
   // navigation from this instance.
@@ -38,9 +36,5 @@ function(app,M,V,Router) {
       Backbone.history.navigate(href.attr, true);
     }
   });
-
-
-
-
 
 });

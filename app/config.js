@@ -11,7 +11,7 @@ require.config({
     vendor: "../assets/vendor",
 
     // Libraries.
-    zepto: "../assets/js/libs/zepto",
+    jquery: "../assets/js/libs/jquery",
     lodash: "../assets/js/libs/lodash",
     backbone: "../assets/js/libs/backbone",
     json2: "../assets/js/libs/json2"
@@ -20,12 +20,13 @@ require.config({
   shim: {
     // Backbone library depends on underscore and jQuery.
     backbone: {
-      deps: ["lodash", "zepto", "json2"],
+      deps: ["lodash", "jquery", "json2"],
       exports: "Backbone"
     },
 
     // Backbone.LayoutManager depends on Backbone.
-    "plugins/backbone.layoutmanager": ["backbone"]
+    "plugins/backbone.layoutmanager": ["backbone"],
+    "plugins/jgesture" : ["jquery"]
   }
 
 });

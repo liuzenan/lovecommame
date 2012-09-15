@@ -1,17 +1,16 @@
 define([
-  // Libraries.
-  "jquery",
-  "lodash",
-  "backbone",
+  "app",
 
+  // Libs
+  "backbone"
 ],
 
-function($, _, Backbone){
+function(app, Backbone) {
 
-
-    var M = M || {};
-
-    M.TextStyle = Backbone.Model.extend({
+  // Create a new module
+  var Postcard = app.module();
+  
+  Postcard.Model.TextStyle = Backbone.Model.extend({
 
         defaults: {
             fontSize: 18,
@@ -30,15 +29,15 @@ function($, _, Backbone){
         changeColor: function( color ){
             this.set({fontColor : color});
         }
-    });    
+  });    
 
-    M.PostcardText = Backbone.Model.extend({
+  Postcard.Model.PostcardText = Backbone.Model.extend({
         defaults: {
             textContent: ''
         },
 
         initialize: function(){
-            textStyle = new M.TextStyle();
+            textStyle = new Postcard.Model.TextStyle();
             this.textStyle.parent = this;
         },
 
@@ -47,21 +46,21 @@ function($, _, Backbone){
         },
 
         changeTextColor: function( color ){
-            this.get("textStyle").changeColor(color);
+            this.textStyle.changeColor(color);
         },
 
         changeTextSize: function( size ){
-            this.get("textStyle").changeSize(size);
+            this.textStyle.changeSize(size);
         },
 
         changeTextFamily: function( family ){
-            this.get("textStyle").changeFamily(family);
+            this.textStyle.changeFamily(family);
         }
-    });
+  });
 
 
 
-    M.PostcardPhoto = Backbone.Model.extend({
+  Postcard.Model.PostcardPhoto = Backbone.Model.extend({
         defaults: {
             photoSrc: "", // local source to be filled up
             photoWidth: 800, // to be determined by Gia
@@ -78,7 +77,7 @@ function($, _, Backbone){
         }
     });
 
-    M.Postcard = Backbone.Model.extend({
+  Postcard.Model = Backbone.Model.extend({
         defaults: {
             postcardSender : '', // sender's address
             postcardSenderName : , // sender's name
@@ -88,34 +87,34 @@ function($, _, Backbone){
         },
 
         initialize: function(){
-            this.postcardText = new M.PostcardText();
+            this.postcardText = new Postcard.Model.PostcardText();
             this.postcardText.parent = this;
-            postcardPhoto = new M.PostcardPhoto();
+            postcardPhoto = new Postcard.Model.PostcardPhoto();
             this.postcardPhoto.parent = this;
         },
 
         changeTextContent: function( content ){
-            this.get("postcardText").changeContent(content);
+            this.postcardText.changeContent(content);
         },
 
         changeTextColor: function( color ){
-            this.get("postcardText").changeTextColor(color);
+            this.postcardText.changeTextColor(color);
         },
 
         changeTextFamily: function( family ){
-            this.get("postcardText").changeTextFamily(family);
+            this.postcardText.changeTextFamily(family);
         },
 
         changeTextSize: function( size ){
-            this.get("postcardText").changeTextSize(size);
+            this.postcardText.changeTextSize(size);
         },
 
         changePhotoSrc: function( src ){
-            this.get("postcardPhoto").changeSrc(src);
+            this.postcardPhoto.changeSrc(src);
         },
 
         changePhotoEffect: function( effect ){
-            this.get("postcardPhoto").changeEffect(effect);
+            this.postcardPhoto.changeEffect(effect);
         },
 
         changeTemplate: function( template ){
@@ -133,16 +132,29 @@ function($, _, Backbone){
         unsync: function(){
             this.set({postcardInSync : false});
         }
-    });
+  });
 
-    M.User = Backbone.Model.extend({
-        defaults : {
-            title : "aaa",
-            body: "asdfasdf"
-        }
+  //to be implemented
+  Postcard.Collection = Backbone.Collection.extend({
+    model: Postcard.Model,
+    cache: true,
 
-    });
+    url: function(){
+      return;
+    }
 
-    return M;
-}
-);
+    parse: function(obj){
+
+    }
+
+    initialize:function(models, options){
+      if(options){
+        
+      }
+    }
+  });
+
+  // Required, return the module for AMD compliance
+  return Postcard;
+
+});
