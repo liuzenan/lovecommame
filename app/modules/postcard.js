@@ -79,6 +79,7 @@ function(app, Backbone) {
 
   Postcard.Model = Backbone.Model.extend({
         defaults: {
+            id: -1,
             postcardSender : "", // sender's address
             postcardSenderName : "", // sender's name
             postcardReceiver : '', // receiver's address
@@ -157,7 +158,41 @@ function(app, Backbone) {
 
   //to be implemented
   Postcard.Views.Wall = Backbone.View.extend({
+    template: "tpl_wall",
 
+    events: {
+      "click #lomo" : "lomo",
+      "click #shanghai1943" : "shanghai"
+    },
+
+    lomo: function(){
+      var image = document.createElement("img");
+      image.src = "assets/img/paris.jpg";
+      var canvas = document.getElementById('postcardcanvas');
+      canvas.width = image.width;
+      canvas.height = image.height;
+      canvas.getContext("2d").drawImage(image, 0, 0);
+      var context = canvas.getContext("2d");
+      //Get data for the entire image
+      var data = context.getImageData(0,0,canvas.width, canvas.height);
+      $.JSManipulate.lomo.filter(data); 
+      context.putImageData(data,0,0);
+    },
+
+    shanghai: function(){
+      var image = document.createElement("img");
+      image.src = "assets/img/paris.jpg";
+      var canvas = document.getElementById('postcardcanvas');
+      canvas.width = image.width;
+      canvas.height = image.height;
+      canvas.getContext("2d").drawImage(image, 0, 0);
+      var context = canvas.getContext("2d");
+      //Get data for the entire image
+      var data = context.getImageData(0,0,canvas.width, canvas.height);
+      $.JSManipulate.sepia.filter(data); 
+      context.putImageData(data,0,0);
+
+    }
   });
 
   //to be implemented

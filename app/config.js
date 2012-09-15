@@ -26,7 +26,8 @@ require.config({
 
     // Backbone.LayoutManager depends on Backbone.
     "plugins/backbone.layoutmanager": ["backbone"],
-    "plugins/jgesture" : ["jquery"]
+    "plugins/jgesture" : ["jquery"],
+    "plugins/jsmanipulate" : ["jquery","lodash"]
   }
 
 });

@@ -10,13 +10,20 @@ function(app, Backbone){
 	
 	var User = app.module();
 
-	User.Model = Backbone.Model.extend({
-			//to be implemented
-	});
+	User.Model = Backbone.Model.extend();
 
 	//User login view
 	User.Views.Login = Backbone.View.extend({
+		template : "tpl_login",
 
+		events: {
+			"submit form" : "login"
+		},
+
+		login: function(ev){
+
+			app.router.navigate("wall", {trigger: true});
+		}
 	});
 
 	//User Sign up view

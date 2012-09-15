@@ -24,7 +24,7 @@ function(app, Postcard, User, Friend) {
 
       console.log('index');
       app.useLayout("login").setViews({
-        
+        "#container" : new User.Views.Login({model: this.user})
       }).render();
     },
 
@@ -37,6 +37,9 @@ function(app, Postcard, User, Friend) {
     },
 
     wall: function(){
+      app.useLayout("wall").setViews({
+        '#wallwarp' : new Postcard.Views.Wall()
+      }).render();
 
     },
 
@@ -50,11 +53,18 @@ function(app, Postcard, User, Friend) {
 
     defaultRoute: function(other){
       console.log('default route');
+
+    },
+
+    // Shortcut for building a url.
+    go: function() {
+      return this.navigate(_.toArray(arguments).join("/"), true);
     },
 
     initialize: function(){
       this.user = new User.Model();
       this.postcards = new Postcard.Collection();
+      this.drafts = new Postcard.Collection();
       this.newPostcard = new Postcard.Model();
       this.friends = new Friend.Collection();
     }
