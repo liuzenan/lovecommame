@@ -162,36 +162,61 @@ function(app, Backbone) {
 
     events: {
       "click #lomo" : "lomo",
-      "click #shanghai1943" : "shanghai"
+      "click #sepia" : "sepia",
+      "click #circlesmear" : "smear"
     },
 
     lomo: function(){
       var image = document.createElement("img");
       image.src = "assets/img/paris.jpg";
-      var canvas = document.getElementById('postcardcanvas');
-      canvas.width = image.width;
-      canvas.height = image.height;
-      canvas.getContext("2d").drawImage(image, 0, 0);
-      var context = canvas.getContext("2d");
-      //Get data for the entire image
-      var data = context.getImageData(0,0,canvas.width, canvas.height);
-      $.JSManipulate.lomo.filter(data); 
-      context.putImageData(data,0,0);
+      $(image).load(function(){
+        var canvas = document.getElementById('postcardcanvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        var context = canvas.getContext("2d");
+        //Get data for the entire image
+        var data = context.getImageData(0,0,canvas.width, canvas.height);
+        $.JSManipulate.lomo.filter(data, {
+          amount : 0.8,
+          exposure : 5.5,
+          level: 2.0
+        }); 
+        context.putImageData(data,0,0);
+      });
+
     },
 
-    shanghai: function(){
+    sepia: function(){
       var image = document.createElement("img");
       image.src = "assets/img/paris.jpg";
+      $(image).load(function(){
       var canvas = document.getElementById('postcardcanvas');
-      canvas.width = image.width;
-      canvas.height = image.height;
-      canvas.getContext("2d").drawImage(image, 0, 0);
-      var context = canvas.getContext("2d");
-      //Get data for the entire image
-      var data = context.getImageData(0,0,canvas.width, canvas.height);
-      $.JSManipulate.sepia.filter(data); 
-      context.putImageData(data,0,0);
-
+        canvas.width = image.width;
+        canvas.height = image.height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        var context = canvas.getContext("2d");
+        //Get data for the entire image
+        var data = context.getImageData(0,0,canvas.width, canvas.height);
+        $.JSManipulate.sepia.filter(data); 
+        context.putImageData(data,0,0);
+      });
+    },
+    
+    smear: function(){
+      var image = document.createElement("img");
+      image.src = "assets/img/paris.jpg";
+      $(image).load(function(){
+      var canvas = document.getElementById('postcardcanvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        var context = canvas.getContext("2d");
+        //Get data for the entire image
+        var data = context.getImageData(0,0,canvas.width, canvas.height);
+        $.JSManipulate.circlesmear.filter(data); 
+        context.putImageData(data,0,0);
+      });
     }
   });
 

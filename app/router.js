@@ -32,11 +32,11 @@ function(app, Postcard, User, Friend) {
       console.log("signup");
       app.useLayout("login").setViews({
 
-      })
+      }).render();
 
     },
 
-    wall: function(){
+    wall: function(path){
       app.useLayout("wall").setViews({
         '#wallwarp' : new Postcard.Views.Wall()
       }).render();
@@ -59,6 +59,15 @@ function(app, Postcard, User, Friend) {
     // Shortcut for building a url.
     go: function() {
       return this.navigate(_.toArray(arguments).join("/"), true);
+    },
+
+    reset: function(){
+      this.user.reset();
+      this.postcareds.reset();
+      this.drafts.reset();
+      this.newPostcard.reset();
+      this.friends.reset();
+      app.active = false;
     },
 
     initialize: function(){

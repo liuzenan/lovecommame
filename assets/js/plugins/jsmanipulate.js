@@ -2257,15 +2257,15 @@ function LomoStyle(){
 	this.name = "Lomography";
 	this.isDirAnimatable = false;
 	this.defaultValues = {
-		amount : 0.9,
+		amount : 0.8,
 		exposure : 4.5,
-		level: 2.0
+		level: 4.0
 
 	};
 	this.valueRanges = {
 		amount : {min:0, max:1},
 		exposure : {min:0, max:5},
-		level:{min:0,max:2}
+		level:{min:0,max:4}
 
 	};
 	this.vignette = new VignetteFilter();

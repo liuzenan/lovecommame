@@ -21,8 +21,8 @@ function(app, Backbone){
 		},
 
 		login: function(ev){
-
-			app.router.navigate("wall", {trigger: true});
+			app.router.go("wall");
+			return false;
 		}
 	});
 
