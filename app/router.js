@@ -13,10 +13,10 @@ function(app, Postcard, User, Friend) {
   var Router = Backbone.Router.extend({
     routes: {
       "": "index",
-      "signup" : "signUp",
+      "signup" : "signup",
       "wall" : "wall",
       "archive" : "archive",
-      "postcard/:id" : "postcard",
+      "postcard/:id" : "viewPostcard",
       "compose" : "compose",
       "*other" : "defaultRoute"
     },
@@ -29,7 +29,7 @@ function(app, Postcard, User, Friend) {
       }).render();
     },
 
-    signUp: function() {
+    signup: function() {
       console.log("signup");
       app.useLayout("login").setViews({
         ".container" : new User.Views.Signup({model: this.user})
@@ -50,18 +50,23 @@ function(app, Postcard, User, Friend) {
       }).render();
     },
 
-    postcard: function(id){
-
+    viewPostcard: function(id){
+      console.log("postcard");
+      app.useLayout("postcard").setViews({
+        '.' : new Postcard.Views.ArchiveList({collection: this.arcPos})
+      }).render();
     },
 
     compose: function(){
-
+      console.log("compose");
+      app.useLayout("compose").setViews({
+        '.' : new Postcard.Views.ArchiveList({collection: this.arcPos})
+      }).render();
     },
 
     defaultRoute: function(other){
       console.log('default route');
       app.router.go("");
-
     },
 
     // Shortcut for building a url.
