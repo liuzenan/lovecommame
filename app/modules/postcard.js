@@ -65,7 +65,9 @@ function(app, Backbone) {
             photoSrc: '', // local source to be filled up
             photoWidth: 800, // to be determined by Gia
             photoHeight: 600,
-            photoEffect: 1
+            photoTop: 0,
+            photoLeft: 0,
+            photoEffect: 0
         },
 
         changeSrc: function( source ){
