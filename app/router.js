@@ -53,14 +53,14 @@ function(app, Postcard, User, Friend) {
     viewPostcard: function(id){
       console.log("postcard");
       app.useLayout("postcard").setViews({
-        '.' : new Postcard.Views.ArchiveList({collection: this.arcPos})
+        '.container' : new Postcard.Views.Detail({collection: this.arcPos})
       }).render();
     },
 
     compose: function(){
       console.log("compose");
       app.useLayout("compose").setViews({
-        '.' : new Postcard.Views.ArchiveList({collection: this.arcPos})
+        '.container' : new Postcard.Views.DraftList({collection: this.draPos})
       }).render();
     },
 

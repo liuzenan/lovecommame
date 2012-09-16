@@ -164,6 +164,25 @@ function(app, Backbone) {
 
   });
 
+
+  Postcard.Views.DraftItem = Backbone.View.extend({
+    template: "tpl_postcard_draft",
+    className: "li"
+  });
+
+  Postcard.Views.DraftList = Postcard.Views.List.extend({
+    className: "compose draft postcardList list",
+
+    beforeRender: function(){
+      this.$el.children().remove();
+      this.collection.each(function(postcard){
+        this.insertView(new Postcard.Views.DraftItem({
+          model: postcard
+        }))
+      }, this);
+    }
+  });
+
   //display page postcard views
   Postcard.Views.Detail = Backbone.View.extend({
     template: "tpl_postcard_display",
