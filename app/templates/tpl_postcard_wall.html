@@ -1,0 +1,13 @@
+<li>
+	<div id="wall postcard container" class="hover">
+		<div id="wall postcard card">
+			<div class="wall postcard front face">
+				<img class="wall postcard image" src="<%= model.postcardPhoto.get('photoSrc') %>"/>
+			</div>
+			<div class="wall postcard back face">
+				<p class="wall postcard text <%= model.postcardText.get('textStyle') %>"><%= model.postcardText.get("textContent") %><p>
+				<p class="wall postcard text signature">Love, me</p>
+			</div>
+	 	</div>	
+	</div>
+</li>
