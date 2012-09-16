@@ -2,7 +2,7 @@
 		<div id="wall postcard card">
 			<% if(model.get("read")) { %>
 			<div class="wall postcard front face">
-				<img class="wall postcard image" src="<%= model.postcardPhoto.get('photoSrc') %>" alt="">
+				<img class="wall postcard image" src="<%= model.postcardPhoto.get('photoSrc') %>" alt=""/>
 			</div>
 			<div class="wall postcard back face">
 				<p class="wall postcard text <%= model.postcardText.get('textStyle') %>"><%= model.postcardText.get("textContent") %><p>
@@ -13,7 +13,7 @@
 				<p class="wall postcard text envelop">New unread postcard from:<br><%= model.postcardText.get("postcardSenderName") %><p>
 			</div>
 			<div class="wall postcard envelop back face">
-				<img class="wall postcard envelop back image" src="" alt="">
+				<img class="wall postcard envelop back image" src="" alt=""/>
 			</div>
 			<% } %>			
 	 	</div>	

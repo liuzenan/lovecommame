@@ -27,22 +27,18 @@ function(app, Postcard, User, Friend) {
     },
 
     index: function() {
-
-      console.log('index');
       app.useLayout("login").setViews({
         ".container" : new User.Views.Login({model: this.user})
       }).render();
     },
 
     signup: function() {
-      console.log("signup");
       app.useLayout("login").setViews({
         ".container" : new User.Views.Signup({model: this.user})
       }).render();
     },
 
     publicWall: function(){
-      console.log("wall");
       app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
       }).render();
@@ -57,23 +53,20 @@ function(app, Postcard, User, Friend) {
     },
 
     archive : function(){
-      console.log("archive");
       app.useLayout("archive").setViews({
         '.postcardList' : new Postcard.Views.ArchiveList({collection: this.arcPos})
       }).render();
     },
 
     viewPostcard: function(id){
-      console.log("postcard");
       app.useLayout("postcard").setViews({
         '.container' : new Postcard.Views.Detail({collection: this.arcPos})
       }).render();
     },
 
     compose: function(){
-      console.log("compose");
       app.useLayout("compose").setViews({
-        '.container' : new Postcard.Views.DraftList({collection: this.draPos})
+        '.draft.container' : new Postcard.Views.DraftList({collection: this.draPos})
       }).render();
     },
 
@@ -90,7 +83,6 @@ function(app, Postcard, User, Friend) {
     },
 
     defaultRoute: function(other){
-      console.log('default route');
       app.router.go("");
     },
 
