@@ -8,54 +8,17 @@ define([
 function(app, Backbone) {
 
   // Create a new module
-  var Postcard = app.module();
-  
-  Postcard.TextStyle = Backbone.Model.extend({
-
-        defaults: {
-            fontSize: 18,
-            fontFamily: 'Times New Roman', // to be determined
-            fontColor: "#000000"
-        },
-
-        changeSize: function( size ){
-            this.set({ fontSize : size });
-        },
-
-        changeFamily: function( family ){
-            this.set({fontFamily : family});
-        },
-        
-        changeColor: function( color ){
-            this.set({fontColor : color});
-        }
-  });    
+  var Postcard = app.module();   
 
   Postcard.PostcardText = Backbone.Model.extend({
         defaults: {
-            textContent: ''
-        },
-
-        initialize: function(){
-            this.textStyle = new Postcard.TextStyle();
-            this.textStyle.parent = this;
+            textContent: '',
+            textStyle: ''
         },
 
         changeContent: function( content ){
             this.set({ textContent : content });
         },
-
-        changeTextColor: function( color ){
-            this.textStyle.changeColor(color);
-        },
-
-        changeTextSize: function( size ){
-            this.textStyle.changeSize(size);
-        },
-
-        changeTextFamily: function( family ){
-            this.textStyle.changeFamily(family);
-        }
   });
 
 
@@ -65,7 +28,9 @@ function(app, Backbone) {
             photoSrc: '', // local source to be filled up
             photoWidth: 800, // to be determined by Gia
             photoHeight: 600,
-            photoEffect: 1
+            photoTop: 0,
+            photoLeft: 0,
+            photoEffect: 0
         },
 
         changeSrc: function( source ){
