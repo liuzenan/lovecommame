@@ -31,9 +31,8 @@ function(app, Postcard, User, Friend) {
     signUp: function() {
       console.log("signup");
       app.useLayout("login").setViews({
-
+        "#container" : new User.Views.Login({model: })
       }).render();
-
     },
 
     wall: function(path){
