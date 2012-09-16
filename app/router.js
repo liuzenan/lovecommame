@@ -31,11 +31,12 @@ function(app, Postcard, User, Friend) {
     signUp: function() {
       console.log("signup");
       app.useLayout("login").setViews({
-        "#container" : new User.Views.Login({model: })
+        "#container" : new User.Views.Signup({model: this.user})
       }).render();
     },
 
     wall: function(path){
+      console.log("wall");
       app.useLayout("wall").setViews({
         '#wallwarp' : new Postcard.Views.Wall()
       }).render();

@@ -36,7 +36,7 @@ function(app, Backbone){
 		},
 
 		signup: function(ev){
-			app.router.go("wall");
+			app.router.go("wall"); // or should it go to a re-direct page?
 		}
 	});
 
