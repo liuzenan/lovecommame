@@ -15,8 +15,9 @@ function(app, Postcard, User, Friend) {
       "": "index",
       "signup" : "signUp",
       "wall" : "wall",
+      "archive" : "archive",
       "postcard/:id" : "postcard",
-      "create" : "create",
+      "compose" : "compose",
       "*other" : "defaultRoute"
     },
 
@@ -24,35 +25,42 @@ function(app, Postcard, User, Friend) {
 
       console.log('index');
       app.useLayout("login").setViews({
-        ".login" : new User.Views.Login({model: this.user})
+        ".container" : new User.Views.Login({model: this.user})
       }).render();
     },
 
     signUp: function() {
       console.log("signup");
       app.useLayout("login").setViews({
-        ".login" : new User.Views.Signup({model: this.user})
+        ".container" : new User.Views.Signup({model: this.user})
       }).render();
     },
 
-    wall: function(path){
+    wall: function(){
       console.log("wall");
       app.useLayout("wall").setViews({
-        '.postcardList' : new Postcard.Views.List({collection: this.postcards})
+        '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
       }).render();
+    },
 
+    archive : function(){
+      console.log("archive");
+      app.useLayout("archive").setViews({
+        '.postcardList' : new Postcard.Views.ArchiveList({collection: this.arcPos})
+      }).render();
     },
 
     postcard: function(id){
 
     },
 
-    create: function(){
+    compose: function(){
 
     },
 
     defaultRoute: function(other){
       console.log('default route');
+      app.router.go("");
 
     },
 

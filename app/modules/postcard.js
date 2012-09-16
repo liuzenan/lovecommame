@@ -21,8 +21,6 @@ function(app, Backbone) {
         },
   });
 
-
-
   Postcard.PostcardPhoto = Backbone.Model.extend({
         defaults: {
             photoSrc: '', // local source to be filled up
@@ -107,25 +105,14 @@ function(app, Backbone) {
     cache: true
   });
 
-
-  Postcard.Views.Item = Backbone.View.extend({
+  //wall page post card views
+  Postcard.Views.WallItem = Backbone.View.extend({
     template: "tpl_postcard_wall",
     tagName: "li"
   });
 
-
-  Postcard.Views.List = Backbone.View.extend({
-    tagName: "ul",
-    className: "wall postcardList list",
-
-    beforeRender: function(){
-      this.$el.children().remove();
-      this.collection.each(function(postcard){
-        this.insertView(new Postcard.Views.Item({
-          model: postcard
-        }));
-      }, this);
-    },
+  Postcard.Views.List =Backbone.View.extend({
+    tagName:"ul",
 
     cleanup: function(){
       this.collection.off(null,null,this);
@@ -137,7 +124,47 @@ function(app, Backbone) {
 
   });
 
+  Postcard.Views.WallList = Postcard.Views.List.extend({
 
+    className: "wall postcardList list",
+
+    beforeRender: function(){
+      this.$el.children().remove();
+      this.collection.each(function(postcard){
+        this.insertView(new Postcard.Views.WallItem({
+          model: postcard
+        }));
+      }, this);
+      $('#archive').bind('click', function(e){
+        app.router.go("archive");
+      });
+      $('#compose').bind('click', function(e){
+        app.router.go("compose");
+      });
+    }
+  });
+
+  //archive page post card views.
+  Postcard.Views.ArchiveItem = Backbone.View.extend({
+    template: "tpl_postcard_archive",
+    className: "li"
+  });
+
+  Postcard.Views.ArchiveList = Postcard.Views.List.extend({
+    className: "archive postcardList list",
+
+    beforeRender: function(){
+      this.$el.children().remove();
+      this.collection.each(function(postcard){
+        this.insertView(new Postcard.Views.ArchiveItem({
+          model: postcard
+        }))
+      }, this);
+    }
+
+  });
+
+  //display page postcard views
   Postcard.Views.Detail = Backbone.View.extend({
     template: "tpl_postcard_display",
     tagName: "div"
