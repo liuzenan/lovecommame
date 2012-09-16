@@ -18,6 +18,9 @@ function(app, Postcard, User, Friend) {
       "archive" : "archive",
       "postcard/:id" : "viewPostcard",
       "compose" : "compose",
+      "compose/text" : "composeText",
+      "compose/photo" : "composePhoto",
+      "compose/send" : "send",
       "*other" : "defaultRoute"
     },
 
@@ -62,6 +65,18 @@ function(app, Postcard, User, Friend) {
       app.useLayout("compose").setViews({
         '.container' : new Postcard.Views.DraftList({collection: this.draPos})
       }).render();
+    },
+
+    composeText: function(){
+
+    },
+
+    composePhoto: function(){
+
+    },
+
+    send: function(){
+
     },
 
     defaultRoute: function(other){
