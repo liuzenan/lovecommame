@@ -23,7 +23,7 @@ function(app, Backbone){
 
 		login: function(ev){
 			app.router.go("wall");
-			return false; // why return false?
+			return false; 
 		}
 	});
 
@@ -37,6 +37,7 @@ function(app, Backbone){
 
 		signup: function(ev){
 			app.router.go("wall"); // or should it go to a re-direct page?
+			return false;
 		}
 	});
 
