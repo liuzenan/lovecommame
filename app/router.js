@@ -38,7 +38,7 @@ function(app, Postcard, User, Friend) {
     wall: function(path){
       console.log("wall");
       app.useLayout("wall").setViews({
-        '.postcardList' : new Postcard.Views.Wall()
+        '.postcardList' : new Postcard.Views.List({collection: this.postcards})
       }).render();
 
     },
@@ -63,7 +63,7 @@ function(app, Postcard, User, Friend) {
 
     reset: function(){
       this.user.reset();
-      this.postcareds.reset();
+      this.postcards.reset();
       this.drafts.reset();
       this.newPostcard.reset();
       this.friends.reset();
@@ -72,9 +72,17 @@ function(app, Postcard, User, Friend) {
 
     initialize: function(){
       this.user = new User.Model();
-      this.postcards = new Postcard.Collection();
-      this.drafts = new Postcard.Collection();
-      this.newPostcard = new Postcard.Model();
+      //received postcards
+      this.recPos = new Postcard.Collection();
+      //sent postcards
+      this.senPos = new Postcard.Collection();
+      //archived postcards
+      this.arcPos = new Postcard.Collection();
+      //draft postcards
+      this.draPos = new Postcard.Collection();
+      //create new postcards
+      this.newPos = new Postcard.Model();
+      //contacts
       this.friends = new Friend.Collection();
     }
 

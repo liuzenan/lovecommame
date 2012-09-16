@@ -101,60 +101,46 @@ function(app, Backbone) {
         }
   });
 
-  //to be implemented
+
   Postcard.Collection = Backbone.Collection.extend({
     model: Postcard.Model,
-    cache: true,
-
-    url: function(){
-      return;
-    },
-
-    parse: function(obj){
-
-    },
-
-    initialize:function(models, options){
-      if(options){
-
-      }
-    }
+    cache: true
   });
 
 
-  Postcard.Views.Read = Backbone.View.extend({
+  Postcard.Views.Item = Backbone.View.extend({
     template: "tpl_postcard_wall",
-    tagName: "li",
+    tagName: "li"
+  });
 
-    initialize: function(){
-      _.bindAll(this, 'render');
-      this.model.bind('change', this.render);
+
+  Postcard.Views.List = Backbone.View.extend({
+    tagName: "ul",
+    className: "wall postcardList list",
+
+    beforeRender: function(){
+      this.$el.children().remove();
+      this.collection.each(function(postcard){
+        this.insertView(new Postcard.Views.Item({
+          model: postcard
+        }));
+      }, this);
     },
 
-    render: function(e){
-      var hasRead = this.model.hasChanged("read");
-      if(hasRead ){
+    cleanup: function(){
+      this.collection.off(null,null,this);
+    },
 
-      }
+    initialize:function(){
+      this.collection.on("reset", this.render, this);
     }
 
   });
 
 
-  Postcard.Views.Unread = Backbone.View.extend({
-    
-  });
-
-  //to be implemented
-  Postcard.Views.List = Backbone.View.extend({
-    template: "tpl_postcard_wall"
-  });
-
-
-
-  //to be implemented
   Postcard.Views.Detail = Backbone.View.extend({
-
+    template: "tpl_postcard_display",
+    tagName: "div"
   });
 
   //to be implemented
