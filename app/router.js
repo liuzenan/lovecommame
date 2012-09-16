@@ -24,21 +24,21 @@ function(app, Postcard, User, Friend) {
 
       console.log('index');
       app.useLayout("login").setViews({
-        "#container" : new User.Views.Login({model: this.user})
+        ".login" : new User.Views.Login({model: this.user})
       }).render();
     },
 
     signUp: function() {
       console.log("signup");
       app.useLayout("login").setViews({
-        "#container" : new User.Views.Signup({model: this.user})
+        ".login" : new User.Views.Signup({model: this.user})
       }).render();
     },
 
     wall: function(path){
       console.log("wall");
       app.useLayout("wall").setViews({
-        '#wallwarp' : new Postcard.Views.Wall()
+        '.postcardList' : new Postcard.Views.Wall()
       }).render();
 
     },
