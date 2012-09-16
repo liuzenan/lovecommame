@@ -14,7 +14,9 @@ function(app, Postcard, User, Friend) {
     routes: {
       "": "index",
       "signup" : "signup",
-      "wall" : "wall",
+      "wall" : "publicWall",
+      "wall/sent" : "sentWall",
+      "wall/received" : "receivedWall",
       "archive" : "archive",
       "postcard/:id" : "viewPostcard",
       "compose" : "compose",
@@ -39,11 +41,19 @@ function(app, Postcard, User, Friend) {
       }).render();
     },
 
-    wall: function(){
+    publicWall: function(){
       console.log("wall");
       app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
       }).render();
+    },
+
+    sentWall:function(){
+
+    },
+
+    receivedWall : function(){
+
     },
 
     archive : function(){
