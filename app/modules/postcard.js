@@ -46,7 +46,6 @@ function(app, Backbone) {
         defaults: {
             id: -1,
             postcardSender : "", // sender's address
-            postcardSenderId : -1,
             postcardSenderName : "", // sender's name
             postcardReceiver : '', // receiver's address
             postcardTemplate : 1,
@@ -123,25 +122,18 @@ function(app, Backbone) {
   });
 
 
-  Postcard.Views.Item = Backbone.View.extend({
+  Postcard.Views.Read = Backbone.View.extend({
     template: "tpl_postcard_wall",
-    tagName:"li",
+    tagName: "li",
 
     initialize: function(){
       _.bindAll(this, 'render');
       this.model.bind('change', this.render);
     },
 
-    serialize: function(){
-      return {
-        model : this.model,
-
-      }
-    },
-
     render: function(e){
       var hasRead = this.model.hasChanged("read");
-      if(hasRead){
+      if(hasRead ){
 
       }
     }
@@ -149,10 +141,16 @@ function(app, Backbone) {
   });
 
 
+  Postcard.Views.Unread = Backbone.View.extend({
+    
+  });
+
   //to be implemented
   Postcard.Views.List = Backbone.View.extend({
     template: "tpl_postcard_wall"
   });
+
+
 
   //to be implemented
   Postcard.Views.Detail = Backbone.View.extend({
