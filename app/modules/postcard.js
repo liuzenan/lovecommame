@@ -38,95 +38,66 @@ function(app, Backbone) {
         changeEffect: function( effect ){
             this.set({photoEffect : effect});
         }
-    });
+  });
 
-  Postcard.Model = Backbone.Model.extend({
-        defaults: {
-            id: -1,
-            postcardSender : "", // sender's address
-            postcardSenderName : "", // sender's name
-            postcardReceiver : '', // receiver's address
-            postcardTemplate : 1,
-            read : false,
-            postcardInSync : false
-        },
+  Postcard.Model = Backbone.Model.extend();
 
-        initialize: function(){
-            this.postcardText = new Postcard.PostcardText();
-            this.postcardText.parent = this;
-            this.postcardPhoto = new Postcard.PostcardPhoto();
-            this.postcardPhoto.parent = this;
-        },
-
-        changeTextContent: function( content ){
-            this.postcardText.changeContent(content);
-        },
-
-        changeTextColor: function( color ){
-            this.postcardText.changeTextColor(color);
-        },
-
-        changeTextFamily: function( family ){
-            this.postcardText.changeTextFamily(family);
-        },
-
-        changeTextSize: function( size ){
-            this.postcardText.changeTextSize(size);
-        },
-
-        changePhotoSrc: function( src ){
-            this.postcardPhoto.changeSrc(src);
-        },
-
-        changePhotoEffect: function( effect ){
-            this.postcardPhoto.changeEffect(effect);
-        },
-
-        changeTemplate: function( template ){
-            this.set({postcardTemplate : template});
-        },
-
-        changeReceiver: function( receiver ){
-            this.set({postcardReceiver : receiver});
-        },
-
-        sync: function(){
-            this.set({postcardInSync : true})
-        },
-
-        unsync: function(){
-            this.set({postcardInSync : false});
-        }
+  Postcard.Collection = Backbone.Collection.extend({
+    url : "http://ec2-54-251-19-5.ap-southeast-1.compute.amazonaws.com/api.php/user/2",
+    cache: true,
+    model: Postcard.Model
   });
 
 
-  Postcard.Collection = Backbone.Collection.extend({
-    model: Postcard.Model,
-    cache: true
+  Postcard.Collection.Wall = Postcard.Collection.extend({
+    parse: function(object){
+      return object.read;
+    }
+  });
+
+  //to be implemented
+  Postcard.Collection.Archive = Postcard.Collection.extend({
+    parse: function(object){
+      return object.read;
+    }
+  });
+
+  //TODO
+  Postcard.Collection.Sent = Postcard.Collection.extend({
+
+  });
+
+  //TODO
+  Postcard.Collection.Draft = Postcard.Collection.extend({
+
   });
 
   //wall page post card views
   Postcard.Views.WallItem = Backbone.View.extend({
+    tagName:"li",
     template: "tpl_postcard_wall",
-    tagName: "li"
+    serialize: function(){
+      return this.model.toJSON();
+    }
   });
 
-  Postcard.Views.List =Backbone.View.extend({
+  Postcard.Views.List = Backbone.View.extend({
     tagName:"ul",
 
-    cleanup: function(){
-      this.collection.off(null,null,this);
+    cleanup: function() {
+      this.collection.off(null, null, this);
     },
 
-    initialize:function(){
+    initialize: function() {
       this.collection.on("reset", this.render, this);
     }
 
   });
 
-  Postcard.Views.WallList = Postcard.Views.List.extend({
 
-    className: "wall postcardList list",
+  Postcard.Views.WallList = Postcard.Views.List.extend({
+    
+    className: "postcardWallList",
 
     beforeRender: function(){
       this.$el.children().remove();
@@ -135,51 +106,78 @@ function(app, Backbone) {
           model: postcard
         }));
       }, this);
-      $('#archive').bind('click', function(e){
+    },
+
+    afterRender: function(){
+      $('#archive').click(function(){
         app.router.go("archive");
       });
-      $('#compose').bind('click', function(e){
+      $('#compose').click(function(){
         app.router.go("compose");
       });
     }
   });
 
-  //archive page post card views.
   Postcard.Views.ArchiveItem = Backbone.View.extend({
+    tagName:"li",
     template: "tpl_postcard_archive",
-    className: "li"
+    serialize: function(){
+      return this.model.toJSON();
+    }
   });
 
+
   Postcard.Views.ArchiveList = Postcard.Views.List.extend({
-    className: "archive postcardList list",
+    className: "postcardArchiveList",
 
     beforeRender: function(){
       this.$el.children().remove();
       this.collection.each(function(postcard){
         this.insertView(new Postcard.Views.ArchiveItem({
           model: postcard
-        }))
+        }));
       }, this);
-    }
+    },
 
+    afterRender: function(){
+      $('#archive').click(function(){
+        app.router.go("archive");
+      });
+      $('#compose').click(function(){
+        app.router.go("compose");
+      });
+    }
   });
 
 
   Postcard.Views.DraftItem = Backbone.View.extend({
+    tagName:"li",
     template: "tpl_postcard_draft",
-    className: "li"
+    serialize: function(){
+      return this.model.toJSON();
+    }
   });
 
+
   Postcard.Views.DraftList = Postcard.Views.List.extend({
-    className: "compose draft postcardList list",
+    className: "postcardDraftList",
 
     beforeRender: function(){
       this.$el.children().remove();
       this.collection.each(function(postcard){
         this.insertView(new Postcard.Views.DraftItem({
           model: postcard
-        }))
+        }));
       }, this);
+    },
+
+    afterRender: function(){
+      $('#archive').click(function(){
+        app.router.go("archive");
+      });
+      $('#compose').click(function(){
+        app.router.go("compose");
+      });
     }
   });
 

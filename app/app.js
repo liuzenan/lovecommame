@@ -7,7 +7,8 @@ define([
   // Plugins.
   "plugins/backbone.layoutmanager",
   "plugins/jgestures",
-  "plugins/jsmanipulate"
+  "plugins/jsmanipulate",
+  "plugins/backbone.collectioncache"
 ],
 
 function($, _, Backbone) {

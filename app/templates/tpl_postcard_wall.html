@@ -1,20 +1,20 @@
 <div class="wall postcard container hover">
-		<div id="wall postcard card">
-			<% if(model.get("read")) { %>
+		<div class="wall postcard card">
+			<% if(1) { %>
 			<div class="wall postcard front face">
-				<img class="wall postcard image" src="<%= model.postcardPhoto.get('photoSrc') %>" alt=""/>
+				<img class="wall postcard image" src="" alt=""/>
 			</div>
 			<div class="wall postcard back face">
-				<p class="wall postcard text <%= model.postcardText.get('textStyle') %>"><%= model.postcardText.get("textContent") %><p>
+				<p class="wall postcard text"><%= body %></p>
 				<p class="wall postcard text signature">Love, me</p>
 			</div>
 			<% } else { %>
 			<div class="wall postcard envelop front face">
-				<p class="wall postcard text envelop">New unread postcard from:<br><%= model.postcardText.get("postcardSenderName") %><p>
+				<p class="wall postcard text envelop">New unread postcard from:<br><%= body %></p>
 			</div>
 			<div class="wall postcard envelop back face">
 				<img class="wall postcard envelop back image" src="" alt=""/>
 			</div>
-			<% } %>			
+			<% } %>
 	 	</div>	
 </div>

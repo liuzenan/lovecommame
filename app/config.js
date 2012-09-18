@@ -24,10 +24,12 @@ require.config({
       exports: "Backbone"
     },
 
+    "plugins/jgesture" : ["jquery"],
+    "plugins/jsmanipulate" : ["jquery"],
     // Backbone.LayoutManager depends on Backbone.
     "plugins/backbone.layoutmanager": ["backbone"],
-    "plugins/jgesture" : ["jquery"],
-    "plugins/jsmanipulate" : ["jquery"]
+    // Backbone.CollectionCache depends on Backbone.
+    "plugins/backbone.collectioncache": ["backbone"]
   }
 
 });
