@@ -1,20 +1,20 @@
-<div class="wall postcard container hover" data-id="<%= pid %>">
-		<a class="wall postcard card" data-id="<%= pid %>" href="#postcard/<%= pid %>">
+<div class="wall postcard container hover">
+		<a class="wall postcard card" href="#postcard/<%= pid %>">
 			<% if(1) { %>
-			<div class="wall postcard front face" data-id="<%= pid %>">
-				<img class="wall postcard image" src="" alt="" data-id="<%= pid %>"/>
+			<div class="wall postcard front face">
+				<img class="wall postcard image" src="" alt=""/>
 			</div>
-			<div class="wall postcard back face" data-id="<%= pid %>">
-				<p class="wall postcard text" data-id="<%= pid %>"><%= body.content %></p>
-				<p class="wall postcard text signature" data-id="<%= pid %>">Love, me</p>
+			<div class="wall postcard back face">
+				<p class="wall postcard text"><%= body.content %></p>
+				<p class="wall postcard text signature">Love, me</p>
 			</div>
 			<% } else { %>
-			<div class="wall postcard envelop front face" data-id="<%= pid %>">
-				<p class="wall postcard text envelop" data-id="<%= pid %>">New unread postcard from:<br><%= body %></p>
+			<div class="wall postcard envelop front face">
+				<p class="wall postcard text envelop">New unread postcard from:<br><%= body %></p>
 			</div>
-			<div class="wall postcard envelop back face" data-id="<%= pid %>">
-				<img class="wall postcard envelop back image" src="" alt="" data-id="<%= pid %>"/>
+			<div class="wall postcard envelop back face">
+				<img class="wall postcard envelop back image" src="" alt=""/>
 			</div>
 			<% } %>
-	 	</a>	
+	 	</a>
 </div>

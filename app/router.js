@@ -23,6 +23,7 @@ function(app, Postcard, User, Friend) {
       "compose/text" : "composeText",
       "compose/photo" : "composePhoto",
       "compose/send" : "send",
+      "edit/:id" : "edit",
       "*other" : "defaultRoute"
     },
 
@@ -66,6 +67,7 @@ function(app, Postcard, User, Friend) {
     },
 
     publicWall : function(){
+      this.reset();
     },
 
     archive : function(){
@@ -73,6 +75,7 @@ function(app, Postcard, User, Friend) {
       app.useLayout("archive").setViews({
         '.postcardList' : new Postcard.Views.ArchiveList({collection: this.arcPos})
       }).render();
+      this.arcPos.fetch();
     },
 
     viewPostcard: function(id){
@@ -87,10 +90,15 @@ function(app, Postcard, User, Friend) {
       app.useLayout("compose").setViews({
         '.container' : new Postcard.Views.DraftList({collection: this.draPos})
       }).render();
+
+      this.draPos.fetch();
     },
 
     composeText: function(){
-
+      this.reset();
+      app.useLayout("create").setViews({
+        //to be implemented
+      }).render();
     },
 
     composePhoto: function(){
@@ -98,6 +106,10 @@ function(app, Postcard, User, Friend) {
     },
 
     send: function(){
+
+    },
+
+    edit: function(){
 
     },
 
@@ -111,7 +123,7 @@ function(app, Postcard, User, Friend) {
     },
 
     reset: function(){
-     // this.user.reset();
+       //this.user.reset();
        this.recPos.reset();
        this.senPos.reset();
     //  this.drafts.reset();
