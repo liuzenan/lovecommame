@@ -40,10 +40,12 @@ function(app, Backbone) {
         }
   });
 
-  Postcard.Model = Backbone.Model.extend();
+  Postcard.Model = Backbone.Model.extend({
+    idAttribute: "pid"
+  });
 
   Postcard.Collection = Backbone.Collection.extend({
-    url : "http://ec2-54-251-19-5.ap-southeast-1.compute.amazonaws.com/api.php/user/2",
+    url : "http://ec2-54-251-19-5.ap-southeast-1.compute.amazonaws.com/api.php/user/1",
     cache: true,
     model: Postcard.Model
   });
@@ -51,25 +53,36 @@ function(app, Backbone) {
 
   Postcard.Collection.Wall = Postcard.Collection.extend({
     parse: function(object){
-      return object.read;
+      return object.unread.concat(object.read);
     }
   });
 
   //to be implemented
   Postcard.Collection.Archive = Postcard.Collection.extend({
     parse: function(object){
-      return object.read;
+      return object.archived;
     }
   });
 
   //TODO
   Postcard.Collection.Sent = Postcard.Collection.extend({
-
+    parse: function(object){
+      return object.sent;
+    }
   });
 
   //TODO
   Postcard.Collection.Draft = Postcard.Collection.extend({
+    parse: function(object){
+      return object.draft;
+    }
+  });
 
+  //TODO
+  Postcard.Collection.All = Postcard.Collection.extend({
+    parse: function(object){
+      return object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft);
+    }
   });
 
   //wall page post card views
@@ -83,10 +96,6 @@ function(app, Backbone) {
 
   Postcard.Views.List = Backbone.View.extend({
     tagName:"ul",
-
-    cleanup: function() {
-      this.collection.off(null, null, this);
-    },
 
     initialize: function() {
       this.collection.on("reset", this.render, this);
@@ -102,6 +111,7 @@ function(app, Backbone) {
     beforeRender: function(){
       this.$el.children().remove();
       this.collection.each(function(postcard){
+        //console.log(postcard);
         this.insertView(new Postcard.Views.WallItem({
           model: postcard
         }));
@@ -114,6 +124,12 @@ function(app, Backbone) {
       });
       $('#compose').click(function(){
         app.router.go("compose");
+      });
+      $('#sent').click(function(){
+        app.router.go("wall/sent");
+      });
+      $('#public').click(function(){
+        app.router.go("wall/public");
       });
     }
   });
@@ -134,18 +150,10 @@ function(app, Backbone) {
       this.$el.children().remove();
       this.collection.each(function(postcard){
         this.insertView(new Postcard.Views.ArchiveItem({
+          el: $(".postcardArchiveList"),
           model: postcard
         }));
       }, this);
-    },
-
-    afterRender: function(){
-      $('#archive').click(function(){
-        app.router.go("archive");
-      });
-      $('#compose').click(function(){
-        app.router.go("compose");
-      });
     }
   });
 
@@ -184,7 +192,10 @@ function(app, Backbone) {
   //display page postcard views
   Postcard.Views.Detail = Backbone.View.extend({
     template: "tpl_postcard_display",
-    tagName: "div"
+    tagName: "div",
+    serialize: function(){
+      return this.model.toJSON();
+    }
   });
 
   //to be implemented

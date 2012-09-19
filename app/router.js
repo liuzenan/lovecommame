@@ -14,9 +14,9 @@ function(app, Postcard, User, Friend) {
     routes: {
       "": "index",
       "signup" : "signup",
-      "wall" : "publicWall",
+      "wall" : "receivedWall",
       "wall/sent" : "sentWall",
-      "wall/received" : "receivedWall",
+      "wall/public" : "publicWall",
       "archive" : "archive",
       "postcard/:id" : "viewPostcard",
       "compose" : "compose",
@@ -40,21 +40,32 @@ function(app, Postcard, User, Friend) {
       }).render();
     },
 
-    publicWall: function(){
+    receivedWall: function(){
       this.reset();
       app.useLayout("wall").setViews({
-        '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
+        '.postcardList' : new Postcard.Views.WallList({
+          collection: this.recPos,
+          type:"rec"
+        })
       }).render();
-
       this.recPos.fetch();
+      this.allPos.fetch();
+
     },
 
     sentWall:function(){
       this.reset();
+      app.useLayout("wall").setViews({
+        '.postcardList' : new Postcard.Views.WallList({
+          collection: this.senPos,
+          type:"sen"
+        })
+      }).render();
+
+      this.senPos.fetch();
     },
 
-    receivedWall : function(){
-      this.reset();
+    publicWall : function(){
     },
 
     archive : function(){
@@ -65,9 +76,9 @@ function(app, Postcard, User, Friend) {
     },
 
     viewPostcard: function(id){
-      this.reset();
-      app.useLayout("postcard").setViews({
-        '.container' : new Postcard.Views.Detail({collection: this.arcPos})
+      console.log(this.allPos.get(id));
+      app.useLayout("viewpostcard").setViews({
+        '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
       }).render();
     },
 
@@ -101,7 +112,8 @@ function(app, Postcard, User, Friend) {
 
     reset: function(){
      // this.user.reset();
-      this.recPos.reset();
+       this.recPos.reset();
+       this.senPos.reset();
     //  this.drafts.reset();
      // this.newPostcard.reset();
      // this.friends.reset();
@@ -109,7 +121,11 @@ function(app, Postcard, User, Friend) {
     },
 
     initialize: function(){
+      Backbone.LayoutManager.configure({
+        manage: true
+      });
       this.user = new User.Model();
+      this.allPos = new Postcard.Collection.All();
       //received postcards
       this.recPos = new Postcard.Collection.Wall();
       //sent postcards

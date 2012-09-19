@@ -1,15 +1,15 @@
 <div class="display postcard container hover">
-		<div id="display postcard card">
+		<div class="display postcard card">
 			<div class="display postcard front face">
-				<img class="display postcard image" src="<%= model.postcardPhoto.get('photoSrc') %>" alt=""/>
+				<img class="display postcard image" src="" alt=""/>
 			</div>
 			<div class="display postcard back face">
 				<div class="display postcard textWrap">
-					<p class="display postcard text <%= model.postcardText.get('textStyle') %>"><%= model.postcardText.get("textContent") %><p>
+					<p class="display postcard text"><%= body.content %><p>
 					<p class="display postcard text signature">Love, me</p>
 				</div>
 				<div class="display postcard addressWrap">
-					<p class="display postcard text address">From:<br><%= model.postcaredText.get("postcardSenderName") %><br>Email:<br><%= model.postcaredText.get("postcardSender") %></p>
+					<p class="display postcard text address">From:<br>ASDF<br>Email:<br>ASDF@ASDF.com</p>
 				</div>
 			</div>	
 	 	</div>	
