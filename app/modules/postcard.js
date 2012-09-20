@@ -116,21 +116,6 @@ function(app, Backbone) {
           model: postcard
         }));
       }, this);
-    },
-
-    afterRender: function(){
-      $('#archive').click(function(){
-        app.router.go("archive");
-      });
-      $('#compose').click(function(){
-        app.router.go("compose");
-      });
-      $('#sent').click(function(){
-        app.router.go("wall/sent");
-      });
-      $('#public').click(function(){
-        app.router.go("wall/public");
-      });
     }
   });
 
@@ -177,15 +162,6 @@ function(app, Backbone) {
           model: postcard
         }));
       }, this);
-    },
-
-    afterRender: function(){
-      $('#archive').click(function(){
-        app.router.go("archive");
-      });
-      $('#compose').click(function(){
-        app.router.go("compose");
-      });
     }
   });
 

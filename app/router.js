@@ -44,10 +44,7 @@ function(app, Postcard, User, Friend) {
     receivedWall: function(){
       this.reset();
       app.useLayout("wall").setViews({
-        '.postcardList' : new Postcard.Views.WallList({
-          collection: this.recPos,
-          type:"rec"
-        })
+        '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
       }).render();
       this.recPos.fetch();
       this.allPos.fetch();
@@ -57,10 +54,7 @@ function(app, Postcard, User, Friend) {
     sentWall:function(){
       this.reset();
       app.useLayout("wall").setViews({
-        '.postcardList' : new Postcard.Views.WallList({
-          collection: this.senPos,
-          type:"sen"
-        })
+        '.postcardList' : new Postcard.Views.WallList({collection: this.senPos})
       }).render();
 
       this.senPos.fetch();
@@ -96,13 +90,11 @@ function(app, Postcard, User, Friend) {
 
     composeText: function(){
       this.reset();
-      app.useLayout("create").setViews({
-        //to be implemented
-      }).render();
+      app.useLayout("create").render();
     },
 
     composePhoto: function(){
-
+      app.useLayout("")
     },
 
     send: function(){
@@ -133,9 +125,6 @@ function(app, Postcard, User, Friend) {
     },
 
     initialize: function(){
-      Backbone.LayoutManager.configure({
-        manage: true
-      });
       this.user = new User.Model();
       this.allPos = new Postcard.Collection.All();
       //received postcards
