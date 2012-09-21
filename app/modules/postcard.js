@@ -116,21 +116,6 @@ function(app, Backbone) {
           model: postcard
         }));
       }, this);
-    },
-
-    afterRender: function(){
-      $('#archive').click(function(){
-        app.router.go("archive");
-      });
-      $('#compose').click(function(){
-        app.router.go("compose");
-      });
-      $('#sent').click(function(){
-        app.router.go("wall/sent");
-      });
-      $('#public').click(function(){
-        app.router.go("wall/public");
-      });
     }
   });
 
@@ -177,15 +162,6 @@ function(app, Backbone) {
           model: postcard
         }));
       }, this);
-    },
-
-    afterRender: function(){
-      $('#archive').click(function(){
-        app.router.go("archive");
-      });
-      $('#compose').click(function(){
-        app.router.go("compose");
-      });
     }
   });
 
@@ -215,17 +191,22 @@ function(app, Backbone) {
 
   //to be implemented
   Postcard.Views.EditText = Backbone.View.extend({
+    template : "tpl_postcard_edit_text",
+    tagName: "div",
+    serialize: function(){
+      return this.model.toJSON();
+    }
 
   });
 
   Postcard.Views.UploadPhoto = Backbone.View.extend({
-
+    template: "tpl_postcard_edit_photo",
+    tagName: "div",
+    serialize:function(){
+      return this.model.toJSON();
+    }
   });
-
-  Postcard.Views.EditPhotoEffect = Backbone.View.extend({
-
-  });
-
+  
   Postcard.Views.Send = Backbone.View.extend({
 
   });

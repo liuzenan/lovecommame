@@ -20,10 +20,9 @@ function(app, Postcard, User, Friend) {
       "archive" : "archive",
       "postcard/:id" : "viewPostcard",
       "compose" : "compose",
-      "compose/text" : "composeText",
-      "compose/photo" : "composePhoto",
+      "compose/text/:id" : "composeText",
+      "compose/photo/:id" : "composePhoto",
       "compose/send" : "send",
-      "edit/:id" : "edit",
       "*other" : "defaultRoute"
     },
 
@@ -44,10 +43,7 @@ function(app, Postcard, User, Friend) {
     receivedWall: function(){
       this.reset();
       app.useLayout("wall").setViews({
-        '.postcardList' : new Postcard.Views.WallList({
-          collection: this.recPos,
-          type:"rec"
-        })
+        '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
       }).render();
       this.recPos.fetch();
       this.allPos.fetch();
@@ -57,10 +53,7 @@ function(app, Postcard, User, Friend) {
     sentWall:function(){
       this.reset();
       app.useLayout("wall").setViews({
-        '.postcardList' : new Postcard.Views.WallList({
-          collection: this.senPos,
-          type:"sen"
-        })
+        '.postcardList' : new Postcard.Views.WallList({collection: this.senPos})
       }).render();
 
       this.senPos.fetch();
@@ -94,23 +87,40 @@ function(app, Postcard, User, Friend) {
       this.draPos.fetch();
     },
 
-    composeText: function(){
-      this.reset();
-      app.useLayout("create").setViews({
-        //to be implemented
-      }).render();
+    composeText: function(id){
+
+      if(id==0){
+        app.useLayout("create").setViews({
+          '.container' : new Postcard.Views.EditText({model:this.newPos})
+        }).render();
+      }else{
+        console.log(this.draPos.get(id));
+        this.newPos = this.draPos.get(id);
+        app.useLayout("create").setViews({
+          '.container' : new Postcard.Views.EditText({model:this.newPos})
+        }).render();
+      }
+      
     },
 
-    composePhoto: function(){
+    composePhoto: function(id){
+
+      if(id==0){
+        app.useLayout("create").setViews({
+          '.container' : new Postcard.Views.UploadPhoto({model:this.newPos})
+        }).render();
+      }else{
+        console.log(this.draPos.get(id));
+        this.newPos = this.draPos.get(id);
+        app.useLayout("create").setViews({
+          '.container' : new Postcard.Views.UploadPhoto({model:this.newPos})
+        }).render();     
+      }
 
     },
 
     send: function(){
-
-    },
-
-    edit: function(){
-
+      
     },
 
     defaultRoute: function(other){
@@ -124,18 +134,15 @@ function(app, Postcard, User, Friend) {
 
     reset: function(){
        //this.user.reset();
-       this.recPos.reset();
-       this.senPos.reset();
-    //  this.drafts.reset();
-     // this.newPostcard.reset();
+      this.recPos.reset();
+      this.senPos.reset();
+      this.draPos.reset();
+     // this.newPos.reset();
      // this.friends.reset();
       app.active = false;
     },
 
     initialize: function(){
-      Backbone.LayoutManager.configure({
-        manage: true
-      });
       this.user = new User.Model();
       this.allPos = new Postcard.Collection.All();
       //received postcards
