@@ -1,17 +1,18 @@
 <div class="display postcard container hover">
-		<div class="display postcard card">
-			<div class="display postcard back face">
-				<img class="display postcard image" src="" alt=""/>
+	<div class="display postcard card">
+		<div class="display postcard back face">
+			<img class="display postcard image" src="" alt=""/>
+		</div>
+		<div class="display postcard front face">
+			<div class="display postcard textWrap">
+				<p class="display postcard text"><%= body.content %><p>
+				<p class="display postcard text signature">Love, me</p>
 			</div>
-			<div class="display postcard front face">
-				<div class="display postcard textWrap">
-					<p class="display postcard text"><%= body.content %><p>
-					<p class="display postcard text signature">Love, me</p>
-				</div>
-				<div class="display postcard addressWrap">
-					<p class="display postcard text address">From:<br><%= uid_from.uname %>&lt<%= uid_from.mail %>&gt</p>
-				</div>
-			</div>	
-	 	</div>	
+			<div class="display postcard addressWrap">
+				<p class="display postcard text address">From:<br><%= uid_from.uname %>&lt<%= uid_from.mail %>&gt</p>
+			</div>
+		</div>	
+ 	</div>	
+ 	<button class="display postcard button">Flip over</button>
 </div>
 	

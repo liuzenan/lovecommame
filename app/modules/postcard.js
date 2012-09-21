@@ -195,6 +195,15 @@ function(app, Backbone) {
     tagName: "div",
     serialize: function(){
       return this.model.toJSON();
+    },
+
+    events: {
+      "click button" : "flip"
+    },
+
+    flip: function(ev){
+      $("#card").css('-webkit-Transform', "rotateY(180deg)");
+      $("#card").css('-moz-Transform', "rotateY(180deg)");
     }
   });
 
