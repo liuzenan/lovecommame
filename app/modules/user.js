@@ -38,6 +38,11 @@ function(app, Backbone){
 		signup: function(ev){
 			app.router.go("wall"); // or should it go to a re-direct page?
 			return false;
+		},
+
+		validate: function(){
+			// check if all fields are filled up
+			// check if two passwords are the same
 		}
 	});
 
