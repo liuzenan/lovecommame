@@ -22,6 +22,7 @@ h2{
 #main{
 	width: 100%;
 	overflow: hidden;
+	padding-bottom: 40px;
 }
 
 ul{
