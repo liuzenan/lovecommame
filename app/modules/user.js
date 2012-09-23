@@ -36,13 +36,39 @@ function(app, Backbone){
 		},
 
 		signup: function(ev){
+			register();
 			app.router.go("wall"); // or should it go to a re-direct page?
 			return false;
 		},
 
 		validate: function(){
 			// check if all fields are filled up
+
 			// check if two passwords are the same
+		},
+
+		register: function(){
+			// upload user credentials to the server
+			var serializedData = $("#signup").serialize();
+			var $inputs = $("#signup").find("input, select, button, textarea");
+
+			// temperarily disable all inputs during the ajex request
+			$inputs.attr("disabled", "disabled");
+
+			$.ajex({
+				url: 'ec2-54-251-19-5.ap-southeast-1.compute.amazonaws.com/api.php/user',
+				type: 'post',
+				dataType: 'json',
+				data: serializedData,
+				success: function(data){
+					alert("successful");
+					// check whether the email already exists in DB
+				},
+				error: function(){
+					alert("error!");
+					// for debugging purposes
+				}
+			});
 		}
 	});
 
