@@ -133,7 +133,7 @@ function(app, Postcard, User, Friend) {
     },
 
     reset: function(){
-       //this.user.reset();
+     // this.user.reset();
       this.recPos.reset();
       this.senPos.reset();
       this.draPos.reset();
