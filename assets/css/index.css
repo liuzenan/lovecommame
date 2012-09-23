@@ -1,6 +1,6 @@
 /* H5BP styles. */
 @import url("../vendor/h5bp/css/style.css");
-/*@import "style.css";
+@import url("style.css");
 /* Add Stylus stylesheets here, alll files ending in .styl will be compiled!
  * For example: @import "main.styl";
  *

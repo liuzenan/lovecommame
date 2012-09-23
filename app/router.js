@@ -35,7 +35,7 @@ function(app, Postcard, User, Friend) {
 
     signup: function() {
       this.reset();
-      app.useLayout("login").setViews({
+      app.useLayout("signup").setViews({
         ".container" : new User.Views.Signup({model: this.user})
       }).render();
     },
@@ -120,7 +120,7 @@ function(app, Postcard, User, Friend) {
     },
 
     send: function(){
-      
+
     },
 
     defaultRoute: function(other){
