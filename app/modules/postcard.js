@@ -178,8 +178,14 @@ function(app, Backbone) {
     },
 
     flip: function(ev){
-      $("#card").css('-webkit-Transform', "rotateY(180deg)");
-      $("#card").css('-moz-Transform', "rotateY(180deg)");
+      $(".card").css('-webkit-Transform', "rotateY(180deg)");
+      $(".card").css('-moz-Transform', "rotateY(180deg)");
+    },
+
+    afterRender: function(){
+      $(".card").bind("tapone", function(e){
+        alert("check"); // apply gesture here to flip the postcard
+      }); 
     }
   });
 
