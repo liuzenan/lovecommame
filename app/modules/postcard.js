@@ -195,8 +195,17 @@ function(app, Backbone) {
     tagName: "div",
     serialize: function(){
       return this.model.toJSON();
-    }
+    },
 
+    events: {
+      "click .send" : "uploadNew"
+    },
+
+    uploadNew: function(ev){
+
+      // create a new instance of postcard
+      // and upload to server
+    }
   });
 
   Postcard.Views.UploadPhoto = Backbone.View.extend({
