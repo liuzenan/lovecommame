@@ -8,7 +8,8 @@ define([
   "plugins/backbone.layoutmanager",
   "plugins/jgestures",
   "plugins/jsmanipulate",
-  "plugins/backbone.collectioncache"
+  "plugins/backbone.collectioncache",
+  "plugins/iscroll-lite"
 ],
 
 function($, _, Backbone) {

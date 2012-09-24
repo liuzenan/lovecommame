@@ -111,11 +111,19 @@ function(app, Backbone) {
     beforeRender: function(){
       this.$el.children().remove();
       this.collection.each(function(postcard){
-        //console.log(postcard);
+        console.log(postcard);
         this.insertView(new Postcard.Views.WallItem({
           model: postcard
         }));
       }, this);
+    },
+
+    afterRender: function(){
+      //var noOfPostcards = this.collection.size();
+      //$('.postcardWallList').css('width', noOfPostcards*240 + "px");
+      this.scroller = new iScroll('postcardList', {
+        vScrollbar: false
+      })
     }
   });
 
