@@ -24,8 +24,12 @@ function(app, Backbone){
 		login: function(ev){
 			alert("inside login");
 
-			var credentials = new User.Model({
-				
+			$.ajax({
+			  type: "POST",
+			  url: "../api.php/user/login",
+			  data: { uname: "inian", pass: window.btoa("pass")}
+			}).done(function( msg ) {
+			  alert( "Data Saved: " + msg );
 			});
 
 			app.router.go("wall");
@@ -42,7 +46,7 @@ function(app, Backbone){
 		},
 
 		signup: function(ev){
-			//register();
+			register();
 			app.router.go("wall"); // or should it go to a re-direct page?
 			return false;
 		},
