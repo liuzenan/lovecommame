@@ -1,9 +1,44 @@
 /* Universal Definition */
 
+/*
+
+purple: #ec008c
+green: #8dc73f
+light green: #9ddd46
+
+*/
 *, *:after, *:before{
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+input{
+	-webkit-appearance: none;
+	border-radius: 0;
+}
+
+html,body, #main{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+#layout{
+	min-height: 100%;
+	position: relative;
+}
+
+.postcardList,
+.compose.draft{
+	padding-bottom: 30px;
+}
+
+footer{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 30px;
 }
 
 /* Typography */
@@ -19,14 +54,39 @@ h2{
 	font-size: 1.2em;
 }
 
-#main{
-	width: 100%;
-	overflow: hidden;
-	padding-bottom: 40px;
+.header a{
+	color: #ec008c;
 }
 
 ul{
 	list-style: none outside none;
+}
+
+
+.navigation{
+	width: 270px;
+	margin: 0 auto;
+}
+
+.navigation a{
+	color: #000;
+	font-size: 1.2em;
+	line-height: 0.8em;
+	display: block;
+	float: left;
+	text-align: center;
+	border-right: 1px solid #999;
+	margin: 5px;
+	padding-right: 10px;
+}
+
+.navigation a:last-child{
+	color: #ec008c;
+	border-right: none;
+}
+
+footer{
+	height: 40px;
 }
 
 /* login page */
@@ -34,7 +94,7 @@ ul{
 .login.layout,
 .signup.layout{
 	width: 80%;
-	margin: 10px auto;
+	margin: 0 auto;
 }
 
 .login.header{
@@ -48,13 +108,14 @@ ul{
 
 .login.header a{
 	font-size: 1.4em;
+	margin-bottom: 30px;
 	position: absolute;
 	right: 0;
 	bottom: 0;
 }
 
 .login.header{
-	margin: 10px 0 30px 0;
+	padding: 10px 0 30px 0;
 }
 
 .login form label{
@@ -64,7 +125,6 @@ ul{
 .login form input{
 	width: 100%;
 	margin: 0 0 20px 0;
-	-webkit-appearance: none;
 	display: block;
 	border: 5px solid #CCC;
 	padding:10px;
@@ -100,7 +160,7 @@ ul{
 .wall.header{
 	width: 90%;
 	margin-left: 10%;
-	margin-top: 30px;
+	padding-top: 10px;
 }
 
 .wall.header h1{
@@ -108,12 +168,65 @@ ul{
 	line-height: 1em;
 }
 
+
+#postcardList{
+	overflow: hidden;
+	padding-left: 10%;
+}
+
+.postcardWallList{
+	margin-left: 0;
+	width: 10000px;
+	padding: 0;
+	position: relative;
+}
+
 .wall ul.postcardWallList li{
-	background: #ccc;
+	width: 240px;
+	height: 180px;
 }
 
 
+.postcard.container{
+	position: relative;
+	margin: 10px auto;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	-webkit-perspective: 1000;
+}
 
+.postcard.card{
+	width: 100%;
+	height: 100%;
+	-webkit-transform-style: preserve-3d;
+	-webkit-transition: all 0.5s ease-in;
+
+}
+
+.postcard.image{
+	width: 100%;
+	height: 100%;
+}
+
+.postcard.front.face {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+}
+
+.postcard.back.face  {
+	display: block;
+	-webkit-transform: rotateY(180deg);
+	box-sizing: border-box;
+	padding: 10px;
+	color: white;
+	text-align: center;
+	background-color: #aaa;
+}
 
 /* compose */
+
+/* display */
 

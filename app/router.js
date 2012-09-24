@@ -42,12 +42,11 @@ function(app, Postcard, User, Friend) {
 
     receivedWall: function(){
       this.reset();
+      this.allPos.fetch();
       app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
       }).render();
       this.recPos.fetch();
-      this.allPos.fetch();
-
     },
 
     sentWall:function(){
@@ -133,7 +132,7 @@ function(app, Postcard, User, Friend) {
     },
 
     reset: function(){
-       //this.user.reset();
+     // this.user.reset();
       this.recPos.reset();
       this.senPos.reset();
       this.draPos.reset();
