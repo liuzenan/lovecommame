@@ -3,7 +3,6 @@
 </header>
 
 <div id="postcardList" class="postcardList">
-	<div id="postcardWrapper"></div>
 </div>
 
 <footer class="footer">
@@ -15,3 +14,25 @@
 	<a href="#compose">Compose</a>
 </div>
 </footer>
+
+<script type="text/javascript">
+	$(window).resize(function(){
+	var noOfPostcards = $('.postcardWallList > li').length;
+      //$('.postcardWallList').css('width', noOfPostcards*240 + "px");
+     // $('.postcardWallList').css('width', (noOfPostcards*250/2)+"px");
+      var containerHeight =  $(window).height()*0.75;
+      var postcardH, postcardW;
+     if($(window).height()>$(window).width()){
+        postcardH = (containerHeight-20)/2;
+        postcardW = postcardH*1.5;
+        $('.postcardWallList').width((noOfPostcards+1)*(postcardW+10)/2);
+     }else{
+        postcardH = containerHeight - 10;
+        postcardW = postcardH*1.5;
+        $('.postcardWallList').width(noOfPostcards*(postcardW+10)+60);
+     }
+
+     $('.postcardWallList > li').width(postcardW);
+     $('.postcardWallList > li').height(postcardH);
+	})
+</script>

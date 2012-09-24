@@ -91,6 +91,31 @@ function(app, Backbone) {
     template: "tpl_postcard_wall",
     serialize: function(){
       return this.model.toJSON();
+    },
+
+    afterRender: function(){
+      this.postcardResize();
+      this.intervals = setInterval(flipBack, 2000);
+      var current = this;
+      function flipBack(){
+        var num = Math.random()*10;
+        if(num<2){
+          $(current.el).find('a').toggleClass('flip');
+        }
+      }
+    },
+
+    postcardResize: function(){
+      var containerHeight =  $(window).height()*0.75;
+      var postcardH, postcardW;
+     if($(window).height()>$(window).width()){
+        postcardH = (containerHeight-20)/2;
+     }else{
+        postcardH = containerHeight - 10;
+     }
+     postcardW = postcardH*1.5;
+     $(this.el).width(postcardW);
+     $(this.el).height(postcardH);
     }
   });
 
@@ -111,7 +136,6 @@ function(app, Backbone) {
     beforeRender: function(){
       this.$el.children().remove();
       this.collection.each(function(postcard){
-        console.log(postcard);
         this.insertView(new Postcard.Views.WallItem({
           model: postcard
         }));
@@ -119,11 +143,25 @@ function(app, Backbone) {
     },
 
     afterRender: function(){
-      //var noOfPostcards = this.collection.size();
+      this.resizePostcard();
+    },
+
+    resizePostcard: function(){
+      var noOfPostcards = this.collection.size();
+      console.log("collection size: " + noOfPostcards);
       //$('.postcardWallList').css('width', noOfPostcards*240 + "px");
-      this.scroller = new iScroll('postcardList', {
-        vScrollbar: false
-      })
+     // $('.postcardWallList').css('width', (noOfPostcards*250/2)+"px");
+      var containerHeight =  $(window).height()*0.75;
+      var postcardH, postcardW;
+     if($(window).height()>$(window).width()){
+        postcardH = (containerHeight-20)/2;
+        postcardW = postcardH*1.5;
+        $('.postcardWallList').width((noOfPostcards+1)*(postcardW+10)/2);
+     }else{
+        postcardH = containerHeight - 10;
+        postcardW = postcardH*1.5;
+        $('.postcardWallList').width(noOfPostcards*(postcardW+10)+60);
+     }
     }
   });
 
@@ -181,19 +219,17 @@ function(app, Backbone) {
       return this.model.toJSON();
     },
 
-    events: {
-      "click button" : "flip"
-    },
-
-    flip: function(ev){
-      $(".card").css('-webkit-Transform', "rotateY(180deg)");
-      $(".card").css('-moz-Transform', "rotateY(180deg)");
-    },
-
     afterRender: function(){
-      $(".card").bind("tapone", function(e){
-        alert("check"); // apply gesture here to flip the postcard
+      var windowHeight =  $(window).height();
+      var windowWidth = $(window).width();
+      $("#displaypostcard>div").width(windowHeight*0.7*1.5+100);
+      $(".display.postcard.container").height(windowHeight*0.7).width(windowHeight*0.7*1.5);
+      var current = this;
+      $(current.el).bind("tapone", function(e){
+        $(current.el).find('.card').toggleClass('flip');
       }); 
+
+      $("#displaypostcard").css("overflow","visible");
     }
   });
 
