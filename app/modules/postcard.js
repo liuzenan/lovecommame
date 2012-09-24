@@ -202,9 +202,30 @@ function(app, Backbone) {
     },
 
     uploadNew: function(ev){
+      alert("send clicked");
 
+      test();
       // create a new instance of postcard
       // and upload to server
+    },
+
+    test: function(ev){
+      alert("creating test postcard");
+
+      var testPostcard = new Postcard.Model({ 
+        body: "testing message",
+        body_effect: 2,
+        postcard_effect: 0,
+        uid_from: 1,
+        status: 2,
+        mail: "test@gmail.com"
+      });
+
+      alert("test postcard created");
+      
+      testPostcard.save();
+
+      alert("testPostcard saved");
     }
   });
 
@@ -222,5 +243,4 @@ function(app, Backbone) {
 
   // Required, return the module for AMD compliance
   return Postcard;
-
 });
