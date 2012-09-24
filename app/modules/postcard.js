@@ -218,7 +218,13 @@ function(app, Backbone) {
         postcard_effect: 0,
         uid_from: 1,
         status: 2,
-        mail: "test@gmail.com"
+        mail: "test@gmail.com",
+        top: 0,
+        left: 0,
+        width: 300,
+        height: 200,
+        data_url: "this is some dummy data",
+        photo_effect: 2
       });
 
       alert("test postcard created");
