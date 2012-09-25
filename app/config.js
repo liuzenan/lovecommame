@@ -29,7 +29,8 @@ require.config({
     // Backbone.LayoutManager depends on Backbone.
     "plugins/backbone.layoutmanager": ["backbone"],
     // Backbone.CollectionCache depends on Backbone.
-    "plugins/backbone.collectioncache": ["backbone"]
+    "plugins/backbone.collectioncache": ["backbone"],
+    "plugins/jquery.cookie" : ["jquery"]
   }
 
 });

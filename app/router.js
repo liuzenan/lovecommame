@@ -173,13 +173,13 @@ define([
     composeText: function(id){
       if(id==0){
         app.useLayout("create").setViews({
-          '.container' : new Postcard.Views.EditText({model:this.newPos})
+          '.editor' : new Postcard.Views.EditText({model:this.newPos})
         }).render();
       }else{
         console.log(this.draPos.get(id));
         this.newPos = this.draPos.get(id);
         app.useLayout("create").setViews({
-          '.container' : new Postcard.Views.EditText({model:this.newPos})
+          '.editor' : new Postcard.Views.EditText({model:this.newPos})
         }).render();
       }
       
@@ -189,13 +189,13 @@ define([
 
       if(id==0){
         app.useLayout("create").setViews({
-          '.container' : new Postcard.Views.UploadPhoto({model:this.newPos})
+          '.editor' : new Postcard.Views.UploadPhoto({model:this.newPos})
         }).render();
       }else{
         console.log(this.draPos.get(id));
         this.newPos = this.draPos.get(id);
         app.useLayout("create").setViews({
-          '.container' : new Postcard.Views.UploadPhoto({model:this.newPos})
+          '.editor' : new Postcard.Views.UploadPhoto({model:this.newPos})
         }).render();     
       }
 

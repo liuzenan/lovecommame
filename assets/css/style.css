@@ -69,13 +69,13 @@ footer{
 }
 
 /* Typography */
+h1, h2, a, p, a:visited, a:hover{
+    font-family: 'Amatic SC',cursive;
+    font-weight: 700;
+    margin: 0;
+    text-decoration: none;
+}
 
-h1,h2,a,p{
-	font-family: 'Amatic SC', cursive;
-	font-weight: 700;
-	margin: 0;
-	text-decoration: none;
-},
 
 h2{
 	font-size: 1.2em;
@@ -392,30 +392,114 @@ ul.postcardDraftList {
 
 /* compose text */
 
-.create.postcard.card{
+.layout.create{
+	height: 100%;
+}
 
+.create.options{
+	margin-left: 10%;
+	height: 20%;
+}
+
+.create.postcard.editor{
+	height: 80%;
+	width: 100%;
+	margin:0;
+}
+
+.create.options, .create.postcard.editor > div{
+    position: relative;
+}
+
+.create.options a {
+    bottom: 0;
+    font-size: 1.5em;
+    position: absolute;
+}
+
+.send {
+    left: 0;
+}
+
+.save {
+    left: 50px;
+}
+
+.discard {
+    left: 130px;
+}
+
+.create.postcard.editor a {
+    font-size: 1.5em;
+    position: absolute;
+    right: 10%;
+    top: -1.4em;
+}
+
+.create.postcard.editor > div {
+    height: 100%;
+    width: 100%;
+}
+
+#createPostcardWrap {
+    height: 80%;
+    padding-left: 10%;
+}
+
+.create.textcontrol{
+	height: 20%;
+}
+
+.create.postcard.container {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.create.postcard.card {
+    height: 100%;
+    padding: 10px;
+    width: 100%;
+    background: white;
+}
+
+.create.postcard.textWrap {
+    border-right: 1px solid black;
+    float: left;
+    height: 100%;
+    padding-right: 2%;
+    width: 60%;
 }
 
 .textWrap, .addressWrap{
 	float: left;
 }
 
-.create.postcard.content{
-	overflow: hidden;
+.create.postcard.content {
+    border: 1px solid;
+    height: 90%;
+    overflow: hidden;
+    width: 100%;
 }
 
-.create.postcard.textWrap {
-	float: left;
-	margin: 10px;
-	padding-right: 30px;
-	border-right: 1px solid black;
-	margin-right: 0;
+p.create {
+    height: 10%;
+    text-align: right;
 }
-
 .create.postcard.addressWrap {
-	float: left;
-	margin: 10px;
-	margin-left: 30px;
+    bottom: 10px;
+    padding-left: 2%;
+    position: absolute;
+    right: 1%;
+    width: 39%;
+}
+.create.postcard.addressWrap input {
+    width: 100%;
+    border: 1px solid black;
+}
+
+.create.textcontrol {
+    padding: 10px 0 0 10%;
 }
 
 

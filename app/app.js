@@ -9,7 +9,8 @@ define([
   "plugins/jgestures",
   "plugins/jsmanipulate",
   "plugins/backbone.collectioncache",
-  "plugins/iscroll"
+  "plugins/iscroll",
+  "plugins/jquery.cookie"
 ],
 
 function($, _, Backbone) {
