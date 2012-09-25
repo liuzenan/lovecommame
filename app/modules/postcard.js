@@ -149,14 +149,6 @@ function(app, Backbone) {
       }
     },
 
-    remove: function(){
-      console.log("destory");
-      if(this.scroller){
-      this.scroller.destroy();
-      this.scroller=null;
-    }
-    },
-
     resizePostcard: function(){
       var noOfPostcards = this.collection.size();
       console.log("collection size: " + noOfPostcards);
@@ -210,7 +202,7 @@ function(app, Backbone) {
 
 
   Postcard.Views.DraftList = Postcard.Views.List.extend({
-    className: "postcardDraftList",
+    className: "postcardDraftList clearfix",
 
     beforeRender: function(){
       this.$el.children().remove();
@@ -219,6 +211,17 @@ function(app, Backbone) {
           model: postcard
         }));
       }, this);
+    },
+
+    afterRender: function(){
+      var numOfCards = this.collection.size();
+      var windowHeight =  $(window).height();
+      var windowWidth = $(window).width();
+      var buttonH = windowHeight*0.4;
+      var buttonV = windowHeight*0.4*1.5;
+      $(".compose.new.button").css("height", buttonH+"px").css("width", buttonV+"px");
+      $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
+      $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
     }
   });
 
@@ -239,8 +242,6 @@ function(app, Backbone) {
       $(current.el).bind("tapone", function(e){
         $(current.el).find('.card').toggleClass('flip');
       }); 
-
-      $("#displaypostcard").css("overflow","visible");
     }
   });
 

@@ -267,6 +267,58 @@ footer{
 
 /* compose */
 
+.layout.compose{
+	height: 100%;
+}
+
+#composeContainer{
+	width: 100%;
+	height: 100%;
+}
+
+#composeContainer div.clearfix{
+	height: 100%;
+}
+
+#composeContainer div.clearfix > div{
+	float: left;
+	margin:20px;
+}
+
+.compose.draft.title {
+    padding: 0;
+}
+
+.postcardDraftList .draft.postcard.container{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.compose.draft, .compose.draft.container {
+    padding: 0;
+}
+
+ul.postcardDraftList {
+    margin: 0;
+    padding-left: 0;
+}
+
+.postcardDraftList li {
+    float: left;
+    margin-right: 20px;
+}
+
+.compose.new.button{
+	display: block;
+	margin-top: 5%;
+}
+
+.compose.new.button,
+.compose.draft.container{
+	margin-top: 10px;
+}
+
 /* display */
 
 .layout.viewpostcard .options{
@@ -294,6 +346,7 @@ footer{
 #displaypostcard{
 	width: 100%;
 	padding-left: 10%;
+	margin-top: -25px;
 }
 
 #displaypostcard>div{
@@ -305,5 +358,5 @@ footer{
 }
 
 .display.postcard.container{
-	margin: 4px;
+	margin: 4% 4px;
 }

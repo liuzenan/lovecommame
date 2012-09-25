@@ -5,9 +5,9 @@ define([
   "modules/postcard",
   "modules/user",
   "modules/friend",
-],
+  ],
 
-function(app, Postcard, User, Friend) {
+  function(app, Postcard, User, Friend) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -52,27 +52,23 @@ function(app, Postcard, User, Friend) {
           current.scroller.destroy();
           current.scroller=null;
         }
-      current.scroller = new iScroll('postcardList', {
-        vScroll: false,
-        vScrollbar: false
-      });
+        current.scroller = new iScroll('postcardList', {
+          vScroll: false,
+          vScrollbar: false
+        });
       });
       this.recPos.fetch({
         success:function(){
           console.log("success");
-        if(current.scroller){
-        current.scroller.destroy();
-        current.scroller=null;
-      }
+          if(current.scroller){
+            current.scroller.destroy();
+            current.scroller=null;
+          }
 
-        current.scroller = new iScroll('postcardList', {
-        vScroll: false,
-        vScrollbar: false
-      });
-
-  setTimeout(function () {
-    current.scroller.refresh();
-  }, 0);
+          current.scroller = new iScroll('postcardList', {
+            vScroll: false,
+            vScrollbar: false
+          });
         }
       });
 
@@ -89,27 +85,23 @@ function(app, Postcard, User, Friend) {
           current.scroller.destroy();
           current.scroller=null;
         }
-      current.scroller = new iScroll('postcardList', {
-        vScroll: false,
-        vScrollbar: false
-      });
+        current.scroller = new iScroll('postcardList', {
+          vScroll: false,
+          vScrollbar: false
+        });
       });
       this.senPos.fetch({
         success:function(){
           console.log("success");
-        if(current.scroller){
-        current.scroller.destroy();
-        current.scroller=null;
-      }
+          if(current.scroller){
+            current.scroller.destroy();
+            current.scroller=null;
+          }
 
-        current.scroller = new iScroll('postcardList', {
-        vScroll: false,
-        vScrollbar: false
-      });
-
-  setTimeout(function () {
-    current.scroller.refresh();
-  }, 0);
+          current.scroller = new iScroll('postcardList', {
+            vScroll: false,
+            vScrollbar: false
+          });
         }
       });
 
@@ -127,22 +119,58 @@ function(app, Postcard, User, Friend) {
 
     viewPostcard: function(id){
       console.log(this.allPos.get(id));
+      var current = this;
       app.useLayout("viewpostcard").setViews({
         '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
-      }).render();
+      }).render().then(function(el){
+        console.log("after render");
+        if(current.scroller){
+          current.scroller.destroy();
+          current.scroller=null;
+        }
+        current.scroller = new iScroll('displaypostcard', {
+          vScroll: false,
+          vScrollbar: false
+        });
+      });
     },
 
     compose: function(){
       this.reset();
+      var current = this;
       app.useLayout("compose").setViews({
         '.container' : new Postcard.Views.DraftList({collection: this.draPos})
-      }).render();
+      }).render().then(function(el){
+        console.log("after render");
+        if(current.scroller){
+          current.scroller.destroy();
+          current.scroller=null;
+        }
+        current.scroller = new iScroll('composeContainer', {
+          vScroll: false,
+          vScrollbar: false,
+          hScrollbar: false
+        });
+      });
 
-      this.draPos.fetch();
+      this.draPos.fetch({
+        success:function(){
+          console.log("success");
+          if(current.scroller){
+            current.scroller.destroy();
+            current.scroller=null;
+          }
+
+          current.scroller = new iScroll('composeContainer', {
+            vScroll: false,
+            vScrollbar: false,
+            hScrollbar: false
+          });
+        }
+      });
     },
 
     composeText: function(id){
-
       if(id==0){
         app.useLayout("create").setViews({
           '.container' : new Postcard.Views.EditText({model:this.newPos})
@@ -188,17 +216,17 @@ function(app, Postcard, User, Friend) {
 
     reset: function(){
      // this.user.reset();
-      this.recPos.reset();
-      this.senPos.reset();
-      this.draPos.reset();
+     this.recPos.reset();
+     this.senPos.reset();
+     this.draPos.reset();
      // this.newPos.reset();
      // this.friends.reset();
-      app.active = false;
-    },
+     app.active = false;
+   },
 
-    initialize: function(){
-      this.user = new User.Model();
-      this.allPos = new Postcard.Collection.All();
+   initialize: function(){
+    this.user = new User.Model();
+    this.allPos = new Postcard.Collection.All();
       //received postcards
       this.recPos = new Postcard.Collection.Wall();
       //sent postcards
@@ -215,6 +243,6 @@ function(app, Postcard, User, Friend) {
 
   });
 
-  return Router;
+return Router;
 
 });
