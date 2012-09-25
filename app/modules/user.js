@@ -21,13 +21,7 @@ function(app, Backbone){
 			"submit form" : "login"
 		},
 
-		test: function(){
-			alert("test");
-		},
-
-		login: function(ev){
-			$(this).test();
-			// disable inputs when 
+		login: function(ev){			// disable inputs when 
 			$inputs = $(this).find("input, select, button, textarea");
 			$inputs.attr("disabled", "disabled");
 
