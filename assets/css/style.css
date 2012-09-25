@@ -28,12 +28,13 @@ light green: #9ddd46
 .clearfix { display: block; }
 /* close commented backslash hack */
 
-input{
+input, textarea{
 	-webkit-appearance: none;
 	-moz-apprearance: none;
 	-o-apprearance: none;
 	apprearance: none;
 	border-radius: 0;
+	outline: none;
 }
 
 html,body, #main{
@@ -392,5 +393,30 @@ ul.postcardDraftList {
 /* compose text */
 
 .create.postcard.card{
-	
+
 }
+
+.textWrap, .addressWrap{
+	float: left;
+}
+
+.create.postcard.content{
+	overflow: hidden;
+}
+
+.create.postcard.textWrap {
+	float: left;
+	margin: 10px;
+	padding-right: 30px;
+	border-right: 1px solid black;
+	margin-right: 0;
+}
+
+.create.postcard.addressWrap {
+	float: left;
+	margin: 10px;
+	margin-left: 30px;
+}
+
+
+
