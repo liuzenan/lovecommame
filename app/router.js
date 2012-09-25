@@ -43,19 +43,76 @@ function(app, Postcard, User, Friend) {
     receivedWall: function(){
       this.reset();
       this.allPos.fetch();
+      var current = this;
       app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
-      }).render();
-      this.recPos.fetch();
+      }).render().then(function(el){
+        console.log("after render");
+        if(current.scroller){
+          current.scroller.destroy();
+          current.scroller=null;
+        }
+      current.scroller = new iScroll('postcardList', {
+        vScroll: false,
+        vScrollbar: false
+      });
+      });
+      this.recPos.fetch({
+        success:function(){
+          console.log("success");
+        if(current.scroller){
+        current.scroller.destroy();
+        current.scroller=null;
+      }
+
+        current.scroller = new iScroll('postcardList', {
+        vScroll: false,
+        vScrollbar: false
+      });
+
+  setTimeout(function () {
+    current.scroller.refresh();
+  }, 0);
+        }
+      });
+
     },
 
     sentWall:function(){
       this.reset();
+      var current = this;
       app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.WallList({collection: this.senPos})
-      }).render();
+      }).render().then(function(el){
+        console.log("after render");
+        if(current.scroller){
+          current.scroller.destroy();
+          current.scroller=null;
+        }
+      current.scroller = new iScroll('postcardList', {
+        vScroll: false,
+        vScrollbar: false
+      });
+      });
+      this.senPos.fetch({
+        success:function(){
+          console.log("success");
+        if(current.scroller){
+        current.scroller.destroy();
+        current.scroller=null;
+      }
 
-      this.senPos.fetch();
+        current.scroller = new iScroll('postcardList', {
+        vScroll: false,
+        vScrollbar: false
+      });
+
+  setTimeout(function () {
+    current.scroller.refresh();
+  }, 0);
+        }
+      });
+
     },
 
     publicWall : function(){
@@ -64,9 +121,7 @@ function(app, Postcard, User, Friend) {
 
     archive : function(){
       this.reset();
-      app.useLayout("archive").setViews({
-        '.postcardList' : new Postcard.Views.ArchiveList({collection: this.arcPos})
-      }).render();
+      app.useLayout("archive").render();
       this.arcPos.fetch();
     },
 
