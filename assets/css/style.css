@@ -336,6 +336,10 @@ ul.postcardDraftList {
 .compose.new.button{
 	display: block;
 	margin-top: 5%;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
 }
 
 .compose.new.button,
@@ -383,4 +387,10 @@ ul.postcardDraftList {
 
 .display.postcard.container{
 	margin: 4% 4px;
+}
+
+/* compose text */
+
+.create.postcard.card{
+	
 }
