@@ -21,7 +21,8 @@ function(app, Backbone){
 			"submit form" : "login"
 		},
 
-		login: function(ev){			// disable inputs when 
+		login: function(ev){
+			// disable inputs when 
 			$inputs = $(this).find("input, select, button, textarea");
 			$inputs.attr("disabled", "disabled");
 
@@ -50,6 +51,30 @@ function(app, Backbone){
 			});
 
 			return false; 
+		},
+
+		initialize: function(){
+			
+			function getCookie(c_name)
+			{
+			var i,x,y,ARRcookies=document.cookie.split(";");
+			for (i=0;i<ARRcookies.length;i++){
+				x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+			    y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+			    x=x.replace(/^\s+|\s+$/g,"");
+			    if (x==c_name){
+			    	return unescape(y);
+			    }
+			  }
+			}
+
+			var username=getCookie("username");
+			var password=getCookie("password");
+
+			if (username!=null && username!="" && password!=null && password!=""){
+				$("input[name=username]").val(username);
+				$("input[name=password]").val(password);
+			}
 		}
 	});
 
