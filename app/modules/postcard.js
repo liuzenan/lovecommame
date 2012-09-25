@@ -260,14 +260,6 @@ function(app, Backbone) {
     uploadNew: function(ev){
       alert("send clicked");
 
-      test();
-      // create a new instance of postcard
-      // and upload to server
-    },
-
-    test: function(ev){
-      alert("creating test postcard");
-
       var testPostcard = new Postcard.Model({ 
         body: "testing message",
         body_effect: 2,
@@ -288,7 +280,9 @@ function(app, Backbone) {
       testPostcard.save();
 
       alert("testPostcard saved");
-    }
+      // create a new instance of postcard
+      // and upload to server
+    },
   });
 
   Postcard.Views.UploadPhoto = Backbone.View.extend({
@@ -300,7 +294,7 @@ function(app, Backbone) {
   });
   
   Postcard.Views.Send = Backbone.View.extend({
-    
+
   });
 
   // Required, return the module for AMD compliance
