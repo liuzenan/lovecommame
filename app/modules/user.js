@@ -21,7 +21,12 @@ function(app, Backbone){
 			"submit form" : "login"
 		},
 
+		test: function(){
+			alert("test");
+		},
+
 		login: function(ev){
+			$(this).test();
 			// disable inputs when 
 			$inputs = $(this).find("input, select, button, textarea");
 			$inputs.attr("disabled", "disabled");
@@ -30,38 +35,16 @@ function(app, Backbone){
 			var pass = $("input[name=password]");
 
 			$.ajax({
-				type: "POST",
-				url: "../api.php/user/login",
-				data: {uname: uname.val(), pass: window.btoa(pass.val())},
-				success: function(response)
-				{
-					if(response == 'success')
-					{
-						alert("success");
-					}
-					else
-					{
-						alert("success");
-					}
-				};
-			});
-
-			$.ajax({
 			  	type: "POST",
 			  	url: "../api.php/user/login",
 			  	data: {uname: uname.val(), pass: window.btoa(pass.val())},
 			  	success: function(response, textStatus, jqXHR){
-				    // log a message to the console
 				    alert("welcome");
 				    app.router.go("wall");
 				},
 				// callback handler that will be called on error
 				error: function(jqXHR, textStatus, errorThrown){
-				    // log the error to the console
-				    console.log(
-				        "The following error occured: "+
-				        textStatus, errorThrown
-				    );
+
 				    alert("Sorry we cannot log you in. Please check your email address or password!")
 				},
 				// callback handler that will be called on completion
@@ -70,7 +53,7 @@ function(app, Backbone){
 				    // enable the inputs
 				    $inputs.removeAttr("disabled");
 				}
-			})
+			});
 
 			return false; 
 		}
