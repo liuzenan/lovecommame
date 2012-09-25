@@ -5,9 +5,9 @@ define([
   "modules/postcard",
   "modules/user",
   "modules/friend",
-  ],
+],
 
-  function(app, Postcard, User, Friend) {
+function(app, Postcard, User, Friend) {
 
   // Defining the application router, you can attach sub routers here.
   var Router = Backbone.Router.extend({
@@ -42,39 +42,40 @@ define([
 
     receivedWall: function(){
       this.reset();
-      
+      this.allPos.fetch();
       var current = this;
-      this.allPos.fetch({
+      app.useLayout("wall").setViews({
+        '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
+      }).render().then(function(el){
+        console.log("after render");
+        if(current.scroller){
+          current.scroller.destroy();
+          current.scroller=null;
+        }
+      current.scroller = new iScroll('postcardList', {
+        vScroll: false,
+        vScrollbar: false
+      });
+      });
+      this.recPos.fetch({
         success:function(){
-          app.useLayout("wall").setViews({
-            '.postcardList' : new Postcard.Views.WallList({collection: current.recPos})
-          }).render().then(function(el){
-            console.log("after render");
-            if(current.scroller){
-              current.scroller.destroy();
-              current.scroller=null;
-            }
-            current.scroller = new iScroll('postcardList', {
-              vScroll: false,
-              vScrollbar: false
-            });
-          });
-          current.recPos.fetch({
-            success:function(){
-              console.log("success");
-              if(current.scroller){
-                current.scroller.destroy();
-                current.scroller=null;
-                current.scroller = new iScroll('postcardList', {
-                  vScroll: false,
-                  vScrollbar: false
-                });
-              }
+          console.log("success");
+        if(current.scroller){
+        current.scroller.destroy();
+        current.scroller=null;
+      }
 
-            }
-          });
+        current.scroller = new iScroll('postcardList', {
+        vScroll: false,
+        vScrollbar: false
+      });
+
+  setTimeout(function () {
+    current.scroller.refresh();
+  }, 0);
         }
       });
+
     },
 
     sentWall:function(){
@@ -88,23 +89,27 @@ define([
           current.scroller.destroy();
           current.scroller=null;
         }
-        current.scroller = new iScroll('postcardList', {
-          vScroll: false,
-          vScrollbar: false
-        });
+      current.scroller = new iScroll('postcardList', {
+        vScroll: false,
+        vScrollbar: false
+      });
       });
       this.senPos.fetch({
         success:function(){
           console.log("success");
-          if(current.scroller){
-            current.scroller.destroy();
-            current.scroller=null;
-            current.scroller = new iScroll('postcardList', {
-              vScroll: false,
-              vScrollbar: false
-            });
-          }
+        if(current.scroller){
+        current.scroller.destroy();
+        current.scroller=null;
+      }
 
+        current.scroller = new iScroll('postcardList', {
+        vScroll: false,
+        vScrollbar: false
+      });
+
+  setTimeout(function () {
+    current.scroller.refresh();
+  }, 0);
         }
       });
 
@@ -149,7 +154,7 @@ define([
           '.container' : new Postcard.Views.EditText({model:this.newPos})
         }).render();
       }
-
+      
     },
 
     composePhoto: function(id){
@@ -183,17 +188,17 @@ define([
 
     reset: function(){
      // this.user.reset();
-     this.recPos.reset();
-     this.senPos.reset();
-     this.draPos.reset();
+      this.recPos.reset();
+      this.senPos.reset();
+      this.draPos.reset();
      // this.newPos.reset();
      // this.friends.reset();
-     app.active = false;
-   },
+      app.active = false;
+    },
 
-   initialize: function(){
-    this.user = new User.Model();
-    this.allPos = new Postcard.Collection.All();
+    initialize: function(){
+      this.user = new User.Model();
+      this.allPos = new Postcard.Collection.All();
       //received postcards
       this.recPos = new Postcard.Collection.Wall();
       //sent postcards
@@ -210,6 +215,6 @@ define([
 
   });
 
-return Router;
+  return Router;
 
 });

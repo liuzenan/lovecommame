@@ -144,6 +144,17 @@ function(app, Backbone) {
 
     afterRender: function(){
       this.resizePostcard();
+      if(app.router.scroller){
+        app.router.scroller.refresh();
+      }
+    },
+
+    remove: function(){
+      console.log("destory");
+      if(this.scroller){
+      this.scroller.destroy();
+      this.scroller=null;
+    }
     },
 
     resizePostcard: function(){
