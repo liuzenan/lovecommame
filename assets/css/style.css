@@ -28,12 +28,13 @@ light green: #9ddd46
 .clearfix { display: block; }
 /* close commented backslash hack */
 
-input{
+input, textarea{
 	-webkit-appearance: none;
 	-moz-apprearance: none;
 	-o-apprearance: none;
 	apprearance: none;
 	border-radius: 0;
+	outline: none;
 }
 
 html,body, #main{
@@ -291,6 +292,62 @@ footer{
 
 /* compose */
 
+.layout.compose{
+	height: 100%;
+}
+
+#composeContainer{
+	width: 100%;
+	height: 100%;
+}
+
+#composeContainer div.clearfix{
+	height: 100%;
+}
+
+#composeContainer div.clearfix > div{
+	float: left;
+	margin:20px;
+}
+
+.compose.draft.title {
+    padding: 0;
+}
+
+.postcardDraftList .draft.postcard.container{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+.compose.draft, .compose.draft.container {
+    padding: 0;
+}
+
+ul.postcardDraftList {
+    margin: 0;
+    padding-left: 0;
+}
+
+.postcardDraftList li {
+    float: left;
+    margin-right: 20px;
+}
+
+.compose.new.button{
+	display: block;
+	margin-top: 5%;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+
+.compose.new.button,
+.compose.draft.container{
+	margin-top: 10px;
+}
+
 /* display */
 
 .layout.viewpostcard .options{
@@ -318,6 +375,7 @@ footer{
 #displaypostcard{
 	width: 100%;
 	padding-left: 10%;
+	margin-top: -25px;
 }
 
 #displaypostcard>div{
@@ -329,5 +387,36 @@ footer{
 }
 
 .display.postcard.container{
-	margin: 4px;
+	margin: 4% 4px;
 }
+
+/* compose text */
+
+.create.postcard.card{
+
+}
+
+.textWrap, .addressWrap{
+	float: left;
+}
+
+.create.postcard.content{
+	overflow: hidden;
+}
+
+.create.postcard.textWrap {
+	float: left;
+	margin: 10px;
+	padding-right: 30px;
+	border-right: 1px solid black;
+	margin-right: 0;
+}
+
+.create.postcard.addressWrap {
+	float: left;
+	margin: 10px;
+	margin-left: 30px;
+}
+
+
+
