@@ -43,7 +43,7 @@ function(app, Backbone){
 					{
 						alert("success");
 					}
-				};
+				}
 			});
 
 			$.ajax({
