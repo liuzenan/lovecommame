@@ -300,7 +300,7 @@ function(app, Backbone) {
   });
   
   Postcard.Views.Send = Backbone.View.extend({
-
+    
   });
 
   // Required, return the module for AMD compliance
