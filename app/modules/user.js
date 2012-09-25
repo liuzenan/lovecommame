@@ -22,17 +22,56 @@ function(app, Backbone){
 		},
 
 		login: function(ev){
-			alert("inside login");
+			// disable inputs when 
+			$inputs = $(this).find("input, select, button, textarea");
+			$inputs.attr("disabled", "disabled");
+
+			var uname = $("input[name=username]");
+			var pass = $("input[name=password]");
 
 			$.ajax({
-			  type: "POST",
-			  url: "../api.php/user/login",
-			  data: { uname: "inian", pass: window.btoa("pass")}
-			}).done(function( msg ) {
-			  alert( "Data Saved: " + msg );
+				type: "POST",
+				url: "../api.php/user/login",
+				data: {uname: uname.val(), pass: window.btoa(pass.val())},
+				success: function(response)
+				{
+					if(response == 'success')
+					{
+						alert("success");
+					}
+					else
+					{
+						alert("success");
+					}
+				};
 			});
 
-			app.router.go("wall");
+			$.ajax({
+			  	type: "POST",
+			  	url: "../api.php/user/login",
+			  	data: {uname: uname.val(), pass: window.btoa(pass.val())},
+			  	success: function(response, textStatus, jqXHR){
+				    // log a message to the console
+				    alert("welcome");
+				    app.router.go("wall");
+				},
+				// callback handler that will be called on error
+				error: function(jqXHR, textStatus, errorThrown){
+				    // log the error to the console
+				    console.log(
+				        "The following error occured: "+
+				        textStatus, errorThrown
+				    );
+				    alert("Sorry we cannot log you in. Please check your email address or password!")
+				},
+				// callback handler that will be called on completion
+				// which means, either on success or error
+				complete: function(textStatus){
+				    // enable the inputs
+				    $inputs.removeAttr("disabled");
+				}
+			})
+
 			return false; 
 		}
 	});
