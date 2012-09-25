@@ -11,7 +11,9 @@ function(app, Backbone){
 	var User = app.module();
 
 	// user model contains username, email address and uid
-	User.Model = Backbone.Model.extend();
+	User.Model = Backbone.Model.extend({
+		// migrate functions from view to model 
+	});
 
 	//User login view
 	User.Views.Login = Backbone.View.extend({
@@ -24,17 +26,24 @@ function(app, Backbone){
 		login: function(ev){
 			// disable inputs when 
 			$inputs = $(this).find("input, select, button, textarea");
-			$inputs.attr("disabled", "disabled");
-
-			var uname = $("input[name=username]");
-			var pass = $("input[name=password]");
+			$inputs.prop("disabled", true);
 
 			$.ajax({
 			  	type: "POST",
 			  	url: "../api.php/user/login",
-			  	data: {uname: uname.val(), pass: window.btoa(pass.val())},
+			  	data: {uname: $("input[name=username]").val(), pass: window.btoa($("input[name=password]").val())},
+			  	
 			  	success: function(response, textStatus, jqXHR){
-				    alert("welcome");
+/*				    if($("input[name=rmbme]").is(':checked')){
+				    	$.cookie("username", $("input[name=username]").val());
+				    	$.cookie("password", $("input[name=password]").val());
+				    }
+				    else{
+				    	$.cookie("username", null);
+				    	$.cookie("password", null);
+				    }
+*/
+				    // navigate to the wall page
 				    app.router.go("wall");
 				},
 				// callback handler that will be called on error
@@ -46,7 +55,7 @@ function(app, Backbone){
 				// which means, either on success or error
 				complete: function(textStatus){
 				    // enable the inputs
-				    $inputs.removeAttr("disabled");
+				    $inputs.prop("disabled", false);
 				}
 			});
 
@@ -54,27 +63,11 @@ function(app, Backbone){
 		},
 
 		initialize: function(){
-			
-			function getCookie(c_name)
-			{
-			var i,x,y,ARRcookies=document.cookie.split(";");
-			for (i=0;i<ARRcookies.length;i++){
-				x=ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
-			    y=ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
-			    x=x.replace(/^\s+|\s+$/g,"");
-			    if (x==c_name){
-			    	return unescape(y);
-			    }
-			  }
-			}
-
-			var username=getCookie("username");
-			var password=getCookie("password");
-
-			if (username!=null && username!="" && password!=null && password!=""){
-				$("input[name=username]").val(username);
-				$("input[name=password]").val(password);
-			}
+	/*		if($.cookie("username") != null){
+				$("input[name=username]").val($.cookie("username"));
+				$("input[name=password]").val($.cookie("password"));
+				$("input[name=rmbme]").prop("checked", true);
+			}*/
 		}
 	});
 
