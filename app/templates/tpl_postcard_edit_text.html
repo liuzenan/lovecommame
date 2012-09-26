@@ -20,7 +20,7 @@
 				</div>
 			</div>
 		<div class="create postcard back face">
-			<button id="uploadimage"><h2>Add photo</h2></button>
+			<button id="uploadimage">Add photo</button>
 			<input type="file" id="imageinput" accept="image/*" onchange="uploadPhoto(this.files);"/>
 			<img class="create postcard image" src="" alt=""/>
 		</div>
@@ -43,7 +43,7 @@
 		reader.onload = function(e){
 			$(".create.postcard.image").attr('src', e.target.result);
 			$("#uploadimage").addClass("small");
-            $("#uploadimage").html("<h2>Change</h2>");
+            $("#uploadimage").html("Change");
 		};
 		reader.readAsDataURL(photo);
 	}

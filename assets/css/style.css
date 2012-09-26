@@ -329,10 +329,6 @@ footer{
 .postcard.image{
 	width: 100%;
 	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
 }
 
 .postcard.face {
@@ -612,8 +608,13 @@ p.create {
 }
 
 #uploadimage.small{
-	width: 50px;
+	width: 70px;
 	height: 30px;
+	position: absolute;
+left: 0;
+top: 0;
+background: rgba(0, 0, 0, 0.4);
+border-radius: 10px;
 }
 
 #postcardCanvas{
@@ -628,5 +629,9 @@ p.create {
 	left:-50;
 }
 
-
-
+.create.postcard.image{
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
