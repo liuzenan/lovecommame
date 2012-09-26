@@ -247,6 +247,13 @@ function(app, Backbone) {
       $(current.el).bind("tapone", function(e){
         $(current.el).find('.card').toggleClass('flip');
       });
+
+      // select delete button
+      $('a[value="delete"]').bind("click", function(e){
+        jQuery.alerts.okButton = ' Yes ';
+        jQuery.alerts.cancelButton = ' No ';                  
+        jConfirm('Do you want to delete this postcard?','', function(r){});
+      });
     }
   });
 
