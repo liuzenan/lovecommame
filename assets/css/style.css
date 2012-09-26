@@ -328,10 +328,12 @@ footer{
 	-moz-backface-visibility: hidden;
 	-o-backface-visibility: hidden;
 	backface-visibility: hidden;
+	background: white;
 }
 
 .postcard.back.face  {
 	display: block;
+	background: white;
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
 	-o-transform: rotateY(180deg);
@@ -343,7 +345,6 @@ footer{
 	padding: 10px;
 	color: white;
 	text-align: center;
-	background-color: #aaa;
 }
 
 /* compose */
@@ -475,6 +476,8 @@ ul.postcardDraftList {
     bottom: 0;
     font-size: 1.5em;
     position: absolute;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .send {
@@ -482,18 +485,32 @@ ul.postcardDraftList {
 }
 
 .save {
-    left: 50px;
+    left: 58px;
 }
 
 .discard {
-    left: 130px;
+    left: 118px;
 }
 
-.create.postcard.editor a {
+.flipback {
+    left: 198px;
+}
+
+.create.options a {
+    border-right: 1px solid white;
+    bottom: 5px;
     font-size: 1.5em;
+    line-height: 0.6em;
+    padding: 0 10px;
     position: absolute;
-    right: 10%;
-    top: -1.4em;
+}
+
+.create.options a:last-child{
+	border: none;
+}
+
+.create.options a:first-child{
+	padding-left: 0;
 }
 
 .create.postcard.editor > div {
@@ -518,12 +535,18 @@ ul.postcardDraftList {
 }
 
 .create.postcard.card {
-    background: none repeat scroll 0 0 white;
+    background: white;
     height: 94%;
     margin: 2% 0;
-    padding: 2%;
     width: 100%;
 }
+
+.create.postcard.front.face {
+    padding: 2%;
+    width: 100%;
+    height: 100%;
+}
+
 
 .create.postcard.textWrap {
     border-right: 1px solid black;

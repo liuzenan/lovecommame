@@ -266,48 +266,6 @@ define([
       
     },
 
-    composePhoto: function(id){
-      var current = this;
-      if(id==0){
-        app.useLayout("create").setViews({
-          '.editor' : new Postcard.Views.UploadPhoto({model:this.newPos})
-        }).render().then(function(el){
-       // console.log("after render");
-       if($('#createPostcardWrap').length>0){
-        if(current.scroller){
-          current.scroller.destroy();
-          current.scroller=null;
-        }
-        current.scroller = new iScroll('createPostcardWrap', {
-          vScroll: false,
-          vScrollbar: false,
-          hScrollbar: false
-        });
-      }
-    });
-      }else{
-        console.log(this.draPos.get(id));
-        this.newPos = this.draPos.get(id);
-        app.useLayout("create").setViews({
-          '.editor' : new Postcard.Views.UploadPhoto({model:this.newPos})
-        }).render().then(function(el){
-       // console.log("after render");
-       if($('#createPostcardWrap').length>0){
-        if(current.scroller){
-          current.scroller.destroy();
-          current.scroller=null;
-        }
-        current.scroller = new iScroll('createPostcardWrap', {
-          vScroll: false,
-          vScrollbar: false,
-          hScrollbar: false
-        });
-      }
-    });    
-      }
-
-    },
-
     send: function(){
 
     },

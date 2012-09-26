@@ -30,7 +30,8 @@ require.config({
     "plugins/backbone.layoutmanager": ["backbone"],
     // Backbone.CollectionCache depends on Backbone.
     "plugins/backbone.collectioncache": ["backbone"],
-    "plugins/jquery.cookie" : ["jquery"]
+    "plugins/jquery.cookie" : ["jquery"],
+    "plugins/jquery.ocupload" : ["jquery"]
   }
 
 });

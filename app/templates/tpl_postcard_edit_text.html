@@ -1,22 +1,30 @@
-<a href="#compose/photo/0">Flip Back</a>
 <div id="createPostcardWrap">
-<div class="create postcard container">
-	<div class="create postcard card clearfix">
-					<form class="create postcard textWrap">
-						<textarea name="content" class="create postcard content" cols="30" rows="10"></textarea>
-						<p class="create postcard text signature">Love, me</p>
-					</form>
-					<div class="create postcard addressWrap">
-						<label for="name"><h2>To</h2></label>
-						<input type="text" name="name"><br>
-						<label for="email"><h2>Email address</h2></label>
-						<input type="email" name="email">
-					</div>
+	<div class="create postcard container">
+		<div class="create postcard card">
+			<div class="create postcard front face clearfix">
+				<form class="create postcard textWrap">
+					<textarea name="content" class="create postcard content" cols="30" rows="10"></textarea>
+					<p class="create postcard text signature">Love, me</p>
+				</form>
+				<div class="create postcard addressWrap">
+					<label for="name"><h2>To</h2></label>
+					<input type="text" name="name"><br>
+					<label for="email"><h2>Email address</h2></label>
+					<input type="email" name="email">
+				</div>
+			</div>
+		<div class="create postcard back face">
+			<button id="uploadimage"><h2>Add photo</h2></button>
+			<img class="create postcard image" src="" alt=""/>
+		</div>
+		</div>
 	</div>
-</div>
 </div>
 
 <div class="create textcontrol">
-	<button class="changetextstyle">Change Style</button>
 	<div class="textstyles"></div>
 </div>
+<div class="create photocontrol">
+	<div class="photoeffects"></div>
+</div>
+

@@ -294,21 +294,25 @@ function(app, Backbone) {
       var postcardH = postcard.height();
       var postcardW = postcardH*1.5;
       postcard.width(postcardW);
-    }
-  });
+      var current = this;
+      $(".flipback").click(function(e){
+        e.preventDefault();
+        $(current.el).find(".postcard.card").toggleClass("flip");
+      });
 
-  Postcard.Views.UploadPhoto = Backbone.View.extend({
-    template: "tpl_postcard_edit_photo",
-    tagName: "div",
-    serialize:function(){
-      return this.model.toJSON();
-    },
-
-    afterRender: function(){
-      var postcard = $(this.el).find('.container');
-      var postcardH = postcard.height();
-      var postcardW = postcardH*1.5;
-      postcard.width(postcardW);
+      this.myphoto = $("#uploadimage").upload({
+        name:"myphoto",
+        action:'',
+        onSubmit :function(){
+          alert("submit");
+        },
+        onComplete:function(){
+          alert("complete");
+        },
+        onSelect: function(){
+          alert("selected");
+        }
+      });
     }
   });
   
