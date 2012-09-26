@@ -8,7 +8,7 @@ define([
 function(app, Backbone) {
 
   // Create a new module
-  var Postcard = app.module();   
+  var Postcard = app.module();
 
   Postcard.PostcardText = Backbone.Model.extend({
         defaults: {
@@ -106,7 +106,7 @@ function(app, Backbone) {
     },
 
     postcardResize: function(){
-      var containerHeight =  $(window).height()*0.75;
+      var containerHeight = $(window).height()*0.75;
       var postcardH, postcardW;
      if($(window).height()>$(window).width()){
         postcardH = (containerHeight-20)/2;
@@ -154,7 +154,7 @@ function(app, Backbone) {
       console.log("collection size: " + noOfPostcards);
       //$('.postcardWallList').css('width', noOfPostcards*240 + "px");
      // $('.postcardWallList').css('width', (noOfPostcards*250/2)+"px");
-      var containerHeight =  $(window).height()*0.75;
+      var containerHeight = $(window).height()*0.75;
       var postcardH, postcardW;
      if($(window).height()>$(window).width()){
         postcardH = (containerHeight-20)/2;
@@ -215,11 +215,16 @@ function(app, Backbone) {
 
     afterRender: function(){
       var numOfCards = this.collection.size();
-      var windowHeight =  $(window).height();
+      console.log("numOfCards: "+ numOfCards);
+      var windowHeight = $(window).height();
       var windowWidth = $(window).width();
-      var buttonH = windowHeight*0.4;
-      var buttonV = windowHeight*0.4*1.5;
-      $(".compose.new.button").css("height", buttonH+"px").css("width", buttonV+"px");
+      var buttonH = windowHeight*0.36;
+      var buttonV = windowHeight*0.36*1.5;
+      if(buttonV<240){
+        buttonV = 240;
+        buttonH = buttonV/1.5;
+      }
+      $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
       $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
       $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
     }
@@ -234,14 +239,14 @@ function(app, Backbone) {
     },
 
     afterRender: function(){
-      var windowHeight =  $(window).height();
+      var windowHeight = $(window).height();
       var windowWidth = $(window).width();
       $("#displaypostcard>div").width(windowHeight*0.7*1.5+100);
       $(".display.postcard.container").height(windowHeight*0.7).width(windowHeight*0.7*1.5);
       var current = this;
       $(current.el).bind("tapone", function(e){
         $(current.el).find('.card').toggleClass('flip');
-      }); 
+      });
     }
   });
 
@@ -260,7 +265,7 @@ function(app, Backbone) {
     uploadNew: function(ev){
       alert("send clicked");
 
-      var testPostcard = new Postcard.Model({ 
+      var testPostcard = new Postcard.Model({
         body: "testing message",
         body_effect: 2,
         postcard_effect: 0,

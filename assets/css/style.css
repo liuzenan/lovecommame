@@ -78,7 +78,7 @@ footer{
 }
 
 /* Typography */
-h1, h2, a, p, a:visited, a:hover{
+h1, h2, a, p, a:visited, a:hover, button{
     font-family: 'Rancho', cursive;
     font-weight: 400;
     margin: 0;
@@ -472,13 +472,29 @@ ul.postcardDraftList {
     position: relative;
 }
 
-.create.options a {
-    bottom: 0;
+.create.options button{
+	background: none;
+	border: none;
+	cursor  : pointer;
     font-size: 1.5em;
     position: absolute;
     color: white;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    border-right: 1px solid white;
+    bottom: 5px;
+    line-height: 0.6em;
+    padding: 0 10px;
 }
+
+
+.create.options button:last-child{
+	border: none;
+}
+
+.create.options button:first-child{
+	padding-left: 0;
+}
+
 
 .send {
     left: 0;
@@ -494,23 +510,6 @@ ul.postcardDraftList {
 
 .flipback {
     left: 198px;
-}
-
-.create.options a {
-    border-right: 1px solid white;
-    bottom: 5px;
-    font-size: 1.5em;
-    line-height: 0.6em;
-    padding: 0 10px;
-    position: absolute;
-}
-
-.create.options a:last-child{
-	border: none;
-}
-
-.create.options a:first-child{
-	padding-left: 0;
 }
 
 .create.postcard.editor > div {
