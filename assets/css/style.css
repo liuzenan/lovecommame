@@ -78,7 +78,7 @@ footer{
 }
 
 /* Typography */
-h1, h2, a, p, a:visited, a:hover, button, form{
+h1, h2, a, p, a:visited, a:hover, button, form, label{
     font-family: 'Rancho', cursive;
     font-weight: 400;
     margin: 0;
@@ -500,7 +500,7 @@ ul.postcardDraftList {
 
 
 .send {
-    left: 0;
+    left: 118px;
 }
 
 .save {
@@ -508,11 +508,7 @@ ul.postcardDraftList {
 }
 
 .discard {
-    left: 118px;
-}
-
-.flipback {
-    left: 198px;
+    left: 0;
 }
 
 .create.postcard.editor > div {
@@ -563,7 +559,7 @@ ul.postcardDraftList {
 
 .create.postcard.content {
     border: 1px solid;
-    height: 90%;
+    height: 80%;
     overflow: hidden;
     width: 100%;
 }
@@ -572,21 +568,27 @@ p.create {
     height: 10%;
     text-align: right;
 }
-.create.postcard.addressWrap {
-    bottom: 10px;
-    padding-left: 2%;
-    position: absolute;
-    right: 2%;
-    width: 38%;
+
+.stamp{
+    display: block;
+    height: 40%;
 }
 
-.create.postcard.addressWrap.back{
-	position: static;
+.create.postcard.addressWrap {
+    height: 100%;
+    padding-left: 2%;
+    width: 40%;
+}
+
+.create.postcard.addressWrap label{
+	font-size: 1em;
+	color: #333;
 }
 
 .create.postcard.addressWrap input {
     width: 100%;
-    border: 1px solid black;
+    border: none;
+    border-bottom: 1px solid #666;
 }
 
 .create.textcontrol {
@@ -603,18 +605,37 @@ p.create {
 	height: 100%;
 	background: none;
 	border: none;
-	color: white;
-	text-shadow: 1px 1px 0px rgba(0,0,0,0.7);
 }
 
-#uploadimage.small{
-	width: 70px;
-	height: 30px;
-	position: absolute;
-left: 0;
-top: 0;
+#flipback{
+left: 10px;
+bottom: 9%;
+margin-bottom: 2px;
+z-index: 99;
+}
+
+
+#uploadimage.overlaybutton.small{
+left: 5px;
+top: 2%;
+width: 70px;
+height: 30px;
+background: rgba(0, 0, 0, 0.4);
+border: 1px solid white;
+}
+
+.overlaybutton{
+color: white;
+text-shadow: 1px 1px 0px rgba(0,0,0,0.7);
+}
+
+.overlaybutton.small{
+width: 100px;
+height: 30px;
+position: absolute;
 background: rgba(0, 0, 0, 0.4);
 border-radius: 10px;
+border: 1px solid white;
 }
 
 #postcardCanvas{

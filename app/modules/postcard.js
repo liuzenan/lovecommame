@@ -303,8 +303,11 @@ function(app, Backbone) {
       postcard.width(postcardW);
       var current = this;
       $(".flipback").click(function(e){
-        $(current.el).find(".addressWrap").toggleClass("back");
+        $("form textarea button").hide();
         $(current.el).find(".postcard.card").toggleClass("flip");
+        $(e.target).fadeOut(200).delay(1000).fadeIn(200,function(){
+          $("form textarea button").fadeIn();
+        });
       });
 
       $("#uploadimage").click(function(){

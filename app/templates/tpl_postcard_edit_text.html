@@ -1,8 +1,8 @@
 <div class="create options">
+	<button class="discard">Back</button>
 	<button class="send">Send</button>
 	<button class="save">Save</button>
-	<button class="discard">Discard</button>	
-	<button class="flipback">Flip</button>
+	
 </div>
 <div id="createPostcardWrap">
 	<div class="create postcard container">
@@ -13,18 +13,20 @@
 					<p class="create postcard text signature">Love, me</p>
 				</form>
 				<div class="create postcard addressWrap">
-					<label for="name"><h2>To</h2></label>
+					<span class="stamp"></span>
+					<label for="name">To</label>
 					<input type="text" name="name"><br>
-					<label for="email"><h2>Email address</h2></label>
+					<label for="email">Email address</label>
 					<input type="email" name="email">
 				</div>
 			</div>
 		<div class="create postcard back face">
-			<button id="uploadimage">Add photo</button>
+			<button id="uploadimage" class="overlaybutton">Add photo</button>
 			<input type="file" id="imageinput" accept="image/*" onchange="uploadPhoto(this.files);"/>
 			<img class="create postcard image" src="" alt=""/>
 		</div>
 		</div>
+	<button id="flipback" class="flipback overlaybutton small">Turn over</button>
 	</div>
 </div>
 
