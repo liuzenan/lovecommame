@@ -221,7 +221,6 @@ define([
           current.scroller=null;
         }
         current.scroller = new iScroll('createPostcardWrap', {
-          zoom:true,
     vScroll: false,
     vScrollbar: false,
     hScrollbar: false,
@@ -229,7 +228,7 @@ define([
       var target = e.target;
       while (target.nodeType != 1) target = target.parentNode;
 
-      if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+      if (target.tagName!= "A" && target.tagName!="BUTTON" && target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
         e.preventDefault();
     }
   });
@@ -248,7 +247,6 @@ define([
           current.scroller=null;
         }
         current.scroller = new iScroll('createPostcardWrap', {
-          zoom:true,
     vScroll: false,
     vScrollbar: false,
     hScrollbar: false,
@@ -256,7 +254,7 @@ define([
       var target = e.target;
       while (target.nodeType != 1) target = target.parentNode;
 
-      if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+      if (target.tagName!= "A" && target.tagName!="BUTTON" && target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
         e.preventDefault();
     }
   });

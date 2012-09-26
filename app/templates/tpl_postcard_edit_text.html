@@ -21,6 +21,7 @@
 			</div>
 		<div class="create postcard back face">
 			<button id="uploadimage"><h2>Add photo</h2></button>
+			<input type="file" id="imageinput" accept="image/*" onchange="uploadPhoto(this.files);"/>
 			<img class="create postcard image" src="" alt=""/>
 		</div>
 		</div>
@@ -34,3 +35,16 @@
 	<div class="photoeffects"></div>
 </div>
 
+<script type="text/javascript">
+
+	function uploadPhoto(files){
+		var photo = files[0];
+		var reader = new FileReader();
+		reader.onload = function(e){
+			$(".create.postcard.image").attr('src', e.target.result);
+			$("#uploadimage").addClass("small");
+            $("#uploadimage").html("<h2>Change</h2>");
+		};
+		reader.readAsDataURL(photo);
+	}
+</script>

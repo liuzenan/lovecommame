@@ -11,7 +11,6 @@ define([
   "plugins/backbone.collectioncache",
   "plugins/iscroll",
   "plugins/jquery.cookie",
-  "plugins/jquery.ocupload",
   "plugins/backbone.localStorage-min"
 ],
 

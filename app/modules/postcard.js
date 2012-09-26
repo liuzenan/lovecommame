@@ -300,18 +300,8 @@ function(app, Backbone) {
         $(current.el).find(".postcard.card").toggleClass("flip");
       });
 
-      this.myphoto = $("#uploadimage").upload({
-        name:"myphoto",
-        action:'',
-        onSubmit :function(){
-          alert("submit");
-        },
-        onComplete:function(){
-          alert("complete");
-        },
-        onSelect: function(){
-          alert("selected");
-        }
+      $("#uploadimage").click(function(){
+          $("#imageinput").click();
       });
     }
   });
