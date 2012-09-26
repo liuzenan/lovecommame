@@ -296,7 +296,7 @@ function(app, Backbone) {
       postcard.width(postcardW);
       var current = this;
       $(".flipback").click(function(e){
-        e.preventDefault();
+        $(current.el).find(".addressWrap").toggleClass("back");
         $(current.el).find(".postcard.card").toggleClass("flip");
       });
 
