@@ -7,3 +7,12 @@
 <div class="create postcard editor">
 
 </div>
+
+<script type="text/javascript">
+	$(window).resize(function(){
+	  var postcard = $('.container');
+      var postcardH = postcard.height();
+      var postcardW = postcardH*1.5;
+      postcard.width(postcardW);
+  });
+</script>
