@@ -215,16 +215,11 @@ function(app, Backbone) {
 
     afterRender: function(){
       var numOfCards = this.collection.size();
-      console.log("numOfCards: "+ numOfCards);
       var windowHeight =  $(window).height();
       var windowWidth = $(window).width();
-      var buttonH = windowHeight*0.36;
-      var buttonV = windowHeight*0.36*1.5;
-      if(buttonV<240){
-        buttonV = 240;
-        buttonH = buttonV/1.5;
-      }
-      $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
+      var buttonH = windowHeight*0.4;
+      var buttonV = windowHeight*0.4*1.5;
+      $(".compose.new.button").css("height", buttonH+"px").css("width", buttonV+"px");
       $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
       $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
     }
@@ -288,13 +283,6 @@ function(app, Backbone) {
       // create a new instance of postcard
       // and upload to server
     },
-
-    afterRender: function(){
-      var postcard = $(this.el).find('.container');
-      var postcardH = postcard.height();
-      var postcardW = postcardH*1.5;
-      postcard.width(postcardW);
-    }
   });
 
   Postcard.Views.UploadPhoto = Backbone.View.extend({
@@ -302,18 +290,11 @@ function(app, Backbone) {
     tagName: "div",
     serialize:function(){
       return this.model.toJSON();
-    },
-
-    afterRender: function(){
-      var postcard = $(this.el).find('.container');
-      var postcardH = postcard.height();
-      var postcardW = postcardH*1.5;
-      postcard.width(postcardW);
     }
   });
   
   Postcard.Views.Send = Backbone.View.extend({
-    
+
   });
 
   // Required, return the module for AMD compliance

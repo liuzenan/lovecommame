@@ -30,7 +30,7 @@ require.config({
     "plugins/backbone.layoutmanager": ["backbone"],
     // Backbone.CollectionCache depends on Backbone.
     "plugins/backbone.collectioncache": ["backbone"],
-    "plugins/backbone.localStorage": ["backbone"],
+    "plugins/backbone.localStorage-min": ["backbone"],
     "plugins/jquery.cookie": ["jquery"]
   }
 
