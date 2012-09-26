@@ -13,6 +13,7 @@ function(app, Backbone){
 	// user model contains username, email address and uid
 	User.Model = Backbone.Model.extend({
 		// migrate functions from view to model 
+
 	});
 
 	//User login view
@@ -33,11 +34,12 @@ function(app, Backbone){
 			  	url: "../api.php/user/login",
 			  	data: {uname: $("input[name=username]").val(), pass: window.btoa($("input[name=password]").val())},
 			  	
+			  	// if successful
 			  	success: function(response, textStatus, jqXHR){
-			  		alert("success");
+			  		// remember username and password if checkbox is checked
 				    if($("input[name=rmbme]").is(':checked')){
-				    	$.cookie("username", $("input[name=username]").val());
-				    	$.cookie("password", $("input[name=password]").val());
+				    	$.cookie("username", $("input[name=username]").val(), {expires: 99});
+				    	$.cookie("password", $("input[name=password]").val(), {expires: 99});
 				    }
 				    else{
 				    	$.cookie("username", null);
@@ -63,7 +65,8 @@ function(app, Backbone){
 			return false; 
 		},
 
-		initialize: function(){
+		// load stored username and password once rendered
+		afterRender: function(){
 			if($.cookie("username") != null){
 				$("input[name=username]").val($.cookie("username"));
 				$("input[name=password]").val($.cookie("password"));

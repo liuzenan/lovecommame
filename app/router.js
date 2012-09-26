@@ -47,44 +47,28 @@ define([
       app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
       }).render().then(function(el){
-        if($('#postcardList').length>0){
-          console.log("after render");
+        console.log("after render");
+        if(current.scroller){
+          current.scroller.destroy();
+          current.scroller=null;
+        }
+        current.scroller = new iScroll('postcardList', {
+          vScroll: false,
+          vScrollbar: false
+        });
+      });
+      this.recPos.fetch({
+        success:function(){
+          console.log("success");
           if(current.scroller){
             current.scroller.destroy();
             current.scroller=null;
           }
+
           current.scroller = new iScroll('postcardList', {
             vScroll: false,
             vScrollbar: false
           });
-
-          var seen = {};
-          console.log(seen);
-          $('.postcardWallList>li').each(function() {
-            var txt = $(this).html();
-            if (seen[txt])
-              $(this).remove();
-            else
-              seen[txt] = true;
-          });
-
-          seen={};
-        }
-      });
-      this.recPos.fetch({
-        success:function(){
-          if($('#postcardList').length>0){
-            console.log("success");
-            if(current.scroller){
-              current.scroller.destroy();
-              current.scroller=null;
-            }
-
-            current.scroller = new iScroll('postcardList', {
-              vScroll: false,
-              vScrollbar: false
-            });
-          }
         }
       });
 
@@ -96,32 +80,28 @@ define([
       app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.WallList({collection: this.senPos})
       }).render().then(function(el){
-        if($('#postcardList').length>0){
-          console.log("after render");
+        console.log("after render");
+        if(current.scroller){
+          current.scroller.destroy();
+          current.scroller=null;
+        }
+        current.scroller = new iScroll('postcardList', {
+          vScroll: false,
+          vScrollbar: false
+        });
+      });
+      this.senPos.fetch({
+        success:function(){
+          console.log("success");
           if(current.scroller){
             current.scroller.destroy();
             current.scroller=null;
           }
+
           current.scroller = new iScroll('postcardList', {
             vScroll: false,
             vScrollbar: false
           });
-        }
-      });
-      this.senPos.fetch({
-        success:function(){
-          if($('#postcardList').length>0){
-            console.log("success");
-            if(current.scroller){
-              current.scroller.destroy();
-              current.scroller=null;
-            }
-
-            current.scroller = new iScroll('postcardList', {
-              vScroll: false,
-              vScrollbar: false
-            });
-          }
         }
       });
 
@@ -143,17 +123,15 @@ define([
       app.useLayout("viewpostcard").setViews({
         '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
       }).render().then(function(el){
-        if($('#displaypostcard').length>0){
-          console.log("after render");
-          if(current.scroller){
-            current.scroller.destroy();
-            current.scroller=null;
-          }
-          current.scroller = new iScroll('displaypostcard', {
-            vScroll: false,
-            vScrollbar: false
-          });
+        console.log("after render");
+        if(current.scroller){
+          current.scroller.destroy();
+          current.scroller=null;
         }
+        current.scroller = new iScroll('displaypostcard', {
+          vScroll: false,
+          vScrollbar: false
+        });
       });
     },
 
@@ -163,8 +141,7 @@ define([
       app.useLayout("compose").setViews({
         '.container' : new Postcard.Views.DraftList({collection: this.draPos})
       }).render().then(function(el){
-       // console.log("after render");
-       if($('#composeContainer').length>0){
+        console.log("after render");
         if(current.scroller){
           current.scroller.destroy();
           current.scroller=null;
@@ -174,94 +151,36 @@ define([
           vScrollbar: false,
           hScrollbar: false
         });
-
-      var seen = {};
-      console.log(seen);
-      $('.postcardDraftList>li').each(function() {
-        var txt = $(this).html();
-        if (seen[txt])
-          $(this).remove();
-        else
-          seen[txt] = true;
       });
-
-      seen={};
-      }
-    });
 
       this.draPos.fetch({
         success:function(){
-       //   console.log("success");
-       if($('#composeContainer').length>0){
-        if(current.scroller){
-          current.scroller.destroy();
-          current.scroller=null;
-        }
+          console.log("success");
+          if(current.scroller){
+            current.scroller.destroy();
+            current.scroller=null;
+          }
 
-        current.scroller = new iScroll('composeContainer', {
-          vScroll: false,
-          vScrollbar: false,
-          hScrollbar: false
-        });
-      }
-    }
-  });
+          current.scroller = new iScroll('composeContainer', {
+            vScroll: false,
+            vScrollbar: false,
+            hScrollbar: false
+          });
+        }
+      });
     },
 
     composeText: function(id){
-      var current = this;
       if(id==0){
         app.useLayout("create").setViews({
           '.editor' : new Postcard.Views.EditText({model:this.newPos})
-        }).render().then(function(el){
-       // console.log("after render");
-       if($('#createPostcardWrap').length>0){
-        if(current.scroller){
-          current.scroller.destroy();
-          current.scroller=null;
-        }
-        current.scroller = new iScroll('createPostcardWrap', {
-          zoom:true,
-    vScroll: false,
-    vScrollbar: false,
-    hScrollbar: false,
-    onBeforeScrollStart: function (e) {
-      var target = e.target;
-      while (target.nodeType != 1) target = target.parentNode;
-
-      if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
-        e.preventDefault();
-    }
-  });
-      }
-    });
+        }).render();
       }else{
         console.log(this.draPos.get(id));
         this.newPos = this.draPos.get(id);
         app.useLayout("create").setViews({
           '.editor' : new Postcard.Views.EditText({model:this.newPos})
-        }).render().then(function(el){
-       // console.log("after render");
-       if($('#createPostcardWrap').length>0){
-        if(current.scroller){
-          current.scroller.destroy();
-          current.scroller=null;
-        }
-        current.scroller = new iScroll('createPostcardWrap', {
-          zoom:true,
-    vScroll: false,
-    vScrollbar: false,
-    hScrollbar: false,
-    onBeforeScrollStart: function (e) {
-      var target = e.target;
-      while (target.nodeType != 1) target = target.parentNode;
-
-      if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
-        e.preventDefault();
-    }
-  });
-      }
-    });
+        }).render();
       }
       
     },

@@ -215,16 +215,11 @@ function(app, Backbone) {
 
     afterRender: function(){
       var numOfCards = this.collection.size();
-      console.log("numOfCards: "+ numOfCards);
       var windowHeight =  $(window).height();
       var windowWidth = $(window).width();
-      var buttonH = windowHeight*0.36;
-      var buttonV = windowHeight*0.36*1.5;
-      if(buttonV<240){
-        buttonV = 240;
-        buttonH = buttonV/1.5;
-      }
-      $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
+      var buttonH = windowHeight*0.4;
+      var buttonV = windowHeight*0.4*1.5;
+      $(".compose.new.button").css("height", buttonH+"px").css("width", buttonV+"px");
       $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
       $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
     }
