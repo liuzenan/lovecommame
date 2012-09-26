@@ -309,7 +309,7 @@ define([
     },
 
     send: function(){
-
+      app.router.go("review");
     },
 
     defaultRoute: function(other){

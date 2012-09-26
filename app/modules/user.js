@@ -38,8 +38,8 @@ function(app, Backbone){
 			  	success: function(response, textStatus, jqXHR){
 			  		// remember username and password if checkbox is checked
 				    if($("input[name=rmbme]").is(':checked')){
-				    	$.cookie("username", $("input[name=username]").val());
-				    	$.cookie("password", $("input[name=password]").val());
+				    	$.cookie("username", $("input[name=username]").val(), {expires: 99});
+				    	$.cookie("password", $("input[name=password]").val(), {expires: 99});
 				    }
 				    else{
 				    	$.cookie("username", null);

@@ -10,7 +10,8 @@ define([
   "plugins/jsmanipulate",
   "plugins/backbone.collectioncache",
   "plugins/iscroll",
-  "plugins/jquery.cookie"
+  "plugins/jquery.cookie",
+  "plugins/backbone.localStorage-min"
 ],
 
 function($, _, Backbone) {
