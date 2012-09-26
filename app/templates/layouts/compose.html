@@ -2,7 +2,7 @@
 	<div class="clearfix">
 		<div class="compose new">
 		<h1 class="compose new title">New Postcard</h1>
-		<a class="postcard card compose new button" href="#compose/text/0">Compose</a>
+		<a class="postcard card compose new" href="#compose/text/0">Compose</a>
 	</div>
 	<div class="compose draft">
 		<h1 class="compose draft title">Saved Drafts</h1>
@@ -29,9 +29,13 @@
 	  var numOfCards = $(".postcardDraftList > li").length;
       var windowHeight =  $(window).height();
       var windowWidth = $(window).width();
-      var buttonH = windowHeight*0.4;
-      var buttonV = windowHeight*0.4*1.5;
-      $(".compose.new.button").css("height", buttonH+"px").css("width", buttonV+"px");
+      var buttonH = windowHeight*0.36;
+      var buttonV = windowHeight*0.36*1.5;
+      if(buttonV<240){
+        buttonV = 240;
+        buttonH = buttonV/1.5;
+      }
+      $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
       $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
       $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
   });
