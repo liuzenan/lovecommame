@@ -31,7 +31,7 @@ light green: #9ddd46
 .clearfix { display: block; }
 /* close commented backslash hack */
 
-input, textarea{
+input[type="text"], input[type="password"],input[type="email"], textarea{
 	-webkit-appearance: none;
 	-moz-apprearance: none;
 	-o-apprearance: none;
@@ -78,7 +78,7 @@ footer{
 }
 
 /* Typography */
-h1, h2, a, p, a:visited, a:hover, button{
+h1, h2, a, p, a:visited, a:hover, button, form{
     font-family: 'Rancho', cursive;
     font-weight: 400;
     margin: 0;
@@ -197,9 +197,14 @@ footer{
 	padding: 10px 0 30px 0;
 }
 
+.login form{
+	font-size: 1.2em;
+	color: #32625f;
+}
+
 .login form label{
 	font-size: 1em;
-	color: #32625f
+	color: #32625f;
 }
 
 .login form input{
@@ -229,6 +234,12 @@ footer{
 	background-color: rgba(105,151,147,0.8);
 	outline: none;
 	box-shadow: 0 0 5px #3f7c78;
+}
+
+.login form input[type="checkbox"]{
+	width: 20px;
+	display: inline-block;
+	margin: 0 10px 0 0;
 }
 
 .login form button{
@@ -480,15 +491,8 @@ ul.postcardDraftList {
     position: absolute;
     color: white;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-    border-right: 1px solid white;
-    bottom: 5px;
-    line-height: 0.6em;
+    bottom: -0.2em;
     padding: 0 10px;
-}
-
-
-.create.options button:last-child{
-	border: none;
 }
 
 .create.options button:first-child{
@@ -577,6 +581,11 @@ p.create {
     right: 2%;
     width: 38%;
 }
+
+.create.postcard.addressWrap.back{
+	position: static;
+}
+
 .create.postcard.addressWrap input {
     width: 100%;
     border: 1px solid black;
