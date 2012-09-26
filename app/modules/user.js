@@ -34,7 +34,8 @@ function(app, Backbone){
 			  	data: {uname: $("input[name=username]").val(), pass: window.btoa($("input[name=password]").val())},
 			  	
 			  	success: function(response, textStatus, jqXHR){
-/*				    if($("input[name=rmbme]").is(':checked')){
+			  		alert("success");
+				    if($("input[name=rmbme]").is(':checked')){
 				    	$.cookie("username", $("input[name=username]").val());
 				    	$.cookie("password", $("input[name=password]").val());
 				    }
@@ -42,7 +43,7 @@ function(app, Backbone){
 				    	$.cookie("username", null);
 				    	$.cookie("password", null);
 				    }
-*/
+
 				    // navigate to the wall page
 				    app.router.go("wall");
 				},
@@ -63,11 +64,11 @@ function(app, Backbone){
 		},
 
 		initialize: function(){
-	/*		if($.cookie("username") != null){
+			if($.cookie("username") != null){
 				$("input[name=username]").val($.cookie("username"));
 				$("input[name=password]").val($.cookie("password"));
 				$("input[name=rmbme]").prop("checked", true);
-			}*/
+			}
 		}
 	});
 
