@@ -246,7 +246,6 @@ footer{
 .wall.header{
 	width: 90%;
 	margin-left: 10%;
-	height: 10%;
 	padding-top: 1%;
 }
 
@@ -258,7 +257,6 @@ footer{
 
 #postcardList{
 	padding-left: 10%;
-	padding-top: 2%;
 	height: 85%;
 }
 
