@@ -47,8 +47,12 @@ function(app, Backbone){
 				    	$.cookie("username", null);
 				    	$.cookie("password", null);
 				    }
+				    
 				    // store token in cookie for future usage
-				    $.cookie("token", response);
+				    var temp = response.toJSON();
+
+				    $.cookie("uid", temp.uid);
+				    $.cookie("token", temp,token);
 
 				    // navigate to the wall page
 				    app.router.go("wall");
@@ -65,7 +69,6 @@ function(app, Backbone){
 				    $inputs.prop("disabled", false);
 				}
 			});
-
 			return false; 
 		},
 

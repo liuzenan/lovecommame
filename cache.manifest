@@ -45,7 +45,7 @@ assets/img/splash-768.png
 assets/img/splash-1024.png
 assets/js/libs/almond.js
 assets/js/libs/backbone.js
-assets/js/libs/jquery.hs
+assets/js/libs/jquery.js
 assets/js/libs/json2.js
 assets/js/libs/lodash.js
 assets/js/libs/require.js
@@ -53,10 +53,11 @@ assets/js/plugins/backbone.collectioncache.js
 assets/js/plugins/backbone.layoutmanager.js
 assets/js/plugins/backbone.localStorage-min.js
 assets/js/plugins/iscroll.js
-assets/js/plugins/jgesture.js
+assets/js/plugins/jgestures.js
 assets/js/plugins/jquery.cookie.js
 assets/js/plugins/jquery.ocupload.js
 assets/js/plugins/jsmanipulate.js
+assets/js/plugins/pixastic.js
 assets/vendor/h5bp/css/style.css
 
 
