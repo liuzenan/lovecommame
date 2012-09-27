@@ -180,7 +180,7 @@ Postcard.Views.ArchiveItem = Backbone.View.extend({
 
 
 Postcard.Views.ArchiveList = Postcard.Views.List.extend({
-  className: "postcardArchiveList",
+  className: "postcardArchiveList clearfix",
 
   beforeRender: function(){
     this.$el.children().remove();
@@ -189,6 +189,11 @@ Postcard.Views.ArchiveList = Postcard.Views.List.extend({
         model: postcard
       }));
     }, this);
+  },
+
+  afterRender : function(){
+    var postcardArc = $(".archive.postcard.card");
+    postcardArc.height(postcardArc.width()/1.5);
   }
 });
 

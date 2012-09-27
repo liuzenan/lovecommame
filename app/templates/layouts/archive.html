@@ -1,4 +1,6 @@
-<div class="archive postcardList"></div>
+<div id="archiveList" class="postcardList">
+	
+</div>
 
 <button class="archive recover">Recover</button>
 <br>
@@ -11,3 +13,10 @@
 	<a id="btncompose" href="#compose">Compose</a>
 </div>
 </footer>
+
+<script type="text/javascript">
+	$(window).resize(function(){
+		var postcardArc = $(".archive.postcard.card");
+   		postcardArc.height(postcardArc.width()/1.5);
+	});
+</script>

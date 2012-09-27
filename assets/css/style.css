@@ -675,3 +675,37 @@ canvas.imageCanvas{
 	width: 100%;
 	height: auto;
 }
+
+
+
+
+
+
+
+/* archive */
+
+
+ul.postcardArchiveList {
+    display: block;
+    margin: 1em auto;
+    padding: 0;
+    position: relative;
+}
+
+.postcardArchiveList li {
+    float: left;
+    width: 50%;
+}
+
+.archive.postcard.container {
+    float: left;
+    margin: 0 2% 0 8%;
+    width: 70%;
+}
+
+.postcardArchiveList form {
+    display: block;
+    float: left;
+    margin-top: -4px;
+    width: 20%;
+}
