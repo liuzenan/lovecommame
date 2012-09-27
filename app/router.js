@@ -135,7 +135,9 @@ define([
 
     archive : function(){
       this.reset();
-      app.useLayout("archive").render();
+      app.useLayout("archive").setViews({
+        '.postcardList' : new Postcard.Views.ArchiveList({model: this.arcPos})
+      }).render();
       this.arcPos.fetch();
     },
 

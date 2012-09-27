@@ -186,7 +186,6 @@ Postcard.Views.ArchiveList = Postcard.Views.List.extend({
     this.$el.children().remove();
     this.collection.each(function(postcard){
       this.insertView(new Postcard.Views.ArchiveItem({
-        el: $(".postcardArchiveList"),
         model: postcard
       }));
     }, this);
