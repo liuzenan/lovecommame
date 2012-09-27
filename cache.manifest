@@ -51,14 +51,11 @@ assets/js/libs/lodash.js
 assets/js/libs/require.js
 assets/js/plugins/backbone.collectioncache.js
 assets/js/plugins/backbone.layoutmanager.js
-assets/js/plugins/backbone.localStorage-min.js
 assets/js/plugins/iscroll.js
 assets/js/plugins/jgestures.js
 assets/js/plugins/jquery.cookie.js
-assets/js/plugins/jquery.ocupload.js
-assets/js/plugins/jsmanipulate.js
 assets/js/plugins/pixastic.js
 assets/vendor/h5bp/css/style.css
-
+assets/font/Rancho-Regular.ttf
 
 NETWORK:
