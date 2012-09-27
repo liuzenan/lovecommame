@@ -8,7 +8,7 @@ app/main.js
 app/router.js
 app/text.js
 app/modules/user.js
-app/modules/friends.js
+app/modules/friend.js
 app/modules/postcard.js
 app/templates/tpl_login.html
 app/templates/tpl_postcard_archive.html
