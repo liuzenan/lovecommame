@@ -277,30 +277,58 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
     },
 
     uploadNew: function(ev){
-      alert("send clicked");
 
-      var testPostcard = new Postcard.Model({
-        body: "testing message",
-        body_effect: 2,
-        postcard_effect: 0,
-        uid_from: 1,
-        status: 2,
-        mail: "test@gmail.com",
-        top: 0,
-        left: 0,
-        width: 300,
-        height: 200,
-        data_url: "this is some dummy data",
-        photo_effect: 2
+      var photo = $("#imageCanvas").get(0);
+      var photo_data_url = photo.toDataURL(); // store data url for the image
+
+      // sending the postcard as the completed version
+      // top, left, width, height, photo_effect would all
+      // be applied already. no need to specify
+      $.ajax({
+        type: "POST",
+        url: "http://54.251.37.19/api.php/postcard/",
+        data: {
+          token: $.cookie("token"), 
+          body: $("textarea.content").val(), 
+          body_effect: 0, 
+          uid_from: $.cookie("uid"), 
+          top: 0, 
+          left: 0, 
+          width: 300, 
+          height: 200, 
+          data_url: photo_data_url, 
+          photo_effect: 0, 
+          postcard_effect: 0, 
+          status: 1, // indicating this postcard is sent and unread 
+          mail: $("input[name=email]").val()},
+
+        success: function(response){
+          alert(response);
+          
+          // add postcard into sent collection
+          var new_postcard = new Postcard.Model{
+            token: $.cookie("token"), 
+            body: $("textarea.content").val(), 
+            body_effect: 0, 
+            uid_from: $.cookie("uid"), 
+            top: 0, 
+            left: 0, 
+            width: 300, 
+            height: 200, 
+            data_url: photo_data_url, 
+            photo_effect: 0, 
+            postcard_effect: 0, 
+            status: 1, // indicating this postcard is sent and unread 
+            mail: $("input[name=email]").val()},
+            pid: response
+          };
+
+          
+        },
+        error: function(error){
+          alert("An error occured! :(");
+        }
       });
-
-      alert("test postcard created");
-      
-      testPostcard.save();
-
-      alert("testPostcard saved");
-      // create a new instance of postcard
-      // and upload to server
     },
 
     goBack: function(ev){
