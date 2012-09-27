@@ -3,49 +3,49 @@ define([
 
   // Libs
   "backbone"
-],
+  ],
 
-function(app, Backbone) {
+  function(app, Backbone) {
 
   // Create a new module
   var Postcard = app.module();
 
   Postcard.PostcardText = Backbone.Model.extend({
-        defaults: {
-            textContent: '',
-            textStyle: ''
-        },
+    defaults: {
+      textContent: '',
+      textStyle: ''
+    },
 
-        changeContent: function( content ){
-            this.set({ textContent : content });
-        },
+    changeContent: function( content ){
+      this.set({ textContent : content });
+    },
   });
 
   Postcard.PostcardPhoto = Backbone.Model.extend({
-        defaults: {
+    defaults: {
             photoSrc: '', // local source to be filled up
             photoWidth: 800, // to be determined by Gia
             photoHeight: 600,
             photoTop: 0,
             photoLeft: 0,
             photoEffect: 0
-        },
+          },
 
-        changeSrc: function( source ){
+          changeSrc: function( source ){
             this.set({photoSrc : source});
-        },
+          },
 
-        changeEffect: function( effect ){
+          changeEffect: function( effect ){
             this.set({photoEffect : effect});
-        }
-  });
+          }
+        });
 
   Postcard.Model = Backbone.Model.extend({
     idAttribute: "pid"
   });
 
   Postcard.Collection = Backbone.Collection.extend({
-    url : "http://ec2-54-251-19-5.ap-southeast-1.compute.amazonaws.com/api.php/user/1",
+    url : "http://ec2-54-251-37-19.ap-southeast-1.compute.amazonaws.com/api.php/user/1",
     cache: true,
     model: Postcard.Model
   });
@@ -108,14 +108,14 @@ function(app, Backbone) {
     postcardResize: function(){
       var containerHeight = $(window).height()*0.75;
       var postcardH, postcardW;
-     if($(window).height()>$(window).width()){
+      if($(window).height()>$(window).width()){
         postcardH = (containerHeight-20)/2;
-     }else{
+      }else{
         postcardH = containerHeight - 10;
-     }
-     postcardW = postcardH*1.5;
-     $(this.el).width(postcardW);
-     $(this.el).height(postcardH);
+      }
+      postcardW = postcardH*1.5;
+      $(this.el).width(postcardW);
+      $(this.el).height(postcardH);
     }
   });
 
@@ -130,7 +130,7 @@ function(app, Backbone) {
 
 
   Postcard.Views.WallList = Postcard.Views.List.extend({
-    
+
     className: "postcardWallList",
 
     beforeRender: function(){
@@ -151,84 +151,84 @@ function(app, Backbone) {
 
     resizePostcard: function(){
       var noOfPostcards = this.collection.size();
-      console.log("collection size: " + noOfPostcards);
+     // console.log("collection size: " + noOfPostcards);
       //$('.postcardWallList').css('width', noOfPostcards*240 + "px");
      // $('.postcardWallList').css('width', (noOfPostcards*250/2)+"px");
-      var containerHeight = $(window).height()*0.75;
-      var postcardH, postcardW;
+     var containerHeight = $(window).height()*0.75;
+     var postcardH, postcardW;
      if($(window).height()>$(window).width()){
-        postcardH = (containerHeight-20)/2;
-        postcardW = postcardH*1.5;
-        $('.postcardWallList').width((noOfPostcards+1)*(postcardW+10)/2);
-     }else{
-        postcardH = containerHeight - 10;
-        postcardW = postcardH*1.5;
-        $('.postcardWallList').width(noOfPostcards*(postcardW+10)+60);
-     }
+      postcardH = (containerHeight-20)/2;
+      postcardW = postcardH*1.5;
+      $('.postcardWallList').width((noOfPostcards+1)*(postcardW+10)/2);
+    }else{
+      postcardH = containerHeight - 10;
+      postcardW = postcardH*1.5;
+      $('.postcardWallList').width(noOfPostcards*(postcardW+10)+60);
     }
-  });
+  }
+});
 
-  Postcard.Views.ArchiveItem = Backbone.View.extend({
-    tagName:"li",
-    template: "tpl_postcard_archive",
-    serialize: function(){
-      return this.model.toJSON();
+Postcard.Views.ArchiveItem = Backbone.View.extend({
+  tagName:"li",
+  template: "tpl_postcard_archive",
+  serialize: function(){
+    return this.model.toJSON();
+  }
+});
+
+
+Postcard.Views.ArchiveList = Postcard.Views.List.extend({
+  className: "postcardArchiveList",
+
+  beforeRender: function(){
+    this.$el.children().remove();
+    this.collection.each(function(postcard){
+      this.insertView(new Postcard.Views.ArchiveItem({
+        el: $(".postcardArchiveList"),
+        model: postcard
+      }));
+    }, this);
+  }
+});
+
+
+Postcard.Views.DraftItem = Backbone.View.extend({
+  tagName:"li",
+  template: "tpl_postcard_draft",
+  serialize: function(){
+    return this.model.toJSON();
+  }
+});
+
+
+Postcard.Views.DraftList = Postcard.Views.List.extend({
+  className: "postcardDraftList clearfix",
+
+  beforeRender: function(){
+    this.$el.children().remove();
+    this.collection.each(function(postcard){
+      this.insertView(new Postcard.Views.DraftItem({
+        model: postcard
+      }));
+    }, this);
+  },
+
+  afterRender: function(){
+    var numOfCards = this.collection.size();
+     // console.log("numOfCards: "+ numOfCards);
+     var windowHeight = $(window).height();
+     var windowWidth = $(window).width();
+     var buttonH = windowHeight*0.36;
+     var buttonV = windowHeight*0.36*1.5;
+     if(buttonV<240){
+      buttonV = 240;
+      buttonH = buttonV/1.5;
     }
-  });
-
-
-  Postcard.Views.ArchiveList = Postcard.Views.List.extend({
-    className: "postcardArchiveList",
-
-    beforeRender: function(){
-      this.$el.children().remove();
-      this.collection.each(function(postcard){
-        this.insertView(new Postcard.Views.ArchiveItem({
-          el: $(".postcardArchiveList"),
-          model: postcard
-        }));
-      }, this);
-    }
-  });
-
-
-  Postcard.Views.DraftItem = Backbone.View.extend({
-    tagName:"li",
-    template: "tpl_postcard_draft",
-    serialize: function(){
-      return this.model.toJSON();
-    }
-  });
-
-
-  Postcard.Views.DraftList = Postcard.Views.List.extend({
-    className: "postcardDraftList clearfix",
-
-    beforeRender: function(){
-      this.$el.children().remove();
-      this.collection.each(function(postcard){
-        this.insertView(new Postcard.Views.DraftItem({
-          model: postcard
-        }));
-      }, this);
-    },
-
-    afterRender: function(){
-      var numOfCards = this.collection.size();
-      console.log("numOfCards: "+ numOfCards);
-      var windowHeight = $(window).height();
-      var windowWidth = $(window).width();
-      var buttonH = windowHeight*0.36;
-      var buttonV = windowHeight*0.36*1.5;
-      if(buttonV<240){
-        buttonV = 240;
-        buttonH = buttonV/1.5;
-      }
-      $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
-      $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
-      $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
-    }
-  });
+    $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
+    $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
+    $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
+  }
+});
 
   //display page postcard views
   Postcard.Views.Detail = Backbone.View.extend({
@@ -266,7 +266,8 @@ function(app, Backbone) {
     },
 
     events: {
-      "click .send" : "uploadNew"
+      "click .send" : "uploadNew",
+      "click .discard" : "goBack"
     },
 
     uploadNew: function(ev){
@@ -296,6 +297,10 @@ function(app, Backbone) {
       // and upload to server
     },
 
+    goBack: function(ev){
+      app.router.go("compose");
+    },
+
     afterRender: function(){
       var postcard = $(this.el).find('.container');
       var postcardH = postcard.height();
@@ -305,20 +310,92 @@ function(app, Backbone) {
       $(".flipback").click(function(e){
         $("form textarea button").hide();
         $(current.el).find(".postcard.card").toggleClass("flip");
-        $(e.target).fadeOut(200).delay(1000).fadeIn(200,function(){
-          $("form textarea button").fadeIn();
+        $(e.target).fadeOut(200).delay(800).fadeIn(200,function(){
+          $("form textarea button").fadeIn(200);
         });
       });
 
       $("#uploadimage").click(function(){
-          $("#imageinput").click();
+        $("#imageinput").click();
       });
-    }
-  });
-  
-  Postcard.Views.Send = Backbone.View.extend({
 
-  });
+      if(this.scroller){
+        this.scroller.destroy();
+        this.scroller=false;
+      }
+
+      this.scroller = new iScroll('createPostcardWrap', {
+        vScroll: false,
+        vScrollbar: false,
+        hScrollbar: false,
+        useTransform: false,
+        onBeforeScrollStart: function (e) {
+          var target = e.target;
+          while (target.nodeType != 1) target = target.parentNode;
+
+          if (target.tagName!='BUTTON' && target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+            e.preventDefault();
+        }});
+
+      $("#imageinput").live('change', function(e){
+        console.log("inside change");
+        $("#canvasWrapper").children().remove();
+        uploadPhoto(e.target.files)
+      });
+
+
+      function uploadPhoto(files){
+        console.log("uploadphoto");
+        var photo = files[0];
+        var reader = new FileReader();
+        var newimage = new Image();
+        reader.onload = function(e){
+    //console.log(e.target.result);
+    newimage.src = e.target.result;
+    $("#uploadimage").addClass("small");
+    $("#uploadimage").html("Change");
+
+    var thiscanvas = convertImageToCanvas(newimage);
+    $("#canvasWrapper").append(thiscanvas);
+    $(".preset-button").removeAttr("disabled");
+
+    $(".preset-button").live("click", function(){
+      console.log("clicked button");
+
+      Caman("#imageCanvas", function(canvas){
+        canvas.hue(5);
+        canvas.saturation(-30);
+      });
+    });
+
+  };
+  reader.readAsDataURL(photo);
+};
+
+function convertImageToCanvas(image) {
+  console.log("convert to image");
+  var canvas = document.createElement("canvas");
+  canvas.className = "imageCanvas"
+  canvas.setAttribute("id","imageCanvas")
+  image.onload = function(){
+    console.log("width: "+ image.width + " ,height: "+ image.height);
+    canvas.width = image.width;
+    canvas.height = image.height;
+    canvas.getContext("2d").drawImage(image, 0, 0);
+    console.log(canvas.getContext("2d").getImageData(0,0, 20, 20));
+  }
+
+  return canvas;
+}
+
+}
+
+
+});
+
+Postcard.Views.Send = Backbone.View.extend({
+
+});
 
   // Required, return the module for AMD compliance
   return Postcard;

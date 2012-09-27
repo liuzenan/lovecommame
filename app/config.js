@@ -23,9 +23,7 @@ require.config({
       deps: ["lodash", "jquery", "json2"],
       exports: "Backbone"
     },
-
     "plugins/jgestures" : ["jquery"],
-    "plugins/jsmanipulate" : ["jquery"],
     // Backbone.LayoutManager depends on Backbone.
     "plugins/backbone.layoutmanager": ["backbone"],
     // Backbone.CollectionCache depends on Backbone.
