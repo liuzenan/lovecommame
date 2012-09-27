@@ -10,7 +10,6 @@ define([
   "plugins/iscroll",
   "plugins/jquery.cookie",
   "plugins/jgestures",
-  "plugins/backbone.localStorage-min",
   "plugins/pixastic"
 ],
 

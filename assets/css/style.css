@@ -8,6 +8,10 @@ light green: #9ddd46
 
 */
 
+@font-face{
+	font-family: 'Rancho';
+	src: url(../font/Rancho-Regular.ttf);
+}
 
 /*layout fix*/
 *, *:after, *:before{
@@ -666,6 +670,8 @@ canvas.imageCanvas{
 	left: 0;
 	position: absolute;
 	top: 0;
+	min-height: 100% !important;
+	min-width: 100% !important;
 	width: 100%;
 	height: auto;
 }
