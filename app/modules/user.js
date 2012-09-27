@@ -45,6 +45,8 @@ function(app, Backbone){
 				    	$.cookie("username", null);
 				    	$.cookie("password", null);
 				    }
+				    // store token in cookie for future usage
+				    $.cookie("token", response);
 
 				    // navigate to the wall page
 				    app.router.go("wall");
@@ -84,40 +86,43 @@ function(app, Backbone){
 		},
 
 		signup: function(ev){
-			register();
-			app.router.go("wall"); // or should it go to a re-direct page?
-			return false;
-		},
+			// disable inputs when 
+			$inputs = $(this).find("input, select, button, textarea");
+			$inputs.prop("disabled", true);
 
-		validate: function(){
-			// check if all fields are filled up
+			if($("input[name=password]").val() != $("input[name=re-password]").val()){
+				alert("your passwords are not consistent");
+			}
+			else{
+				app.router.go("wall");
+			}
+/*
+			$.ajax({
+			  	type: "POST",
+			  	url: "../api.php/user/",
+			  	data: {uname: $("input[name=username]").val(), email: $("input[name=email]").val(), pass: window.btoa($("input[name=password]").val())},
+			  	
+			  	// if successful
+			  	success: function(response, textStatus, jqXHR){
+				    $.cookie("token", response);
 
-			// check if two passwords are the same
-		},
-
-		register: function(){
-			// serialize user credential data
-			var serializedData = $("form").serialize();
-			var $inputs = $("form").find("input, select, button, textarea");
-
-			// temperarily disable all inputs during the ajex request
-			$inputs.attr("disabled", "disabled");
-
-			// uploading user credential form to the server
-			$.ajex({
-				url: 'ec2-54-251-19-5.ap-southeast-1.compute.amazonaws.com/api.php/user',
-				type: 'post',
-				dataType: 'json',
-				data: serializedData,
-				success: function(data){
-					alert("successful");
-					// check whether the email already exists in DB
+				    // navigate to the wall page
+				    app.router.go("wall");
 				},
-				error: function(){
-					alert("error!");
-					// for debugging purposes
+				// callback handler that will be called on error
+				error: function(jqXHR, textStatus, errorThrown){
+
+				    alert("Sorry we cannot sign you up right now!")
+				},
+				// callback handler that will be called on completion
+				// which means, either on success or error
+				complete: function(textStatus){
+				    // enable the inputs
+				    $inputs.prop("disabled", false);
 				}
 			});
+*/
+			return false;
 		}
 	});
 

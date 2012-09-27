@@ -45,7 +45,7 @@ function(app, Backbone) {
   });
 
   Postcard.Collection = Backbone.Collection.extend({
-    url : "http://ec2-54-251-19-5.ap-southeast-1.compute.amazonaws.com/api.php/user/1",
+    url : "../api.php/user/1",
     cache: true,
     model: Postcard.Model
   });
