@@ -83,7 +83,12 @@ define([
   //TODO
   Postcard.Collection.All = Postcard.Collection.extend({
     parse: function(object){
-      return object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft);
+      var temp = object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft);
+
+      // store postcard collection locally
+      localStorage.setItem('all_postcard', temp.toJSON());
+
+      return temp;
     }
   });
 
@@ -326,6 +331,9 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           // adding the new postcard into collections
           app.router.allPos.add(new_postcard);
           app.router.senPos.add(new_postcard);
+
+          // going back to draft list
+          app.router.go("compose");
         },
         error: function(error){
           alert("An error occured! :(");

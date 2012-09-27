@@ -127,7 +127,7 @@ function(app, Backbone){
 					$.ajax({
 					  	type: "POST",
 					  	url: "../api.php/user/",
-					  	data: {uname: $("input[name=username]").val(), email: $("input[name=email]").val(), pass: window.btoa($("input[name=password]").val())},
+					  	data: {uname: $("input[name=username]").val(), mail: $("input[name=email]").val(), pass: window.btoa($("input[name=password]").val())},
 					  	
 					  	// if successful
 					  	success: function(response, textStatus, jqXHR){
