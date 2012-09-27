@@ -115,7 +115,7 @@ function(app, Backbone){
 			$inputs.prop("disabled", true);
 
 			// make sure all fields are filled up
-			if($("input[name=usename]").val() == null || $("input[name=usename]").val() == "" || $("input[name=email]").val() == null || $("input[name=email]").val() == "" || $("input[name=password]").val() == null || $("input[name=password]").val() == "" || $("input[name=re-password]").val() == null || $("input[name=re-password]").val() == ""){
+			if($("input[name=username]").val() == null || $("input[name=username]").val() == "" || $("input[name=email]").val() == null || $("input[name=email]").val() == "" || $("input[name=password]").val() == null || $("input[name=password]").val() == "" || $("input[name=re-password]").val() == null || $("input[name=re-password]").val() == ""){
 				alert("Please fill in all fields!");
 			}
 			else{
