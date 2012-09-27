@@ -273,30 +273,37 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
     },
 
     uploadNew: function(ev){
-      alert("send clicked");
 
-      var testPostcard = new Postcard.Model({
-        body: "testing message",
-        body_effect: 2,
-        postcard_effect: 0,
-        uid_from: 1,
-        status: 2,
-        mail: "test@gmail.com",
-        top: 0,
-        left: 0,
-        width: 300,
-        height: 200,
-        data_url: "this is some dummy data",
-        photo_effect: 2
+      alert("send");
+      var photo = $("#imageCanvas").get(0);
+
+      console.log(photo);
+      console.log(photo.toDataURL());
+      $.ajax({
+        type: "POST",
+        url: "../../../api.php/postcard",
+        data: {
+          token: "1_5063faf0411474.67715943", 
+          body: "test", 
+          body_effect: 0, 
+          uid_from: 1, 
+          top: 0, 
+          left: 0, 
+          width: 300, 
+          height: 200, 
+          data_url: photo.toDataURL(), 
+          photo_effect: 0, 
+          postcard_effect: 0, 
+          status: 1, 
+          mail: "inian1234@gmail.com"},
+        success: function(response){
+          alert(response);
+          // add postcard into sent collection
+        },
+        error: function(error){
+          alert("error");
+        }
       });
-
-      alert("test postcard created");
-      
-      testPostcard.save();
-
-      alert("testPostcard saved");
-      // create a new instance of postcard
-      // and upload to server
     },
 
     goBack: function(ev){
