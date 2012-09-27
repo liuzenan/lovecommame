@@ -273,34 +273,55 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
     uploadNew: function(ev){
 
-      alert("send");
       var photo = $("#imageCanvas").get(0);
+      var photo_data_url = photo.toDataURL(); // store data url for the image
 
-      console.log(photo);
-      console.log(photo.toDataURL());
+      // sending the postcard as the completed version
+      // top, left, width, height, photo_effect would all
+      // be applied already. no need to specify
       $.ajax({
         type: "POST",
-        url: "../../../api.php/postcard",
+        url: "http://54.251.37.19/api.php/postcard/",
         data: {
-          token: "1_5063faf0411474.67715943", 
-          body: "test", 
+          token: $.cookie("token"), 
+          body: $("textarea.content").val(), 
           body_effect: 0, 
-          uid_from: 1, 
+          uid_from: $.cookie("uid"), 
           top: 0, 
           left: 0, 
           width: 300, 
           height: 200, 
-          data_url: photo.toDataURL(), 
+          data_url: photo_data_url, 
           photo_effect: 0, 
           postcard_effect: 0, 
-          status: 1, 
-          mail: "inian1234@gmail.com"},
+          status: 1, // indicating this postcard is sent and unread 
+          mail: $("input[name=email]").val()},
+
         success: function(response){
           alert(response);
+          
           // add postcard into sent collection
+          var new_postcard = new Postcard.Model{
+            token: $.cookie("token"), 
+            body: $("textarea.content").val(), 
+            body_effect: 0, 
+            uid_from: $.cookie("uid"), 
+            top: 0, 
+            left: 0, 
+            width: 300, 
+            height: 200, 
+            data_url: photo_data_url, 
+            photo_effect: 0, 
+            postcard_effect: 0, 
+            status: 1, // indicating this postcard is sent and unread 
+            mail: $("input[name=email]").val()},
+            pid: response
+          };
+
+          
         },
         error: function(error){
-          alert("error");
+          alert("An error occured! :(");
         }
       });
     },

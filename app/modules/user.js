@@ -13,9 +13,6 @@ function(app, Backbone){
 	// user model contains username, email address and uid
 	User.Model = Backbone.Model.extend({
 		// migrate functions from view to model 
-		defaults: {
-            online: true
-        }
 	});
 
 	//User login view
