@@ -1,8 +1,8 @@
 <div class="create options">
+	<button class="discard">Back</button>
 	<button class="send">Send</button>
 	<button class="save">Save</button>
-	<button class="discard">Discard</button>	
-	<button class="flipback">Flip</button>
+	
 </div>
 <div id="createPostcardWrap">
 	<div class="create postcard container">
@@ -13,38 +13,32 @@
 					<p class="create postcard text signature">Love, me</p>
 				</form>
 				<div class="create postcard addressWrap">
-					<label for="name"><h2>To</h2></label>
+					<span class="stamp"></span>
+					<label for="name">Send to:</label>
 					<input type="text" name="name"><br>
-					<label for="email"><h2>Email address</h2></label>
+					<label for="email">Email address:</label>
 					<input type="email" name="email">
 				</div>
 			</div>
-		<div class="create postcard back face">
-			<button id="uploadimage">Add photo</button>
-			<input type="file" id="imageinput" accept="image/*" onchange="uploadPhoto(this.files);"/>
-			<img class="create postcard image" src="" alt=""/>
+			<div class="create postcard back face">
+				<button id="uploadimage" class="overlaybutton">Add photo</button>
+				<input type="file" id="imageinput" accept="image/*"/>
+				<div id="canvasWrapper">
+					
+				</div>
+			</div>
 		</div>
-		</div>
+		<button id="flipback" class="flipback overlaybutton small">Turn over</button>
 	</div>
 </div>
 
 <div class="create textcontrol">
-	<div class="textstyles"></div>
+	<div class="textstyles">
+		
+	</div>
 </div>
 <div class="create photocontrol">
-	<div class="photoeffects"></div>
+	<div class="photoeffects">
+		<button id="preset-hermingway" class="preset-button" disabled="disabled">Hermingway</button>
+	</div>
 </div>
-
-<script type="text/javascript">
-
-	function uploadPhoto(files){
-		var photo = files[0];
-		var reader = new FileReader();
-		reader.onload = function(e){
-			$(".create.postcard.image").attr('src', e.target.result);
-			$("#uploadimage").addClass("small");
-            $("#uploadimage").html("Change");
-		};
-		reader.readAsDataURL(photo);
-	}
-</script>

@@ -6,12 +6,12 @@ define([
 
   // Plugins.
   "plugins/backbone.layoutmanager",
-  "plugins/jgestures",
-  "plugins/jsmanipulate",
   "plugins/backbone.collectioncache",
   "plugins/iscroll",
   "plugins/jquery.cookie",
-  "plugins/backbone.localStorage-min"
+  "plugins/jgestures",
+  "plugins/backbone.localStorage-min",
+  "plugins/caman.full.min"
 ],
 
 function($, _, Backbone) {
