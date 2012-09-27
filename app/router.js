@@ -135,10 +135,17 @@ define([
 
     archive : function(){
       this.reset();
+      var current = this;
       app.useLayout("archive").setViews({
-        '.postcardList' : new Postcard.Views.ArchiveList({model: this.arcPos})
+        '#archiveList' : new Postcard.Views.ArchiveList({collection: this.arcPos})
       }).render();
-      this.arcPos.fetch();
+      console.log("archive render");
+      console.log(this.arcPos);
+      this.arcPos.fetch({
+        success : function(){
+          console.log(current.arcPos.models);
+        }
+      });
     },
 
     viewPostcard: function(id){
@@ -242,6 +249,7 @@ define([
      this.recPos.reset();
      this.senPos.reset();
      this.draPos.reset();
+     this.arcPos.reset();
      // this.newPos.reset();
      // this.friends.reset();
      app.active = false;
