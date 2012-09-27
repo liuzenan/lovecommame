@@ -48,7 +48,7 @@ define([
     url : function(){
       return "../api.php/user/" + $.cookie("uid") + "?token=" + $.cookie("token");
     },
-    cache: false,
+    cache: true,
     model: Postcard.Model
   });
 

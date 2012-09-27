@@ -47,12 +47,12 @@ function(app, Backbone){
 				    	$.cookie("username", null);
 				    	$.cookie("password", null);
 				    }
-				    
+
 				    // store token in cookie for future usage
-				    var temp = response.toJSON();
+				    var temp = $.parseJSON(response);
 
 				    $.cookie("uid", temp.uid);
-				    $.cookie("token", temp,token);
+				    $.cookie("token", temp.token);
 
 				    // navigate to the wall page
 				    app.router.go("wall");
