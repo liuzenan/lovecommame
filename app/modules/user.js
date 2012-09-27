@@ -13,7 +13,9 @@ function(app, Backbone){
 	// user model contains username, email address and uid
 	User.Model = Backbone.Model.extend({
 		// migrate functions from view to model 
-
+		defaults: {
+            online: true
+        }
 	});
 
 	//User login view
@@ -69,11 +71,34 @@ function(app, Backbone){
 
 		// load stored username and password once rendered
 		afterRender: function(){
-			if($.cookie("username") != null){
-				$("input[name=username]").val($.cookie("username"));
-				$("input[name=password]").val($.cookie("password"));
-				$("input[name=rmbme]").prop("checked", true);
+			// check internect connection
+			if(navigator.onLine){
+				// check if username and password exist in cookie
+				if($.cookie("username") != null){
+					$("input[name=username]").val($.cookie("username"));
+					$("input[name=password]").val($.cookie("password"));
+					$("input[name=rmbme]").prop("checked", true);
+				}
 			}
+			else{
+				// check if username and password exist in cookie
+				if($.cookie("username") != null){
+					$("input[name=username]").val($.cookie("username"));
+					$("input[name=password]").val($.cookie("password"));
+					$("input[name=rmbme]").prop("checked", true);
+					// disable inputs so that no user switch is allowed
+					$("input").prop('disabled', true);
+				}
+				else{
+					$("h2").text("Please get internet connection");
+					$("button").prop("disabled", true);
+				}
+			}
+		},
+
+		initialize: function(){
+			// clear token first
+			$.cookie("token", null);
 		}
 	});
 
