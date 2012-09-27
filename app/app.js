@@ -11,7 +11,7 @@ define([
   "plugins/jquery.cookie",
   "plugins/jgestures",
   "plugins/backbone.localStorage-min",
-  "plugins/caman.full.min"
+  "plugins/pixastic"
 ],
 
 function($, _, Backbone) {

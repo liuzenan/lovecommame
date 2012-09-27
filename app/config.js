@@ -29,7 +29,8 @@ require.config({
     // Backbone.CollectionCache depends on Backbone.
     "plugins/backbone.collectioncache": ["backbone"],
     "plugins/backbone.localStorage-min": ["backbone"],
-    "plugins/jquery.cookie": ["jquery"]
+    "plugins/jquery.cookie": ["jquery"],
+    "plugins/pixastic" :["jquery"]
   }
 
 });
