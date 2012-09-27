@@ -364,10 +364,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
     $(".preset-button").live("click", function(){
       console.log("clicked button");
 
-      Caman("#imageCanvas", function(canvas){
-        canvas.hue(5);
-        canvas.saturation(-30);
-      });
+      
     });
 
   };
