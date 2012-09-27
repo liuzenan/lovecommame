@@ -306,7 +306,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           alert(response);
           
           // add postcard into sent collection
-          var new_postcard = new Postcard.Model{
+          var new_postcard = new Postcard.Model({
             token: $.cookie("token"), 
             body: $("textarea.content").val(), 
             body_effect: 0, 
@@ -319,9 +319,9 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             photo_effect: 0, 
             postcard_effect: 0, 
             status: 1, // indicating this postcard is sent and unread 
-            mail: $("input[name=email]").val()},
+            mail: $("input[name=email]").val(),
             pid: response
-          };
+          });
 
           
         },
