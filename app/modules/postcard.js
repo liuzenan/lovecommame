@@ -48,10 +48,9 @@
     url : function(){
       return "../api.php/user/" + $.cookie("uid") + "?token=" + $.cookie("token");
     },
-    cache: true,
+    cache: false,
     model: Postcard.Model
   });
-
 
   Postcard.Collection.Wall = Postcard.Collection.extend({
     parse: function(object){
@@ -111,7 +110,8 @@
 
         // store postcard collection locally
         localStorage.setItem('all_postcard', JSON.stringify(temp));
-        alert(JSON.stringify(temp));
+
+        alert(temp.length);
 
         return temp;
       }
@@ -347,6 +347,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
               pid: response
             });
 
+            alert("adding new postcard to collection");
+
             // adding the new draft into collections
             app.router.allPos.add(new_postcard);
             app.router.draPos.add(new_postcard);
@@ -354,8 +356,10 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             // renew the locally stored data
             localStorage.setItem('all_postcard', app.router.allPos.toJSON());
 
+            alert(localStorage.getItem('all_postcard'));
+
             // going back to draft list
-            app.router.go("compose");
+            app.router.go("wall");
           },
           error: function(error){
             alert("Oops! An error occured! :(");
