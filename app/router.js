@@ -28,14 +28,14 @@ define([
 
     index: function() {
       this.reset();
-      app.useLayout("login").setView({
+      app.useLayout("login").setViews({
         ".container" : new User.Views.Login({model: this.user})
       }).render();
     },
 
     signup: function() {
       this.reset();
-      app.useLayout("signup").setView({
+      app.useLayout("signup").setViews({
         ".container" : new User.Views.Signup({model: this.user})
       }).render();
     },
@@ -53,7 +53,7 @@ define([
         this.allPos = JSON.parse(localStorage.getItem("all_postcard"));
       }
       var current = this;
-      app.useLayout("wall").setView({
+      app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
       }).render().then(function(){
 
@@ -103,7 +103,7 @@ define([
     sentWall:function(){
       this.reset();
       var current = this;
-      app.useLayout("wall").setView({
+      app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.SentList({collection: this.senPos})
       }).render().then(function(el){
 current.setScroller('postcardList');
@@ -127,17 +127,28 @@ current.setScroller('postcardList');
       var current= this;
         $(".navigation>a").removeClass("current");
         $("#btnpublic").addClass("current");
-        app.useLayout("wall").setView({
+        app.useLayout("wall").setViews({
           '.postcardList' : new Postcard.Views.PublicList({collection: this.pubPos})
         }).render().then(function(el){
           current.setScroller('postcardList');
         });
+
+      if($.cookie("uid") != null && $.cookie("token") != null){
+        this.pubPos.fetch({
+          success:function(){
+            current.setScroller('postcardList');
+          }
+        });
+      }
+      else{
+      }
+
     },
 
     archive : function(){
       this.reset();
       var current = this;
-      app.useLayout("archive").setView({
+      app.useLayout("archive").setViews({
         '#archiveList' : new Postcard.Views.ArchiveList({collection: this.arcPos})
       }).render();
       console.log("archive render");
@@ -157,14 +168,14 @@ current.setScroller('postcardList');
     viewPostcard: function(type,id){
       var current = this;
       if(type=="sent"){
-        app.useLayout("viewsent").setView({
+        app.useLayout("viewsent").setViews({
           '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
         }).render().then(function(el){
           current.setScroller('displaypostcard');
         });        
 
       }else{
-        app.useLayout("viewpostcard").setView({
+        app.useLayout("viewpostcard").setViews({
           '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
         }).render().then(function(el){
           current.setScroller('displaypostcard');
@@ -175,7 +186,7 @@ current.setScroller('postcardList');
     compose: function(){
       this.reset();
       var current = this;
-      app.useLayout("compose").setView({
+      app.useLayout("compose").setViews({
         '.container' : new Postcard.Views.DraftList({collection: this.draPos})
       }).render().then(function(el){
        // console.log("after render");
@@ -210,12 +221,12 @@ current.setScroller('postcardList');
       var current = this;
       if(id==0){
         this.newPos = new Postcard.Model();
-        app.useLayout("create").setView({
+        app.useLayout("create").setViews({
           '.editor' : new Postcard.Views.EditText({model: this.newPos})
         }).render();
       }else{
         this.newPos = this.draPos.get(id);
-        app.useLayout("create").setView({
+        app.useLayout("create").setViews({
           '.editor' : new Postcard.Views.EditText({model:this.newPos})
         }).render();
       }
