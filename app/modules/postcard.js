@@ -59,8 +59,10 @@ define([
         return object.unread.concat(object.read);
       }
       else{
-        // to be completed
-        var unread = app.router.allPos.where({status: 1});
+        var unread = app.router.allPos.where({status: 1, uid_to: $.cookie("uid")});
+        var read = app.router.allPos.where({status: 2, uid_to: $.cookie("uid")});
+
+        return unread.concat(read);
       }
     }
   });
@@ -93,6 +95,7 @@ define([
 
       // store postcard collection locally
       localStorage.setItem('all_postcard', JSON.stringify(temp));
+      alert(JSON.stringify(temp));
 
       return temp;
     }
@@ -284,7 +287,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
     events: {
       "click .send" : "uploadNew",
-      "click .discard" : "goBack"
+      "click .discard" : "goBack",
       "click .save" : "saveNew"
     },
 

@@ -46,6 +46,9 @@ define([
       // fetch data from server
       // otherwise use local storage
       if($.cookie("token") != null && $.cookie("uid") != null){
+        alert("online");
+        alert($.cookie("token"));
+        alert($.cookie("uid"));
         this.allPos.fetch();
       }
       else{
