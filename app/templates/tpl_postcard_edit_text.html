@@ -21,11 +21,14 @@
 				</div>
 			</div>
 			<div class="create postcard back face">
+				<div class="create postcard backwrap">
 				<button id="uploadimage" class="overlaybutton">Touch to add photo</button>
 				<input type="file" id="imageinput" accept="image/*"/>
 				<div id="canvasWrapper" data-image="<% if(status==0){%><%= body.body_effect %><% } %>">
 					
 				</div>
+				</div>
+
 			</div>
 		</div>
 		<button id="flipback" class="flipback overlaybutton small">Turn over</button>

@@ -374,6 +374,14 @@ p.sent.postcard.text{
 	padding: 10px;
 }
 
+.backwrap{
+	width: 100%;
+	height: 100%;
+	background: white;
+	margin: 0;
+	padding:0;
+}
+
 .postcard.back.face  {
 	display: block;
 	-webkit-transform: rotateY(180deg);
