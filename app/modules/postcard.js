@@ -168,49 +168,7 @@ define([
 
    
     resizePostcard: function(){
-      var numOfCards = $('.postcardWallList>li').length;
-     var containerHeight = $(".postcardWallList").height();
-     var postcardW = containerHeight*1.5;
-     var allPostcard = $('.postcardWallList>li');
-     console.log("numOfCards: " + numOfCards + " " + "containerHeight: "+ containerHeight);
-     $('.postcardWallList>li').css("float", "left");
-     if(containerHeight<250){
-            $(".postcardWallList").css({
-        "-moz-column-count" : "",
-        "-webkit-column-count" : "",
-        "column-count" : "",
-        "column-gap" : "",
-        "-webkit-column-gap" : "",
-        "-moz-column-gap" : "",
-        "height" : containerHeight + "",
-        "-webkit-column-width": w+"";
-      });
-      allPostcard.height(containerHeight);
-      allPostcard.width(postcardW);
-      $(".postcardWallList").width(numOfCards*postcardW+300);
-     }else{
-      var columns =  Math.floor((numOfCards+1)/2);
-      var w, h;
-      h= containerHeight/2;
-      w= h*1.5;
-      console.log(h+", "+ w);
-      $(".postcardWallList").css({
-        "-moz-column-count" : columns +"",
-        "-webkit-column-count" : columns+"",
-        "column-count" : columns+"",
-        "column-gap" : "0",
-        "-webkit-column-gap" : "0",
-        "-moz-column-gap" : "0",
-        "height" : h*2 + "",
-        "-webkit-column-width": w+"";
-      });
 
-      $('.postcardWallList>li').css("float", "none");
-
-      allPostcard.height(h);
-      allPostcard.width(w);
-      $(".postcardWallList").width((numOfCards+1)*w/2+300);
-     }
   }
 });
 
@@ -317,7 +275,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
     events: {
       "click .send" : "uploadNew",
-      "click .discard" : "goBack"
+      "click .discard" : "goBack",
       "click .save" : "saveNew"
     },
 
