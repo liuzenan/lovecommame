@@ -130,10 +130,6 @@ current.setScroller('postcardList');
       this.reset();
         $(".navigation>a").removeClass("current");
         $("#btnpublic").addClass("current");
-
-      app.useLayout("wall").setViews({
-        '.postcardList' : new Postcard.Views.
-      });
     },
 
     archive : function(){

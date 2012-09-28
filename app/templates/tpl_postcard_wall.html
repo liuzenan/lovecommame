@@ -5,7 +5,9 @@
 				<img class="wall postcard image" src="/<%= photo.uri %>" alt=""/>
 			</div>
 			<div class="wall postcard read back face">
-				<p class="wall postcard text">from: <%= uid_from.uname %></p>
+				<div class="wall postcard backwrap">
+					<p class="wall postcard text">from: <%= uid_from.uname %></p>
+				</div>
 			</div>
 			<% } else { %>
 			<div class="wall postcard envelop front face">

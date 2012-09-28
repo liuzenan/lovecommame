@@ -823,6 +823,7 @@ width: 70px;
 height: 30px;
 background: rgba(0, 0, 0, 0.4);
 border: 1px solid white;
+z-index: 2;
 }
 
 .overlaybutton{
@@ -858,7 +859,6 @@ border: 1px solid white;
     position: absolute;
     top: 0;
     width: 100%;
-    z-index: -1;
 }
 
 canvas.imageCanvas{
