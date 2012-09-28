@@ -925,3 +925,7 @@ ul.postcardArchiveList {
     margin-top: -4px;
     width: 20%;
 }
+
+#archiveList {
+    padding-bottom: 10%;
+}
