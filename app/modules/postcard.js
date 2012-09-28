@@ -387,7 +387,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           text_style = 2;
         }
         else{
-          if($(".front.face").hasClass("style13")){
+          if($(".front.face").hasClass("style3")){
             text_style = 3;
           }
           else{
