@@ -389,33 +389,15 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
       // if the user is currently logged in online
       if($.cookie("token") != null && $.cookie("uid") != null){
-        // save the postcard as a draft version
-        // top, left, width, height, photo_effect should be recorded
-        $.ajax({
-          type: "POST",
-          url: "http://54.251.37.19/api.php/postcard/",
-          data: {
-            token: $.cookie("token"), 
-            body: $("textarea.content").val(), 
-            body_effect: text_style, 
-            uid_from: $.cookie("uid"), 
-            top: 0, 
-            left: 0, 
-            width: photo_width, 
-            height: photo_height, 
-            data_url: photo_data_url, 
-            photo_effect: 0, 
-            postcard_effect: 0, 
-            status: 0, // indicating this postcard is sent and unread 
-            mail: $("input[name=email]").val(),
-            public_card: 0},
 
-
-          success: function(response){
-            alert(response);
-            
-            // add postcard into draft collection
-            var new_postcard = new Postcard.Model({
+        if($("#createPostcardWrap").attr("data-pid") == -1){
+          alert("new card");
+          // save the postcard as a draft version
+          // top, left, width, height, photo_effect should be recorded
+          $.ajax({
+            type: "POST",
+            url: "http://54.251.37.19/api.php/postcard/",
+            data: {
               token: $.cookie("token"), 
               body: $("textarea.content").val(), 
               body_effect: text_style, 
@@ -427,30 +409,112 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
               data_url: photo_data_url, 
               photo_effect: 0, 
               postcard_effect: 0, 
-              status: 0, // indicating this postcard is draft only 
+              status: 0, // indicating this postcard is sent and unread 
               mail: $("input[name=email]").val(),
-              pid: response,
-              public_card: 0
-            });
+              public_card: 0},
 
-            alert("adding new postcard to collection");
 
-            // adding the new draft into collections
-            app.router.allPos.add(new_postcard);
-            app.router.draPos.add(new_postcard);
+            success: function(response){
+              alert(response);
+              
+              // add postcard into draft collection
+              var new_postcard = new Postcard.Model({
+                token: $.cookie("token"), 
+                body: $("textarea.content").val(), 
+                body_effect: text_style, 
+                uid_from: $.cookie("uid"), 
+                top: 0, 
+                left: 0, 
+                width: photo_width, 
+                height: photo_height, 
+                data_url: photo_data_url, 
+                photo_effect: 0, 
+                postcard_effect: 0, 
+                status: 0, // indicating this postcard is draft only 
+                mail: $("input[name=email]").val(),
+                pid: response,
+                public_card: 0
+              });
 
-            // renew the locally stored data
-            localStorage.setItem('all_postcard', app.router.allPos.toJSON());
+              alert("adding new postcard to collection");
 
-            alert(localStorage.getItem('all_postcard'));
+              // adding the new draft into collections
+              app.router.allPos.add(new_postcard);
+              app.router.draPos.add(new_postcard);
 
-            // going back to draft list
-            app.router.go("wall");
-          },
-          error: function(error){
-            alert("Oops! An error occured! :(");
-          }
-        });
+              // renew the locally stored data
+              localStorage.setItem('all_postcard', app.router.allPos.toJSON());
+
+              alert(localStorage.getItem('all_postcard'));
+
+              // going back to draft list
+              app.router.go("wall");
+            },
+            error: function(error){
+              alert("Oops! An error occured! :(");
+            }
+          });
+        }
+        else{
+          alert("old card");
+          // save the postcard as a draft version
+          // top, left, width, height, photo_effect should be recorded
+          $.ajax({
+            type: "PUT",
+            url: "http://54.251.37.19/api.php/postcard/" + $("#createPostcardWrap").attr("data-pid"),
+            data: {
+              token: $.cookie("token"), 
+              body: $("textarea.content").val(), 
+              body_effect: text_style, 
+              uid_from: $.cookie("uid"), 
+              top: 0, 
+              left: 0, 
+              width: photo_width, 
+              height: photo_height, 
+              data_url: photo_data_url, 
+              photo_effect: 0, 
+              postcard_effect: 0, 
+              status: 0, // indicating this postcard is sent and unread 
+              mail: $("input[name=email]").val(),
+              public_card: 0},
+
+
+            success: function(response){              
+              // add postcard into draft collection
+              var new_postcard = new Postcard.Model({
+                token: $.cookie("token"), 
+                body: $("textarea.content").val(), 
+                body_effect: text_style, 
+                uid_from: $.cookie("uid"), 
+                top: 0, 
+                left: 0, 
+                width: photo_width, 
+                height: photo_height, 
+                data_url: photo_data_url, 
+                photo_effect: 0, 
+                postcard_effect: 0, 
+                status: 0, // indicating this postcard is draft only 
+                mail: $("input[name=email]").val(),
+                pid: response,
+                public_card: 0
+              });
+
+              // adding the new draft into collections
+              app.router.allPos.add(new_postcard);
+              app.router.draPos.add(new_postcard);
+
+              // renew the locally stored data
+              localStorage.setItem('all_postcard', app.router.allPos.toJSON());
+
+              // going back to draft list
+              app.router.go("wall");
+            },
+            error: function(error){
+              alert("Oops! An error occured! :(");
+            }
+          });
+        }
+        
       }
       else{
         // add postcard into draft collection with a dummy pid
@@ -594,12 +658,12 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
           console.log("2"); 
-          var geocoder = new google.maps.Geocoder();
+          var geocoder = new window.google.maps.Geocoder();
 
           console.log("3");
-          var latlng = new google.maps.LatLng(lat, lng);
+          var latlng = new window.google.maps.LatLng(lat, lng);
           geocoder.geocode({'latLng': latlng}, function(results, status){
-            if (status == google.maps.GeocoderStatus.OK) {
+            if (status == window.google.maps.GeocoderStatus.OK) {
               if (results[1]) {
                 alert(results[0].formatted_address);
               }

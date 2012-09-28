@@ -57,7 +57,6 @@ function(app, Backbone){
 					},
 					// callback handler that will be called on error
 					error: function(jqXHR, textStatus, errorThrown){
-						alert(textStatus);
 					    alert("Sorry we cannot log you in. Please check your email address or password!")
 					},
 					// callback handler that will be called on completion
@@ -71,7 +70,6 @@ function(app, Backbone){
 			else{
 				// enter offline mode
 				// navigate to the wall page
-				alert("offline");
 			    app.router.go("wall");
 			}
 			
