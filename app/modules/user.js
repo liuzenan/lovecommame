@@ -56,7 +56,6 @@ function(app, Backbone){
 				},
 				// callback handler that will be called on error
 				error: function(jqXHR, textStatus, errorThrown){
-
 				    alert("Sorry we cannot log you in. Please check your email address or password!")
 				},
 				// callback handler that will be called on completion
@@ -115,38 +114,51 @@ function(app, Backbone){
 			$inputs = $(this).find("input, select, button, textarea");
 			$inputs.prop("disabled", true);
 
-			if($("input[name=password]").val() != $("input[name=re-password]").val()){
-				alert("your passwords are not consistent");
+			// make sure all fields are filled up
+			if($("input[name=username]").val() == null || $("input[name=username]").val() == "" || $("input[name=email]").val() == null || $("input[name=email]").val() == "" || $("input[name=password]").val() == null || $("input[name=password]").val() == "" || $("input[name=re-password]").val() == null || $("input[name=re-password]").val() == ""){
+				alert("Please fill in all fields!");
 			}
 			else{
-				app.router.go("wall");
-			}
-/*
-			$.ajax({
-			  	type: "POST",
-			  	url: "../api.php/user/",
-			  	data: {uname: $("input[name=username]").val(), email: $("input[name=email]").val(), pass: window.btoa($("input[name=password]").val())},
-			  	
-			  	// if successful
-			  	success: function(response, textStatus, jqXHR){
-				    $.cookie("token", response);
-
-				    // navigate to the wall page
-				    app.router.go("wall");
-				},
-				// callback handler that will be called on error
-				error: function(jqXHR, textStatus, errorThrown){
-
-				    alert("Sorry we cannot sign you up right now!")
-				},
-				// callback handler that will be called on completion
-				// which means, either on success or error
-				complete: function(textStatus){
-				    // enable the inputs
-				    $inputs.prop("disabled", false);
+				// make sure the passwords are the same
+				if($("input[name=password]").val() != $("input[name=re-password]").val()){
+					alert("Please type the same password!");
 				}
-			});
-*/
+				else{
+					$.ajax({
+					  	type: "POST",
+					  	url: "../api.php/user/",
+					  	data: {uname: $("input[name=username]").val(), mail: $("input[name=email]").val(), pass: window.btoa($("input[name=password]").val())},
+					  	
+					  	// if successful
+					  	success: function(response, textStatus, jqXHR){
+						    // store token in cookie for future usage
+						    var temp = $.parseJSON(response);
+
+						    $.cookie("uid", temp.uid);
+						    $.cookie("token", temp.token);
+
+						    // navigate to the wall page
+						    app.router.go("wall");
+						},
+						// callback handler that will be called on error
+						error: function(jqXHR, textStatus, errorThrown){
+							// check server response to see if the email is registered
+							if(errorThrown == "Internal Server Error"){
+								alert("The email is registered!");
+							}
+							else{
+								alert("Oops! An error occured! :(");
+							}
+						},
+						// callback handler that will be called on completion
+						// which means, either on success or error
+						complete: function(textStatus){
+						    // enable the inputs
+						    $inputs.prop("disabled", false);
+						}
+					});
+				}
+			}
 			return false;
 		}
 	});

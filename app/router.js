@@ -42,7 +42,17 @@ define([
 
     receivedWall: function(){
       this.reset();
-      this.allPos.fetch();
+      // if token and uid exist, meaning user is logged in
+      // fetch data from server
+      // otherwise use local storage
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        this.allPos.fetch();
+      }
+      else{
+        alert("use localStorage");
+        
+        this.allPos = JSON.parse(localStorage.getItem("all_postcard"));
+      }
       var current = this;
       app.useLayout("wall").setViews({
         '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
