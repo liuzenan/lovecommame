@@ -214,8 +214,9 @@ current.setScroller('postcardList');
     composeText: function(id){
       var current = this;
       if(id==0){
+        this.newPos = new Postcard.Model();
         app.useLayout("create").setViews({
-          '.editor' : new Postcard.Views.EditText({model:this.newPos})
+          '.editor' : new Postcard.Views.EditText({model: this.newPos})
         }).render();
       }else{
         this.newPos = this.draPos.get(id);

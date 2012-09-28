@@ -683,7 +683,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         });
       }
 
-      var postcard = $(this.el).find('.container');
+      var postcard = $(this.el).find('.create.postcard.container');
       var postcardH = postcard.height();
       var postcardW = postcardH*1.5;
       postcard.width(postcardW);
@@ -724,6 +724,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         $("#canvasWrapper").children().remove();
         uploadPhoto(e.target.files)
       });
+
+
 
       function uploadPhoto(files){
         console.log("uploadphoto");
