@@ -276,6 +276,7 @@ footer{
 #postcardList{
 	padding-left: 10%;
 	height: 70%;
+	position: relative;
 }
 
 .postcardWallList{
