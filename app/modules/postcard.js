@@ -119,9 +119,8 @@
   });
 
   //wall page post card views
-  Postcard.Views.WallItem = Backbone.View.extend({
+  Postcard.Views.Item = Backbone.View.extend({
     tagName:"li",
-    template: "tpl_postcard_wall",
     serialize: function(){
       return this.model.toJSON();
     },
@@ -152,12 +151,36 @@
     }
   });
 
+  Postcard.Views.WallItem = Postcard.Views.Item.extend({
+    template:"tpl_postcard_wall"
+  });
+
+  Postcard.Views.SentItem = Postcard.Views.Item.extend({
+    template: "tpl_postcard_sent"
+  });
+
   Postcard.Views.List = Backbone.View.extend({
     tagName:"ul",
 
     initialize: function() {
       this.collection.on("reset", this.render, this);
-    }
+    },
+
+    resizePostcard: function(){
+      var numOfCards = $(".postcardWallList>li").length;
+      var containerHeight = $(window).height();
+      var containerWidth = $(window).width();
+      var childlist = $(".postcardWallList>li");
+      if(containerHeight<containerWidth){
+        childlist.height(containerHeight*0.7);
+        childlist.width(containerHeight*0.7*1.5);
+        $(".postcardWallList").width(numOfCards*containerHeight*0.7*1.5+100);
+      }else{
+        childlist.height((containerHeight*0.7)/2);
+        childlist.width((containerHeight*0.7)/2*1.5);
+        $(".postcardWallList").width(((numOfCards+1)/2)*(containerHeight*0.7/2)*1.5+100);
+      }
+  }
 
   });
 
@@ -184,25 +207,34 @@
       if(app.router.scroller){
         app.router.scroller.refresh();
       }
+    }
+});
+
+
+Postcard.Views.SentList = Postcard.Views.List.extend({
+
+    className: "postcardWallList",
+
+    beforeRender: function(){
+      this.$el.children().remove();
+      this.collection.each(function(postcard){
+        this.insertView(new Postcard.Views.SentItem({
+          model: postcard
+        }));
+      }, this);
     },
 
-   
-    resizePostcard: function(){
-      var numOfCards = $(".postcardWallList>li").length;
-      var containerHeight = $(window).height();
-      var containerWidth = $(window).width();
-      var childlist = $(".postcardWallList>li");
-      if(containerHeight<containerWidth){
-        childlist.height(containerHeight*0.7);
-        childlist.width(containerHeight*0.7*1.5);
-        $(".postcardWallList").width(numOfCards*containerHeight*0.7*1.5+100);
-      }else{
-        childlist.height((containerHeight*0.7)/2);
-        childlist.width((containerHeight*0.7)/2*1.5);
-        $(".postcardWallList").width(((numOfCards+1)/2)*(containerHeight*0.7/2)*1.5+100);
+    afterRender: function(){
+      this.resizePostcard();
+      var current = this;
+      $(window).resize(function(){
+        current.resizePostcard();
+      })
+      if(app.router.scroller){
+        app.router.scroller.refresh();
       }
-  }
-});
+    }
+  });
 
 Postcard.Views.ArchiveItem = Backbone.View.extend({
   tagName:"li",

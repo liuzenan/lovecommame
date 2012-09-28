@@ -92,6 +92,7 @@ h2{
 
 .header h1{
 	background:url(../img/title.png) no-repeat left bottom;
+	background-size: 108px 48px;
 	text-indent: -9999px;
 }
 
@@ -300,7 +301,11 @@ footer{
 p.wall.postcard.text {
     color: #222222;
     display: block;
-    font-size: 1.4em;
+    font-size: 12px;
+    margin-left: 10%;
+    margin-top: 40%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 200;
 }
 
 
@@ -372,19 +377,26 @@ p.wall.postcard.text {
 	text-align: center;
 }
 
-/*
+
 .postcard.envelop.front.face{
-	background: url(../img/front.jpg) no-repeat center center;
+	background: url(../img/front_white.png) no-repeat center center;
 	background-size: 100% 100%;
 
 }
 
 .postcard.envelop.back.face{
-	background: url(../img/back.jpg) no-repeat center center;
+	background: url(../img/back_white.png) no-repeat center center;
 	background-size: 100% 100%;
 }
 
-*/
+.front.face{
+	background-color: white !important;
+}
+
+.back.face{
+	background-color: white !important;
+}
+
 /* compose */
 
 .layout.compose{
@@ -583,6 +595,22 @@ ul.postcardDraftList {
     width: 60%;
 }
 
+.front.face.style1{
+	background: url(../img/pstyle/1/paper.png);
+}
+
+.front.face.style2{
+	background: url(../img/pstyle/2/paper.png);
+}
+
+.front.face.style3{
+	background: url(../img/pstyle/3/paper.png);
+}
+
+.front.face.style4{
+	background: url(../img/pstyle/4/paper.png);
+}
+
 .textWrap, .addressWrap{
 	float: left;
 }
@@ -593,10 +621,12 @@ ul.postcardDraftList {
     overflow: hidden;
     width: 100%;
     resize: none;
-	font-size: 14px;
-	line-height: 20px;
+	font-size: 16px;
+	line-height: 30px;
 	background: transparent url(../img/postcardline.png);
 }
+
+
 
 p.create {
     height: 10%;
@@ -606,7 +636,54 @@ p.create {
 .stamp{
     display: block;
     height: 40%;
+    background: url(../img/pstyle/1/stamp.png) no-repeat top right;
 }
+
+.stamp.style1{
+	background: url(../img/pstyle/1/stamp.png) no-repeat top right;
+}
+
+.stamp.style2{
+	background: url(../img/pstyle/2/stamp.png) no-repeat top right;
+}
+
+
+.stamp.style3{
+	background: url(../img/pstyle/3/stamp.png) no-repeat top right;
+}
+
+
+.stamp.style4{
+	background: url(../img/pstyle/4/stamp.png) no-repeat top right;
+}
+
+
+.chop{
+	display: block;
+	height: 100%;
+	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+	background-size: 100px !important;
+	margin-right: 20%;
+	opacity: 0.7;
+}
+
+.chop.style1{
+	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+}
+
+.chop.style2{
+	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+}
+
+.chop.style3{
+	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+}
+
+.chop.style4{
+	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+}
+
+
 
 .create.postcard.addressWrap {
     height: 100%;
@@ -708,12 +785,6 @@ canvas.imageCanvas{
 	width: 100%;
 	height: auto;
 }
-
-
-
-
-
-
 
 /* archive */
 
