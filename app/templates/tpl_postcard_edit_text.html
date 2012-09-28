@@ -3,17 +3,17 @@
 	<button class="send">Send</button>
 	<button class="save">Save</button>
 </div>
-<div id="createPostcardWrap">
+<div id="createPostcardWrap" data-pid="<%= pid %>">
 	<div class="create postcard container">
 		<div class="create postcard card">
-			<div class="create postcard front face style1 clearfix">
+			<div class="create postcard front face style<% if(status==0){%><%= body.body_effect %><% } %> clearfix">
 				<form class="create postcard textWrap">
-					<textarea name="content" class="create postcard content" placeholder="Dear friend:"></textarea>
+					<textarea name="content" class="create postcard content style<% if(status==0){%><%= body.body_effect %><% } %>" placeholder="Dear friend:"><% if(status==0){%><%= body.content %><% } %></textarea>
 					<p class="create postcard text signature">Love, me</p>
 				</form>
 				<div class="create postcard addressWrap">
-					<span class="stamp style1">
-						<span class="chop style1"></span>
+					<span class="stamp style<% if(status==0){%><%= body.body_effect %><% } %>">
+						<span class="chop style<% if(status==0){%><%= body.body_effect %><% } %>"></span>
 					</span>
 					<label for="name">Send to:</label>
 					<input type="text" name="name" placeholder="Name">
@@ -23,7 +23,7 @@
 			<div class="create postcard back face">
 				<button id="uploadimage" class="overlaybutton">Touch to add photo</button>
 				<input type="file" id="imageinput" accept="image/*"/>
-				<div id="canvasWrapper">
+				<div id="canvasWrapper" data-image="<% if(status==0){%><%= body.body_effect %><% } %>">
 					
 				</div>
 			</div>

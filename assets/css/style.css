@@ -620,17 +620,41 @@ ul.postcardDraftList {
 	float: left;
 }
 
-.create.postcard.content {
+.postcard.content {
     border: none;
     height: 80%;
     overflow: hidden;
     width: 100%;
     resize: none;
-	font-size: 16px;
+	font-size: 14px;
 	line-height: 30px;
 	background: transparent url(../img/postcardline.png);
 }
 
+
+.postcard.content.style1{
+	text-align: center;
+	font-family: "Times New Roman", Times, serif;
+	color: #666;
+}
+
+
+.postcard.content.style2{
+	font-family: "MS Sans Serif", Geneva, sans-serif;
+	color: #777;
+}
+
+
+.postcard.content.style3{
+	font-family: Georgia, serif;
+	color: #777;
+}
+
+
+.postcard.content.style4{
+	font-family: "Palatino Linotype", serif;
+	color: #777;
+}
 
 
 p.create {
@@ -668,7 +692,7 @@ p.create {
 	height: 100%;
 	background:url(../img/pstyle/1/chop.png) no-repeat top right;
 	background-size: 100px !important;
-	margin-right: 20%;
+	margin-right: 40px;
 	opacity: 0.7;
 }
 
@@ -677,15 +701,15 @@ p.create {
 }
 
 .chop.style2{
-	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+	background:url(../img/pstyle/2/chop.png) no-repeat top right;
 }
 
 .chop.style3{
-	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+	background:url(../img/pstyle/3/chop.png) no-repeat top right;
 }
 
 .chop.style4{
-	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+	background:url(../img/pstyle/4/chop.png) no-repeat top right;
 }
 
 

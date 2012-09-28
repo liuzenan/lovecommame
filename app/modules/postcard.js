@@ -41,7 +41,11 @@
         });
 
   Postcard.Model = Backbone.Model.extend({
-    idAttribute: "pid"
+    idAttribute: "pid",
+    defaults:{
+      pid: -1,
+      status : -1
+    }
   });
 
   Postcard.Collection = Backbone.Collection.extend({
@@ -346,11 +350,16 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
     changeStyle: function(ev){
       var currentbutton = ev.target;
-      console.log(currentbutton);
-      var currentStyle = $(ev.targert).attr("id");
-      $(".create.postcard.front.face").removeClass("style1").removeClass("style2").removeClass("style3").removeClass("style4").addClass(currentStyle);
-      $(".stamp").removeClass("style1").removeClass("style2").removeClass("style3").removeClass("style4").addClass(currentStyle);
-      $(".chop").removeClass("style1").removeClass("style2").removeClass("style3").removeClass("style4").addClass(currentStyle);
+      var currentStyle = $(currentbutton).attr("id");
+      console.log(currentStyle);
+      $(".create.postcard.front.face").removeClass("style1 style2 style3 style4")
+      $(".create.postcard.front.face").addClass(currentStyle);
+      $(".stamp").removeClass("style1 style2 style3 style4");
+      $(".stamp").addClass(currentStyle);
+      $(".chop").removeClass("style1 style2 style3 style4");
+      $(".chop").addClass(currentStyle);
+      $(".postcard.content").removeClass("style1 style2 style3 style4");
+      $(".postcard.content").addClass(currentStyle);
     },
 
     saveNew: function(ev){
