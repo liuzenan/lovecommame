@@ -47,9 +47,6 @@ define([
       // fetch data from server
       // otherwise use local storage
       if($.cookie("token") != null && $.cookie("uid") != null){
-        alert("online");
-        alert($.cookie("token"));
-        alert($.cookie("uid"));
         this.allPos.fetch();
       }
       else{
@@ -89,7 +86,14 @@ define([
         });
       }
       else{
-        alert("received");
+        alert("get received from local");
+
+        var unread = this.allPos.where({status: 1, uid_to: $.cookie("uid")});
+        var read = this.allPos.where({status: 2, uid_to: $.cookie("uid")});
+
+        alert(unread);
+        alert(read);
+        this.recPos = unread.concat(read);
       }  
     },
 

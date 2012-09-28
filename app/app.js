@@ -3,6 +3,7 @@ define([
   "jquery",
   "lodash",
   "backbone",
+  "gmap",
 
   // Plugins.
   "plugins/backbone.layoutmanager",

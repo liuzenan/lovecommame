@@ -14,7 +14,8 @@ require.config({
     jquery: "../assets/js/libs/jquery",
     lodash: "../assets/js/libs/lodash",
     backbone: "../assets/js/libs/backbone",
-    json2: "../assets/js/libs/json2"
+    json2: "../assets/js/libs/json2",
+    gmap: "../assets/js/libs/gmap"
   },
 
   shim: {
