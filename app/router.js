@@ -52,10 +52,12 @@ define([
       else{
         alert("use localStorage");
         
+        alert(localStorage.getItem("all_postcard"));
         this.allPos = JSON.parse(localStorage.getItem("all_postcard"));
 
         alert(this.allPos.length);
         alert(this.allPos);
+        alert(this.allPos.toJSON());
       }
       var current = this;
       app.useLayout("wall").setViews({
