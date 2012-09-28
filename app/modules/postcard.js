@@ -188,7 +188,19 @@
 
    
     resizePostcard: function(){
-      
+      var numOfCards = $(".postcardWallList>li").length;
+      var containerHeight = $(window).height();
+      var containerWidth = $(window).width();
+      var childlist = $(".postcardWallList>li");
+      if(containerHeight<containerWidth){
+        childlist.height(containerHeight*0.7);
+        childlist.width(containerHeight*0.7*1.5);
+        $(".postcardWallList").width(numOfCards*containerHeight*0.7*1.5+200);
+      }else{
+        childlist.height((containerHeight*0.7)/2);
+        childlist.width((containerHeight*0.7)/2*1.5);
+        $(".postcardWallList").width(((numOfCards+1)/2)*containerHeight*0.7*1.5+200);
+      }
   }
 });
 
