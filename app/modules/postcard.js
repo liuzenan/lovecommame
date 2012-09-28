@@ -41,7 +41,11 @@
         });
 
   Postcard.Model = Backbone.Model.extend({
-    idAttribute: "pid"
+    idAttribute: "pid",
+    defaults:{
+      pid: -1,
+      status : -1
+    }
   });
 
   Postcard.Collection = Backbone.Collection.extend({
@@ -354,6 +358,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       $(".stamp").addClass(currentStyle);
       $(".chop").removeClass("style1 style2 style3 style4");
       $(".chop").addClass(currentStyle);
+      $(".postcard.content").removeClass("style1 style2 style3 style4");
+      $(".postcard.content").addClass(currentStyle);
     },
 
     saveNew: function(ev){
