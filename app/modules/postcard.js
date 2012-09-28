@@ -306,8 +306,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       buttonV = 240;
       buttonH = buttonV/1.5;
     }
-      $("a.compose.new").css("height", buttonH+"");
-      $("a.compose.new").css("width", buttonV+"");
+      $(".compose.face").css("height", buttonH+"");
+      $(".compose.face").css("width", buttonV+"");
       $("ul.postcardDraftList li").height(buttonH);
       $("ul.postcardDraftList li").width(buttonV);
       $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);

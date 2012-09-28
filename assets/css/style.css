@@ -409,11 +409,17 @@ p.sent.postcard.text{
 	background-size: 100% 100%;
 }
 
+.compose.face{
+	padding: 1%;
+}
+
 .display.face,
 .read.face,
 .create.face,
 .sent.face,
-.public.face{
+.public.face,
+.draft.face,
+.compose.face{
 	background: url(../img/bg_letter.png) !important;
 }
 
@@ -488,7 +494,6 @@ ul.postcardDraftList {
 
 .postcard.card.compose.new{
 	display: block;
-	margin-top: 5%;
 	-webkit-transition: none;
 	-moz-transition: none;
 	-o-transition: none;
@@ -498,12 +503,9 @@ ul.postcardDraftList {
 	padding: 25% 0;
 	font-size: 1.6em;
 	color: white;
+	width: 100%;
+	height: 100%;
 	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-}
-
-.postcard.card.compose.new,
-.compose.draft.container{
-	margin-top: 10px;
 }
 
 /* display */
