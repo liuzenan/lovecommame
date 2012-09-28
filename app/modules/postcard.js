@@ -687,7 +687,21 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
       alert("start geolocation");
       // detecting geo-location
+
       if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(position){
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+
+          alert("Location: " + lat + " / " + lng);
+        }, function(){
+          alert("Sorry we cannot find your location right now :(");
+        });
+      }
+
+// the following is with google map 
+// but it hardly works      
+/*      if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function(position){
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
@@ -703,7 +717,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         }, function(){
           alert("Sorry we cannot find your location right now :(");
         });
-      }
+*/      }
 
       var postcard = $(this.el).find('.create.postcard.container');
       var postcardH = postcard.height();
