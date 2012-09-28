@@ -356,6 +356,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
     saveNew: function(ev){
       var photo = $("#imageCanvas").get(0);
 
+      // check if any photos are attached
       if(photo != undefined && photo.title != undefined){
         var photo_data_url = photo.toDataURL(); // store data url for the image
         var photo_height = photo.height;
@@ -365,6 +366,25 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         var photo_data_url = "";
         var photo_height = 0;
         var photo_width = 0;
+      }
+
+      // check for the style being used
+      var text_style;
+      if($(".front.face").hasClass("style1")){
+        text_style = 1;
+      }
+      else{
+        if($(".front.face").hasClass("style2")){
+          text_style = 2;
+        }
+        else{
+          if($(".front.face").hasClass("style13")){
+            text_style = 3;
+          }
+          else{
+            text_style = 4;
+          }
+        }
       }
 
       // if the user is currently logged in online
@@ -377,7 +397,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           data: {
             token: $.cookie("token"), 
             body: $("textarea.content").val(), 
-            body_effect: 0, 
+            body_effect: text_style, 
             uid_from: $.cookie("uid"), 
             top: 0, 
             left: 0, 
@@ -398,7 +418,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             var new_postcard = new Postcard.Model({
               token: $.cookie("token"), 
               body: $("textarea.content").val(), 
-              body_effect: 0, 
+              body_effect: text_style, 
               uid_from: $.cookie("uid"), 
               top: 0, 
               left: 0, 
@@ -437,7 +457,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         var new_postcard = new Postcard.Model({
           token: $.cookie("token"), 
           body: $("textarea.content").val(), 
-          body_effect: 0, 
+          body_effect: text_style, 
           uid_from: $.cookie("uid"), 
           top: 0, 
           left: 0, 
@@ -479,6 +499,26 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         else{
           var photo_data_url = "";
         }
+
+        // check for the style being used
+        var text_style;
+        if($(".front.face").hasClass("style1")){
+          text_style = 1;
+        }
+        else{
+          if($(".front.face").hasClass("style2")){
+            text_style = 2;
+          }
+          else{
+            if($(".front.face").hasClass("style13")){
+              text_style = 3;
+            }
+            else{
+              text_style = 4;
+            }
+          }
+        }
+        
         // sending the postcard as the completed version
         // top, left, width, height, photo_effect would all
         // be applied already. no need to specify
@@ -488,7 +528,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           data: {
             token: $.cookie("token"), 
             body: $("textarea.content").val(), 
-            body_effect: 0, 
+            body_effect: text_style, 
             uid_from: $.cookie("uid"), 
             top: 0, 
             left: 0, 
@@ -508,7 +548,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             var new_postcard = new Postcard.Model({
               token: $.cookie("token"), 
               body: $("textarea.content").val(), 
-              body_effect: 0, 
+              body_effect: text_style, 
               uid_from: $.cookie("uid"), 
               top: 0, 
               left: 0, 
@@ -553,7 +593,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         navigator.geolocation.getCurrentPosition(function(position){
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
-          console.log("2");
+          console.log("2"); 
           var geocoder = new google.maps.Geocoder();
 
           console.log("3");
