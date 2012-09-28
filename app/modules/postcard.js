@@ -352,7 +352,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         var photo_width = photo.width;
       }
       else{
-        var photo_data_url = null;
+        var photo_data_url = "";
         var photo_height = 0;
         var photo_width = 0;
       }
@@ -378,7 +378,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             postcard_effect: 0, 
             status: 0, // indicating this postcard is sent and unread 
             mail: $("input[name=email]").val(),
-            public: 0},
+            public_card: 0},
 
 
           success: function(response){
@@ -400,7 +400,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
               status: 0, // indicating this postcard is draft only 
               mail: $("input[name=email]").val(),
               pid: response,
-              public: 0
+              public_card: 0
             });
 
             alert("adding new postcard to collection");
@@ -438,7 +438,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           postcard_effect: 0, 
           status: 0, // indicating this postcard is draft only 
           mail: $("input[name=email]").val(),
-          public: 0,
+          public_card: 0,
           pid: -1
         });
 
@@ -450,48 +450,32 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         localStorage.setItem('all_postcard', app.router.allPos.toJSON());
 
         // going back to draft list
-        app.router.go("compose");
+        app.router.go("wall");
       }
 
     },
 
     uploadNew: function(ev){
 
-      var photo = $("#imageCanvas").get(0);
-      
-      if(photo != undefined && photo.title != undefined){
-        var photo_data_url = photo.toDataURL(); // store data url for the image
+      if($("input[name=email]").val() == null || $("input[name=email]").val() == ""){
+        alert("Please specify the receiver's email!");
       }
       else{
-        var photo_data_url = null;
-      }
-      // sending the postcard as the completed version
-      // top, left, width, height, photo_effect would all
-      // be applied already. no need to specify
-      $.ajax({
-        type: "POST",
-        url: "http://54.251.37.19/api.php/postcard/",
-        data: {
-          token: $.cookie("token"), 
-          body: $("textarea.content").val(), 
-          body_effect: 0, 
-          uid_from: $.cookie("uid"), 
-          top: 0, 
-          left: 0, 
-          width: 300, 
-          height: 200, 
-          data_url: photo_data_url, 
-          photo_effect: 0, 
-          postcard_effect: 0, 
-          status: 1, // indicating this postcard is sent and unread 
-          mail: $("input[name=email]").val(),
-          public: 0},
-
-        success: function(response){
-          alert(response);
-          
-          // add postcard into sent collection
-          var new_postcard = new Postcard.Model({
+        var photo = $("#imageCanvas").get(0);
+      
+        if(photo != undefined && photo.title != undefined){
+          var photo_data_url = photo.toDataURL(); // store data url for the image
+        }
+        else{
+          var photo_data_url = "";
+        }
+        // sending the postcard as the completed version
+        // top, left, width, height, photo_effect would all
+        // be applied already. no need to specify
+        $.ajax({
+          type: "POST",
+          url: "http://54.251.37.19/api.php/postcard/",
+          data: {
             token: $.cookie("token"), 
             body: $("textarea.content").val(), 
             body_effect: 0, 
@@ -505,24 +489,45 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             postcard_effect: 0, 
             status: 1, // indicating this postcard is sent and unread 
             mail: $("input[name=email]").val(),
-            pid: response,
-            public: 0
-          });
+            public_card: 0},
 
-          // adding the new postcard into collections
-          app.router.allPos.add(new_postcard);
-          app.router.draPos.add(new_postcard);
+          success: function(response){
+            alert(response);
+            
+            // add postcard into sent collection
+            var new_postcard = new Postcard.Model({
+              token: $.cookie("token"), 
+              body: $("textarea.content").val(), 
+              body_effect: 0, 
+              uid_from: $.cookie("uid"), 
+              top: 0, 
+              left: 0, 
+              width: 300, 
+              height: 200, 
+              data_url: photo_data_url, 
+              photo_effect: 0, 
+              postcard_effect: 0, 
+              status: 1, // indicating this postcard is sent and unread 
+              mail: $("input[name=email]").val(),
+              pid: response,
+              public_card: 0
+            });
 
-          // renew the locally stored data
-          localStorage.setItem('all_postcard', app.router.allPos.toJSON());
+            // adding the new postcard into collections
+            app.router.allPos.add(new_postcard);
+            app.router.draPos.add(new_postcard);
 
-          // going back to draft list
-          app.router.go("compose");
-        },
-        error: function(error){
-          alert("Oops! An error occured! :(");
-        }
-      });
+            // renew the locally stored data
+            localStorage.setItem('all_postcard', app.router.allPos.toJSON());
+
+            // going back to draft list
+            app.router.go("wall");
+          },
+          error: function(error){
+            alert("Oops! An error occured! :(");
+          }
+        });
+      }
     },
 
     goBack: function(ev){
@@ -530,6 +535,31 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
     },
 
     afterRender: function(){
+
+      alert("start geolocation");
+      // detecting geo-location
+      if(navigator.geolocation){
+        console.log("1");
+        navigator.geolocation.getCurrentPosition(function(position){
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+          console.log("2");
+          var geocoder = new google.maps.Geocoder();
+
+          console.log("3");
+          var latlng = new google.maps.LatLng(lat, lng);
+          geocoder.geocode({'latLng': latlng}, function(results, status){
+            if (status == google.maps.GeocoderStatus.OK) {
+              if (results[1]) {
+                alert(results[0].formatted_address);
+              }
+            } 
+          });
+        }, function(){
+          alert("Sorry we cannot find your location right now :(");
+        });
+      }
+
       var postcard = $(this.el).find('.container');
       var postcardH = postcard.height();
       var postcardW = postcardH*1.5;
@@ -592,29 +622,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         });
       };
       reader.readAsDataURL(photo);
-
-      // detecting geo-location
-      if(navigator.geolocation){
-        console.log("1");
-        navigator.geolocation.getCurrentPosition(function(position){
-          var lat = position.coords.latitude;
-          var lng = position.coords.longitude;
-          console.log("2");
-          var geocoder = new google.maps.Geocoder();
-
-          console.log("3");
-          var latlng = new google.maps.LatLng(lat, lng);
-          geocoder.geocode({'latLng': latlng}, function(results, status){
-            if (status == google.maps.GeocoderStatus.OK) {
-              if (results[1]) {
-                alert(results[0].formatted_address);
-              }
-            } 
-          });
-        }, function(){
-          alert("Sorry we cannot find your location right now :(");
-        });
-      }
     };
 
     function convertImageToCanvas(image){
