@@ -470,12 +470,12 @@ ul.postcardDraftList {
 
 /* display */
 
-.layout.viewpostcard .options{
+.layout .options{
     margin-left: 10%;
     padding: 50px 0 30px 0;
 }
 
-.layout.viewpostcard .options a{
+.layout .options a{
 	color: white;
 	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
 	float:left;
@@ -484,14 +484,14 @@ ul.postcardDraftList {
 	padding: 0 10px 0 10px;
 }
 
-.layout.viewpostcard .options a:first-child{
+.layout .options a:first-child{
 	padding-left: 0;
 }
 
-.layout.viewpostcard .options a:last-child{
-	color: red;
+.layout .options a:last-child{
 	border-right: none;
 }
+
 
 #displaypostcard{
 	width: 100%;
@@ -564,8 +564,13 @@ ul.postcardDraftList {
     position: relative;
 }
 
-.create.textcontrol{
+.create.textcontrol,
+.create.photocontrol{
 	height: 20%;
+}
+
+.create.photocontrol{
+	display: none;
 }
 
 .create.postcard.container {
