@@ -171,7 +171,8 @@ define([
         "column-gap" : "",
         "-webkit-column-gap" : "",
         "-moz-column-gap" : "",
-        "height" : containerHeight + ""
+        "height" : containerHeight + "",
+        "-webkit-column-width": w+"";
       });
       allPostcard.height(containerHeight);
       allPostcard.width(postcardW);
@@ -189,7 +190,8 @@ define([
         "column-gap" : "0",
         "-webkit-column-gap" : "0",
         "-moz-column-gap" : "0",
-        "height" : h*2 + ""
+        "height" : h*2 + "",
+        "-webkit-column-width": w+"";
       });
 
       $('.postcardWallList>li').css("float", "none");
