@@ -171,7 +171,7 @@ define([
 
    
     resizePostcard: function(){
-
+      
   }
 });
 
