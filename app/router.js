@@ -187,9 +187,10 @@ current.setScroller('postcardList');
         }).render().then(function(el){
           current.setScroller('displaypostcard');
         });        
-
-
-
+}else if(type=="archive"){
+  app.useLayout("viewarchive").setViews({
+    '.viewPostcard' : new Postcard.Views.Detail({model:this.allPos.get(id)})
+  }).render();
     }else{
         app.useLayout("viewpostcard").setViews({
           '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})

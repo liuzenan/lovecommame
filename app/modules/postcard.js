@@ -798,17 +798,24 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         $("#canvasWrapper").css("z-index", "0")
       });
 
+      console.log(this.model);
+      console.log(this.model.get("status"));
 
-      if(this.model.status==1){
+      if(this.model.get("status")==0){
+        $("#canvasWrapper").children().remove();
         var newimage = new Image();
-        newimage.src = this.model.photo.uri;
+        newimage.src = "/" + this.model.get("photo").uri;
         console.log(newimage.src);
         var thiscanvas = convertImageToCanvas(newimage);
+        $("#uploadimage").addClass("small");
+        $("#uploadimage").html("Change");
         $("#canvasWrapper").append(thiscanvas);
         $(".preset-button").removeAttr("disabled");
         $(".preset-button").live("click", function(){
             console.log("clicked button");
         });
+
+        $("#canvasWrapper").css("z-index", "0")
 
       };
 
@@ -841,9 +848,15 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       canvas.setAttribute("id","imageCanvas");
       image.onload = function(){
         console.log("width: "+ image.width + " ,height: "+ image.height);
-        canvas.width = image.width;
-        canvas.height = image.height;
-        canvas.getContext("2d").drawImage(image, 0, 0);
+        var wwidth = $("#canvasWrapper").width();
+        var wheight= $("#canvasWrapper").height();
+        canvas.width = wwidth;
+        canvas.height = wheight;
+        if((wwidth/wheight)>(image.width/image.height)){
+          canvas.getContext("2d").drawImage(image, 0, 0, wwidth, (wwidth/image.width)*image.height);
+        }else{
+          canvas.getContext("2d").drawImage(image, 0, 0, (wheight/image.height)*image.width, wheight);
+        }
         console.log(canvas.getContext("2d").getImageData(0,0, 20, 20));
       };
       return canvas;

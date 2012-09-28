@@ -902,15 +902,23 @@ ul.postcardArchiveList {
 
 .postcardArchiveList li {
     float: left;
-    width: 50%;
+    width: 150px;
+    height: 100px;
+    margin: 10px;
+}
+.archive.postcardcontainer {
+    background: url("../img/bg_letter.png") repeat scroll 0 0 transparent !important;
+    display: block;
+    height: 100%;
+    padding: 5px;
+    position: relative;
+    width: 100%;
 }
 
-.archive.postcard.container {
-    float: left;
-    margin: 0 2% 0 8%;
-    width: 70%;
+.archive.frontface {
+    height: 100%;
+    width: 100%;
 }
-
 .postcardArchiveList form {
     display: block;
     float: left;
