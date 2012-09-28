@@ -53,6 +53,7 @@ define([
             current.scroller=null;
           }
           current.scroller = new iScroll('postcardList', {
+            useTransform: false,
             vScroll: false,
             vScrollbar: false
           });
@@ -81,6 +82,7 @@ define([
             }
 
             current.scroller = new iScroll('postcardList', {
+              useTransform: false,
               vScroll: false,
               vScrollbar: false
             });
@@ -102,6 +104,7 @@ define([
             current.scroller=null;
           }
           current.scroller = new iScroll('postcardList', {
+            useTransform: false,
             vScroll: false,
             vScrollbar: false
           });
@@ -118,6 +121,7 @@ define([
             }
 
             current.scroller = new iScroll('postcardList', {
+              useTransform: false,
               vScroll: false,
               vScrollbar: false
             });
@@ -179,6 +183,7 @@ define([
           current.scroller=null;
         }
         current.scroller = new iScroll('composeContainer', {
+          useTransform: false,
           vScroll: false,
           vScrollbar: false,
           hScrollbar: false
@@ -207,6 +212,7 @@ define([
         }
 
         current.scroller = new iScroll('composeContainer', {
+          useTransform: false,
           vScroll: false,
           vScrollbar: false,
           hScrollbar: false
