@@ -345,9 +345,17 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
     saveNew: function(ev){
       var photo = $("#imageCanvas").get(0);
-      var photo_data_url = photo.toDataURL(); // store data url for the image
-      var photo_height = photo.height;
-      var photo_width = photo.width;
+
+      if(photo != undefined && photo.title != undefined){
+        var photo_data_url = photo.toDataURL(); // store data url for the image
+        var photo_height = photo.height;
+        var photo_width = photo.width;
+      }
+      else{
+        var photo_data_url = null;
+        var photo_height = 0;
+        var photo_width = 0;
+      }
 
       // if the user is currently logged in online
       if($.cookie("token") != null && $.cookie("uid") != null){
@@ -369,7 +377,9 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             photo_effect: 0, 
             postcard_effect: 0, 
             status: 0, // indicating this postcard is sent and unread 
-            mail: $("input[name=email]").val()},
+            mail: $("input[name=email]").val(),
+            public: 0},
+
 
           success: function(response){
             alert(response);
@@ -389,7 +399,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
               postcard_effect: 0, 
               status: 0, // indicating this postcard is draft only 
               mail: $("input[name=email]").val(),
-              pid: response
+              pid: response,
+              public: 0
             });
 
             alert("adding new postcard to collection");
@@ -427,6 +438,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           postcard_effect: 0, 
           status: 0, // indicating this postcard is draft only 
           mail: $("input[name=email]").val(),
+          public: 0,
           pid: -1
         });
 
@@ -446,8 +458,13 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
     uploadNew: function(ev){
 
       var photo = $("#imageCanvas").get(0);
-      var photo_data_url = photo.toDataURL(); // store data url for the image
-
+      
+      if(photo != undefined && photo.title != undefined){
+        var photo_data_url = photo.toDataURL(); // store data url for the image
+      }
+      else{
+        var photo_data_url = null;
+      }
       // sending the postcard as the completed version
       // top, left, width, height, photo_effect would all
       // be applied already. no need to specify
@@ -467,7 +484,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           photo_effect: 0, 
           postcard_effect: 0, 
           status: 1, // indicating this postcard is sent and unread 
-          mail: $("input[name=email]").val()},
+          mail: $("input[name=email]").val(),
+          public: 0},
 
         success: function(response){
           alert(response);
@@ -487,7 +505,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             postcard_effect: 0, 
             status: 1, // indicating this postcard is sent and unread 
             mail: $("input[name=email]").val(),
-            pid: response
+            pid: response,
+            public: 0
           });
 
           // adding the new postcard into collections
@@ -553,7 +572,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         uploadPhoto(e.target.files)
       });
 
-
       function uploadPhoto(files){
         console.log("uploadphoto");
         var photo = files[0];
@@ -574,6 +592,29 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         });
       };
       reader.readAsDataURL(photo);
+
+      // detecting geo-location
+      if(navigator.geolocation){
+        console.log("1");
+        navigator.geolocation.getCurrentPosition(function(position){
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+          console.log("2");
+          var geocoder = new google.maps.Geocoder();
+
+          console.log("3");
+          var latlng = new google.maps.LatLng(lat, lng);
+          geocoder.geocode({'latLng': latlng}, function(results, status){
+            if (status == google.maps.GeocoderStatus.OK) {
+              if (results[1]) {
+                alert(results[0].formatted_address);
+              }
+            } 
+          });
+        }, function(){
+          alert("Sorry we cannot find your location right now :(");
+        });
+      }
     };
 
     function convertImageToCanvas(image){
