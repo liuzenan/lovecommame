@@ -31,7 +31,7 @@ function(app, Backbone){
 
 				$.ajax({
 				  	type: "POST",
-				  	url: "../api.php/user/login",
+				  	url: "http://54.251.37.19/api.php/user/login",
 				  	data: {uname: $("input[name=username]").val(), pass: window.btoa($("input[name=password]").val())},
 				  	
 				  	// if successful
@@ -136,7 +136,7 @@ function(app, Backbone){
 				else{
 					$.ajax({
 					  	type: "POST",
-					  	url: "../api.php/user/",
+					  	url: "http://54.251.37.19/api.php/user/",
 					  	data: {uname: $("input[name=username]").val(), mail: $("input[name=email]").val(), pass: window.btoa($("input[name=password]").val())},
 					  	
 					  	// if successful

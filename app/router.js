@@ -81,12 +81,16 @@ define([
 
       });
 
-      this.recPos.fetch({
-        success:function(){
-        current.setScroller('postcardList');
-        }
-      });
-
+      if($.cookie("uid") != null && $.cookie("token") != null){
+        this.recPos.fetch({
+          success:function(){
+            current.setScroller('postcardList');
+          }
+        });
+      }
+      else{
+        alert("received");
+      }  
     },
 
     setScroller : function(wrapper){
@@ -115,12 +119,17 @@ current.setScroller('postcardList');
         $(".navigation>a").removeClass("current");
         $("#btnsent").addClass("current");
       });
-      this.senPos.fetch({
-        success:function(){
-current.setScroller('postcardList');
-        }
-      });
 
+      if($.cookie("uid") != null && $.cookie("token") != null){
+        this.senPos.fetch({
+          success:function(){
+            current.setScroller('postcardList');
+          }
+        });
+      }
+      else{
+        alert("sentwall");
+      }
     },
 
     publicWall : function(){
@@ -137,11 +146,17 @@ current.setScroller('postcardList');
       }).render();
       console.log("archive render");
       console.log(this.arcPos);
-      this.arcPos.fetch({
-        success : function(){
-          console.log(current.arcPos.models);
-        }
-      });
+
+      if($.cookie("uid") != null && $.cookie("token") != null){
+        this.arcPos.fetch({
+          success : function(){
+            console.log(current.arcPos.models);
+          }
+        });
+      }
+      else{
+        alert("archive");
+      }  
     },
 
     viewPostcard: function(id){
@@ -165,18 +180,25 @@ current.setScroller('postcardList');
       var seen = {};
       $('.postcardDraftList>li').each(function() {
         var txt = $(this).html();
-        if (seen[txt])
+        if (seen[txt]){
           $(this).remove();
-        else
+        }
+        else{
           seen[txt] = true;
+        }
       });
     });
 
-      this.draPos.fetch({
-        success:function(){
-      current.setScroller('composeContainer');
-    }
-  });
+      if($.cookie("uid") != null && $.cookie("token") != null){
+        this.draPos.fetch({
+          success:function(){
+            current.setScroller('composeContainer');
+          }
+        });
+      }
+      else{
+        alert("draft");
+      }  
     },
 
     composeText: function(id){
