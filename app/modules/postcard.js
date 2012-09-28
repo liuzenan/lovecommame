@@ -277,6 +277,12 @@ Postcard.Views.DraftItem = Backbone.View.extend({
 });
 
 
+Postcard.Views.PublicList = Postcard.Views.List.extend({
+  className: "postcardPublic",
+  
+});
+
+
 Postcard.Views.DraftList = Postcard.Views.List.extend({
   className: "postcardDraftList clearfix",
 
@@ -300,9 +306,11 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       buttonV = 240;
       buttonH = buttonV/1.5;
     }
-    $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
-    $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
-    $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
+      $("a.compose.new").css("height", buttonH+"");
+      $("a.compose.new").css("width", buttonV+"");
+      $("ul.postcardDraftList li").height(buttonH);
+      $("ul.postcardDraftList li").width(buttonV);
+      $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
   }
 });
 

@@ -52,6 +52,10 @@ html,body, #main{
 	padding: 0;
 }
 
+p.address{
+	word-wrap: break-word;
+}
+
 html{
 	background: url(../img/basic_background.gif) no-repeat center center fixed; 
 	-webkit-background-size: cover;
@@ -130,6 +134,11 @@ ul{
 
 .navigation a.current{
 	color: white;
+}
+
+body{
+	font-family: Georgia, serif;
+	color: black;
 }
 
 footer{
@@ -298,14 +307,15 @@ footer{
 	overflow: visible;
 }
 
-p.wall.postcard.text {
+p.wall.postcard.text,
+p.sent.postcard.text{
     color: #222222;
     display: block;
     font-size: 12px;
-    margin-left: 10%;
-    margin-top: 40%;
+	padding-top: 30%;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 200;
+    text-align: center;
 }
 
 
@@ -347,6 +357,7 @@ p.wall.postcard.text {
 }
 
 .postcard.image{
+	background: white;
 	width: 100%;
 	height: 100%;
 }
@@ -360,6 +371,7 @@ p.wall.postcard.text {
 	-o-backface-visibility: hidden;
 	backface-visibility: hidden;
 	background: white;
+	padding: 10px;
 }
 
 .postcard.back.face  {
@@ -389,13 +401,32 @@ p.wall.postcard.text {
 	background-size: 100% 100%;
 }
 
-.front.face{
-	background-color: white !important;
+.display.face,
+.read.face,
+.create.face,
+.sent.face,
+.public.face{
+	background: url(../img/bg_letter.png) !important;
+}
+
+.sent.backwrap{
+	width: 100%;
+	height: 100%;
+	background: white;
 }
 
 .back.face{
 	background-color: white !important;
 }
+
+/* view postcard */
+
+.display.postcard.text{
+	color: black;
+	font-family: Georgia, serif;
+	text-align: left;
+}
+
 
 /* compose */
 
@@ -503,6 +534,8 @@ ul.postcardDraftList {
     width: 100%;
 }
 
+
+
 /* compose text */
 
 .layout.create{
@@ -572,26 +605,34 @@ ul.postcardDraftList {
 	display: none;
 }
 
-.create.postcard.container {
+.create.postcard.container{
     height: 100%;
     margin: 0 10%;
     padding-right: 100px;
 }
 
-.create.postcard.card {
+
+.display.postcard.container{
+	padding-right: 100px;
+}
+
+.create.postcard.card,
+.display.postcard.card {
     height: 94%;
     margin: 2% 0;
     width: 100%;
 }
 
-.create.postcard.front.face {
+.create.postcard.front.face,
+.display.postcard.front.face {
     padding: 2%;
     width: 100%;
     height: 100%;
 }
 
 
-.create.postcard.textWrap {
+.create.postcard.textWrap,
+.display.postcard.textWrap {
     border-right: 1px solid black;
     float: left;
     height: 100%;
@@ -631,30 +672,38 @@ ul.postcardDraftList {
 }
 
 
-.postcard.content.style1{
+.postcard.content.style1,
+.postcard.text.style1{
 	text-align: center;
 	font-family: "Times New Roman", Times, serif;
 	color: #666;
 }
 
 
-.postcard.content.style2{
+.postcard.content.style2,
+.postcard.text.style2{
 	font-family: "MS Sans Serif", Geneva, sans-serif;
 	color: #777;
 }
 
 
-.postcard.content.style3{
+.postcard.content.style3,
+.postcard.text.style3{
 	font-family: Georgia, serif;
 	color: #777;
 }
 
 
-.postcard.content.style4{
+.postcard.content.style4,
+.postcard.text.style4{
 	font-family: "Palatino Linotype", serif;
 	color: #777;
 }
 
+.display.postcard.addressWrap{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
 
 p.create {
     height: 10%;
@@ -712,7 +761,8 @@ p.create {
 
 
 
-.create.postcard.addressWrap {
+.create.postcard.addressWrap,
+.display.postcard.addressWrap {
     height: 100%;
     padding-left: 2%;
     width: 40%;
