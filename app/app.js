@@ -3,7 +3,6 @@ define([
   "jquery",
   "lodash",
   "backbone",
-  "gmap",
 
   // Plugins.
   "plugins/backbone.layoutmanager",
@@ -11,7 +10,8 @@ define([
   "plugins/iscroll",
   "plugins/jquery.cookie",
   "plugins/jgestures",
-  "plugins/pixastic"
+  "plugins/pixastic",
+  "plugins/gmap"
 ],
 
 function($, _, Backbone) {
