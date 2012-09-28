@@ -49,12 +49,8 @@ define([
       if($.cookie("token") != null && $.cookie("uid") != null){
         this.allPos.fetch();
       }
-      else{
-        alert("use localStorage");
-        
+      else{        
         this.allPos = JSON.parse(localStorage.getItem("all_postcard"));
-
-        alert(this.allPos.length);
         alert(this.allPos);
       }
       var current = this;
@@ -86,11 +82,8 @@ define([
         });
       }
       else{
-        alert("get received from local");
-
-        alert(this.allPos.length);
-        alert(this.allPos);
-        alert(this.allPos.get(1));
+        alert(JSON.stringify(this.allPos));
+        alert(this.allPos.where({status: 1}));
       }  
     },
 
