@@ -97,7 +97,6 @@ define([
             current.scroller=null;
           }
           current.scroller = new iScroll(wrapper, {
-            useTransform: false,
             vScroll: false,
             vScrollbar: false,
             hScrollbar:false

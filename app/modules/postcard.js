@@ -188,7 +188,8 @@
 
    
     resizePostcard: function(){
-    }
+      
+  }
 });
 
 Postcard.Views.ArchiveItem = Backbone.View.extend({
