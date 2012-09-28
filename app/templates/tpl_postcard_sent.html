@@ -1,10 +1,10 @@
 <div class="sent postcard container">
-		<a class="sent postcard card" href="#postcard/<%= pid %>">
+		<a class="sent postcard card" href="#postcard/sent/<%= pid %>">
 			<div class="sent postcard front face">
 				<img class="sent postcard image" src="/<%= photo.uri %>" alt=""/>
 			</div>
 			<div class="sent postcard back face">
-				<p class="sent postcard text">send to: <%= uid_to.uname %></p>
+				<p class="sent postcard text">send to: <% if (type==0) {%> <%= mail_to%>  <% }else{ %>  <%= uid_to.name %> <% } %> </p>
 			</div>
 	 	</a>
 </div>
