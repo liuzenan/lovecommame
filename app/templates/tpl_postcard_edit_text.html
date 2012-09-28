@@ -7,6 +7,7 @@
 	<div class="create postcard container">
 		<div class="create postcard card">
 			<div class="create postcard front face style<% if(status==0){%><%= body.body_effect %><% } %> clearfix">
+				<div class="create postcard backwrap">
 				<form class="create postcard textWrap">
 					<textarea name="content" class="create postcard content style<% if(status==0){%><%= body.body_effect %><% } %>" placeholder="Dear friend:"><% if(status==0){%><%= body.content %><% } %></textarea>
 					<p class="create postcard text signature">Love, me</p>
@@ -18,6 +19,7 @@
 					<label for="name">Send to:</label>
 					<input type="text" name="name" placeholder="Name">
 					<input type="email" name="email" placeholder="Email address">
+				</div>					
 				</div>
 			</div>
 			<div class="create postcard back face">
