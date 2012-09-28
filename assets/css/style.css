@@ -928,4 +928,15 @@ ul.postcardArchiveList {
 
 #archiveList {
     padding-bottom: 10%;
+    margin-top: 80px;
+}
+
+
+.share{
+	position: absolute;
+right: 0;
+top: 0;
+margin-right: 30%;
+margin-top: 50px;
+z-index: 9999;
 }
