@@ -55,7 +55,7 @@ define([
         this.allPos = JSON.parse(localStorage.getItem("all_postcard"));
 
         alert(this.allPos.length);
-        alert(localStorage.getItem("all_postcard"));
+        alert(this.allPos);
       }
       var current = this;
       app.useLayout("wall").setViews({
@@ -88,14 +88,9 @@ define([
       else{
         alert("get received from local");
 
+        alert(this.allPos.length);
         alert(this.allPos);
-
-        var unread = this.allPos.where({status: 1, uid_to: $.cookie("uid")});
-        var read = this.allPos.where({status: 2, uid_to: $.cookie("uid")});
-
-        alert(unread);
-        alert(read);
-        this.recPos = unread.concat(read);
+        alert(this.allPos.get(1));
       }  
     },
 

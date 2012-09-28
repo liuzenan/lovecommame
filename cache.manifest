@@ -59,6 +59,7 @@ assets/js/plugins/jquery.cookie.js
 assets/js/plugins/pixastic.js
 assets/vendor/h5bp/css/style.css
 assets/font/Rancho-Regular.ttf
+assets/js/plugins/gmap.js
 
 NETWORK:
 ../api.php
