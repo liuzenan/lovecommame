@@ -142,7 +142,13 @@ function(app, Backbone){
 						},
 						// callback handler that will be called on error
 						error: function(jqXHR, textStatus, errorThrown){
-						    alert("Sorry we cannot sign you up right now!")
+							// check server response to see if the email is registered
+							if(errorThrown == "Internal Server Error"){
+								alert("The email is registered!");
+							}
+							else{
+								alert("Oops! An error occured! :(");
+							}
 						},
 						// callback handler that will be called on completion
 						// which means, either on success or error

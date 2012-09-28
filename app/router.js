@@ -49,7 +49,9 @@ define([
         this.allPos.fetch();
       }
       else{
+        alert("use localStorage");
         
+        this.allPos = JSON.parse(localStorage.getItem("all_postcard"));
       }
       var current = this;
       app.useLayout("wall").setViews({

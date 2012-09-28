@@ -55,7 +55,13 @@ define([
 
   Postcard.Collection.Wall = Postcard.Collection.extend({
     parse: function(object){
-      return object.unread.concat(object.read);
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        return object.unread.concat(object.read);
+      }
+      else{
+        // to be completed
+        var unread = app.router.allPos.where({status: 1});
+      }
     }
   });
 
@@ -86,7 +92,7 @@ define([
       var temp = object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft);
 
       // store postcard collection locally
-      localStorage.setItem('all_postcard', temp.toJSON());
+      localStorage.setItem('all_postcard', JSON.stringify(temp));
 
       return temp;
     }
@@ -279,6 +285,103 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
     events: {
       "click .send" : "uploadNew",
       "click .discard" : "goBack"
+      "click .save" : "saveNew"
+    },
+
+    saveNew: function(ev){
+      var photo = $("#imageCanvas").get(0);
+      var photo_data_url = photo.toDataURL(); // store data url for the image
+      var photo_height = photo.height;
+      var photo_width = photo.width;
+
+      // if the user is currently logged in online
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        // save the postcard as a draft version
+        // top, left, width, height, photo_effect should be recorded
+        $.ajax({
+          type: "POST",
+          url: "http://54.251.37.19/api.php/postcard/",
+          data: {
+            token: $.cookie("token"), 
+            body: $("textarea.content").val(), 
+            body_effect: 0, 
+            uid_from: $.cookie("uid"), 
+            top: 0, 
+            left: 0, 
+            width: photo_width, 
+            height: photo_height, 
+            data_url: photo_data_url, 
+            photo_effect: 0, 
+            postcard_effect: 0, 
+            status: 0, // indicating this postcard is sent and unread 
+            mail: $("input[name=email]").val()},
+
+          success: function(response){
+            alert(response);
+            
+            // add postcard into draft collection
+            var new_postcard = new Postcard.Model({
+              token: $.cookie("token"), 
+              body: $("textarea.content").val(), 
+              body_effect: 0, 
+              uid_from: $.cookie("uid"), 
+              top: 0, 
+              left: 0, 
+              width: photo_width, 
+              height: photo_height, 
+              data_url: photo_data_url, 
+              photo_effect: 0, 
+              postcard_effect: 0, 
+              status: 0, // indicating this postcard is draft only 
+              mail: $("input[name=email]").val(),
+              pid: response
+            });
+
+            // adding the new draft into collections
+            app.router.allPos.add(new_postcard);
+            app.router.draPos.add(new_postcard);
+
+            // renew the locally stored data
+            localStorage.setItem('all_postcard', app.router.allPos.toJSON());
+
+            // going back to draft list
+            app.router.go("compose");
+          },
+          error: function(error){
+            alert("Oops! An error occured! :(");
+          }
+        });
+      }
+      else{
+        // add postcard into draft collection with a dummy pid
+        var new_postcard = new Postcard.Model({
+          token: $.cookie("token"), 
+          body: $("textarea.content").val(), 
+          body_effect: 0, 
+          uid_from: $.cookie("uid"), 
+          top: 0, 
+          left: 0, 
+          width: photo_width, 
+          height: photo_height, 
+          data_url: photo_data_url, 
+          photo_effect: 0, 
+          postcard_effect: 0, 
+          status: 0, // indicating this postcard is draft only 
+          mail: $("input[name=email]").val(),
+          pid: -1
+        });
+
+        // adding the new draft into collections
+        app.router.allPos.add(new_postcard);
+        app.router.draPos.add(new_postcard);
+
+        // renew the locally stored data
+        localStorage.setItem('all_postcard', app.router.allPos.toJSON());
+
+        // going back to draft list
+        app.router.go("compose");
+      }
+
     },
 
     uploadNew: function(ev){
@@ -330,13 +433,16 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
           // adding the new postcard into collections
           app.router.allPos.add(new_postcard);
-          app.router.senPos.add(new_postcard);
+          app.router.draPos.add(new_postcard);
+
+          // renew the locally stored data
+          localStorage.setItem('all_postcard', app.router.allPos.toJSON());
 
           // going back to draft list
           app.router.go("compose");
         },
         error: function(error){
-          alert("An error occured! :(");
+          alert("Oops! An error occured! :(");
         }
       });
     },
@@ -379,7 +485,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
           if (target.tagName!='BUTTON' && target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
             e.preventDefault();
-        }});
+        }
+      });
 
       $("#imageinput").live('change', function(e){
         console.log("inside change");
@@ -394,48 +501,37 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         var reader = new FileReader();
         var newimage = new Image();
         reader.onload = function(e){
-    //console.log(e.target.result);
-    newimage.src = e.target.result;
-    $("#uploadimage").addClass("small");
-    $("#uploadimage").html("Change");
+          //console.log(e.target.result);
+          newimage.src = e.target.result;
+          $("#uploadimage").addClass("small");
+          $("#uploadimage").html("Change");
 
-    var thiscanvas = convertImageToCanvas(newimage);
-    $("#canvasWrapper").append(thiscanvas);
-    $(".preset-button").removeAttr("disabled");
+          var thiscanvas = convertImageToCanvas(newimage);
+          $("#canvasWrapper").append(thiscanvas);
+          $(".preset-button").removeAttr("disabled");
 
-    $(".preset-button").live("click", function(){
-      console.log("clicked button");
+          $(".preset-button").live("click", function(){
+            console.log("clicked button");
+        });
+      };
+      reader.readAsDataURL(photo);
+    };
 
-      
-    });
-
-  };
-  reader.readAsDataURL(photo);
-};
-
-function convertImageToCanvas(image) {
-  console.log("convert to image");
-  var canvas = document.createElement("canvas");
-  canvas.className = "imageCanvas"
-  canvas.setAttribute("id","imageCanvas")
-  image.onload = function(){
-    console.log("width: "+ image.width + " ,height: "+ image.height);
-    canvas.width = image.width;
-    canvas.height = image.height;
-    canvas.getContext("2d").drawImage(image, 0, 0);
-    console.log(canvas.getContext("2d").getImageData(0,0, 20, 20));
+    function convertImageToCanvas(image){
+      console.log("convert to image");
+      var canvas = document.createElement("canvas");
+      canvas.className = "imageCanvas";
+      canvas.setAttribute("id","imageCanvas");
+      image.onload = function(){
+        console.log("width: "+ image.width + " ,height: "+ image.height);
+        canvas.width = image.width;
+        canvas.height = image.height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        console.log(canvas.getContext("2d").getImageData(0,0, 20, 20));
+      };
+      return canvas;
+    }
   }
-
-  return canvas;
-}
-
-}
-
-
-});
-
-Postcard.Views.Send = Backbone.View.extend({
-
 });
 
   // Required, return the module for AMD compliance
