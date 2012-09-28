@@ -340,7 +340,17 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
     events: {
       "click .send" : "uploadNew",
       "click .discard" : "goBack",
-      "click .save" : "saveNew"
+      "click .save" : "saveNew",
+      "click .textstyle" : "changeStyle"
+    },
+
+    changeStyle: function(ev){
+      var currentbutton = ev.target;
+      console.log(currentbutton);
+      var currentStyle = $(ev.targert).attr("id");
+      $(".create.postcard.front.face").removeClass("style1").removeClass("style2").removeClass("style3").removeClass("style4").addClass(currentStyle);
+      $(".stamp").removeClass("style1").removeClass("style2").removeClass("style3").removeClass("style4").addClass(currentStyle);
+      $(".chop").removeClass("style1").removeClass("style2").removeClass("style3").removeClass("style4").addClass(currentStyle);
     },
 
     saveNew: function(ev){
