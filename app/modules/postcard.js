@@ -46,7 +46,7 @@
 
   Postcard.Collection = Backbone.Collection.extend({
     url : function(){
-      return "../api.php/user/" + $.cookie("uid") + "?token=" + $.cookie("token");
+      return "http://54.251.37.19/api.php/user/" + $.cookie("uid") + "?token=" + $.cookie("token");
     },
     cache: false,
     model: Postcard.Model
