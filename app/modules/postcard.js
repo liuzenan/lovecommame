@@ -277,6 +277,12 @@ Postcard.Views.DraftItem = Backbone.View.extend({
 });
 
 
+Postcard.Views.PublicList = Postcard.Views.List.extend({
+  className: "postcardPublic",
+  
+});
+
+
 Postcard.Views.DraftList = Postcard.Views.List.extend({
   className: "postcardDraftList clearfix",
 
