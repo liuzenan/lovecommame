@@ -717,8 +717,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
         }, function(){
           alert("Sorry we cannot find your location right now :(");
         });
-*/      }
-
+      }
+*/
       var postcard = $(this.el).find('.create.postcard.container');
       var postcardH = postcard.height();
       var postcardW = postcardH*1.5;
