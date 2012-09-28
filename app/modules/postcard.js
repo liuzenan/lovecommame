@@ -1,4 +1,4 @@
-define([
+  define([
   "app",
 
   // Libs
@@ -70,34 +70,51 @@ define([
   //to be implemented
   Postcard.Collection.Archive = Postcard.Collection.extend({
     parse: function(object){
-      return object.archived;
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        return object.archived;
+      }
+      else{
+        // get from all postcard collection
+      }
     }
   });
 
   //TODO
   Postcard.Collection.Sent = Postcard.Collection.extend({
     parse: function(object){
-      return object.sent;
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        return object.sent;
+      }
+      else{
+        // get from all postcard collection
+      }
     }
   });
 
   //TODO
   Postcard.Collection.Draft = Postcard.Collection.extend({
     parse: function(object){
-      return object.draft;
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        return object.draft;
+      }
+      else{
+        // get from all postcard collection
+      }
     }
   });
 
   //TODO
   Postcard.Collection.All = Postcard.Collection.extend({
     parse: function(object){
-      var temp = object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft);
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        var temp = object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft);
 
-      // store postcard collection locally
-      localStorage.setItem('all_postcard', JSON.stringify(temp));
-      alert(JSON.stringify(temp));
+        // store postcard collection locally
+        localStorage.setItem('all_postcard', JSON.stringify(temp));
+        alert(JSON.stringify(temp));
 
-      return temp;
+        return temp;
+      }
     }
   });
 
@@ -186,7 +203,7 @@ define([
         "-webkit-column-gap" : "",
         "-moz-column-gap" : "",
         "height" : containerHeight + "",
-        "-webkit-column-width": w+"";
+        "-webkit-column-width": w+""
       });
       allPostcard.height(containerHeight);
       allPostcard.width(postcardW);
@@ -205,7 +222,7 @@ define([
         "-webkit-column-gap" : "0",
         "-moz-column-gap" : "0",
         "height" : h*2 + "",
-        "-webkit-column-width": w+"";
+        "-webkit-column-width": w+""
       });
 
       $('.postcardWallList>li').css("float", "none");
