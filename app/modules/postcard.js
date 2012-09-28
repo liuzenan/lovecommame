@@ -300,9 +300,11 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       buttonV = 240;
       buttonH = buttonV/1.5;
     }
-    $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
-    $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
-    $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
+      $("a.compose.new").css("height", buttonH+"");
+      $("a.compose.new").css("width", buttonV+"");
+      $("ul.postcardDraftList li").height(buttonH);
+      $("ul.postcardDraftList li").width(buttonV);
+      $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
   }
 });
 
@@ -325,11 +327,29 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       });
 
       // select delete button
-      $('a[value="delete"]').bind("click", function(e){
-        jQuery.alerts.okButton = ' Yes ';
-        jQuery.alerts.cancelButton = ' No ';                  
-        jConfirm('Do you want to delete this postcard?','', function(r){});
+      $('a[title="archive"]').bind("click", function(e){
+        $.ajax({
+          type: "PUT",
+          url: "http://54.251.37.19/api.php/postcard/" + $(".display.postcard.container").attr("data-pid") + "/archive/",
+          data: {token: $.cookie("token")},
+          success: function(ev){
+            alert("marked as read");
+          }
+        });
       });
+
+      alert(JSON.stringify(this.model));
+      // mark as read if the postcard used to be unread
+      if(this.model.get("status") == 1){
+        $.ajax({
+          type: "PUT",
+          url: "http://54.251.37.19/api.php/postcard/" + this.model.get("pid") + "/read/",
+          data: {token: $.cookie("token")},
+          success: function(ev){
+            alert("marked as read");
+          }
+        });
+      }
     }
   });
 
@@ -662,15 +682,11 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       alert("start geolocation");
       // detecting geo-location
       if(navigator.geolocation){
-        console.log("1");
         navigator.geolocation.getCurrentPosition(function(position){
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
-          console.log("2"); 
-          var geocoder = new window.google.maps.Geocoder();
-
-          console.log("3");
-          var latlng = new window.google.maps.LatLng(lat, lng);
+          var geocoder = new google.maps.Geocoder();
+          var latlng = new google.maps.LatLng(lat, lng);
           geocoder.geocode({'latLng': latlng}, function(results, status){
             if (status == window.google.maps.GeocoderStatus.OK) {
               if (results[1]) {
