@@ -24,47 +24,57 @@ function(app, Backbone){
 		},
 
 		login: function(ev){
-			// disable inputs when 
-			$inputs = $(this).find("input, select, button, textarea");
-			$inputs.prop("disabled", true);
+			if(navigator.onLine){
+				// disable inputs when 
+				$inputs = $(this).find("input, select, button, textarea");
+				$inputs.prop("disabled", true);
 
-			$.ajax({
-			  	type: "POST",
-			  	url: "../api.php/user/login",
-			  	data: {uname: $("input[name=username]").val(), pass: window.btoa($("input[name=password]").val())},
-			  	
-			  	// if successful
-			  	success: function(response, textStatus, jqXHR){
-			  		// remember username and password if checkbox is checked
-				    if($("input[name=rmbme]").is(':checked')){
-				    	$.cookie("username", $("input[name=username]").val(), {expires: 99});
-				    	$.cookie("password", $("input[name=password]").val(), {expires: 99});
-				    }
-				    else{
-				    	$.cookie("username", null);
-				    	$.cookie("password", null);
-				    }
+				$.ajax({
+				  	type: "POST",
+				  	url: "../api.php/user/login",
+				  	data: {uname: $("input[name=username]").val(), pass: window.btoa($("input[name=password]").val())},
+				  	
+				  	// if successful
+				  	success: function(response, textStatus, jqXHR){
+				  		// remember username and password if checkbox is checked
+					    if($("input[name=rmbme]").is(':checked')){
+					    	$.cookie("username", $("input[name=username]").val(), {expires: 99});
+					    	$.cookie("password", $("input[name=password]").val(), {expires: 99});
+					    }
+					    else{
+					    	$.cookie("username", null);
+					    	$.cookie("password", null);
+					    }
 
-				    // store token in cookie for future usage
-				    var temp = $.parseJSON(response);
+					    // store token in cookie for future usage
+					    var temp = $.parseJSON(response);
 
-				    $.cookie("uid", temp.uid);
-				    $.cookie("token", temp.token);
+					    $.cookie("uid", temp.uid);
+					    $.cookie("token", temp.token);
 
-				    // navigate to the wall page
-				    app.router.go("wall");
-				},
-				// callback handler that will be called on error
-				error: function(jqXHR, textStatus, errorThrown){
-				    alert("Sorry we cannot log you in. Please check your email address or password!")
-				},
-				// callback handler that will be called on completion
-				// which means, either on success or error
-				complete: function(textStatus){
-				    // enable the inputs
-				    $inputs.prop("disabled", false);
-				}
-			});
+					    // navigate to the wall page
+					    app.router.go("wall");
+					},
+					// callback handler that will be called on error
+					error: function(jqXHR, textStatus, errorThrown){
+						alert(textStatus);
+					    alert("Sorry we cannot log you in. Please check your email address or password!")
+					},
+					// callback handler that will be called on completion
+					// which means, either on success or error
+					complete: function(textStatus){
+					    // enable the inputs
+					    $inputs.prop("disabled", false);
+					}
+				});
+			}
+			else{
+				// enter offline mode
+				// navigate to the wall page
+				alert("offline");
+			    app.router.go("wall");
+			}
+			
 			return false; 
 		},
 
@@ -89,7 +99,7 @@ function(app, Backbone){
 					$("input").prop('disabled', true);
 				}
 				else{
-					$("h2").text("Please get internet connection");
+					$("#button").text("No internet or cache available!");
 					$("button").prop("disabled", true);
 				}
 			}
