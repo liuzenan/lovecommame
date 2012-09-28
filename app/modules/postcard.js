@@ -384,12 +384,11 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           url: "http://54.251.37.19/api.php/postcard/" + $(".display.postcard.container").attr("data-pid") + "/archive/",
           data: {token: $.cookie("token")},
           success: function(ev){
-            alert("marked as read");
+            app.router.go("wall");
           }
         });
       });
 
-      alert(JSON.stringify(this.model));
       // mark as read if the postcard used to be unread
       if(this.model.get("status") == 1){
         $.ajax({
@@ -397,7 +396,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           url: "http://54.251.37.19/api.php/postcard/" + this.model.get("pid") + "/read/",
           data: {token: $.cookie("token")},
           success: function(ev){
-            alert("marked as read");
           }
         });
       }
@@ -801,6 +799,18 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       });
 
 
+      if(this.model.status==1){
+        var newimage = new Image();
+        newimage.src = this.model.photo.uri;
+        console.log(newimage.src);
+        var thiscanvas = convertImageToCanvas(newimage);
+        $("#canvasWrapper").append(thiscanvas);
+        $(".preset-button").removeAttr("disabled");
+        $(".preset-button").live("click", function(){
+            console.log("clicked button");
+        });
+
+      };
 
       function uploadPhoto(files){
         console.log("uploadphoto");

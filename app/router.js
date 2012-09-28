@@ -28,9 +28,14 @@ define([
 
     index: function() {
       this.reset();
-      app.useLayout("login").setViews({
-        ".container" : new User.Views.Login({model: this.user})
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        this.go("wall");
+      }else{
+        app.useLayout("login").setViews({
+          ".container" : new User.Views.Login({model: this.user})
       }).render();
+      }
+
     },
 
     signup: function() {
@@ -176,7 +181,7 @@ current.setScroller('postcardList');
           current.setScroller('displaypostcard');
         });        
 
-      }else if(type="public"){
+      }else if(type=="public"){
         app.useLayout("viewpublic").setViews({
           '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
         }).render().then(function(el){
