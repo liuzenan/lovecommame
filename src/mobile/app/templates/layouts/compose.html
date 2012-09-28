@@ -1,0 +1,42 @@
+<div id="composeContainer">
+	<div class="clearfix">
+		<div class="compose new">
+		<h1 class="compose new title">New Postcard</h1>
+		<a class="postcard card compose new" href="#compose/text/0">Compose</a>
+	</div>
+	<div class="compose draft">
+		<h1 class="compose draft title">Saved Drafts</h1>
+		<div class="compose draft container">
+		</div>
+	</div>
+	</div>
+
+</div>
+
+<footer class="footer">
+<div class="navigation clearfix">
+	<a id="btnarchive" href="#archive">Archive</a>
+	<a id="btninbox" href="#wall">Inbox</a>
+	<a id="btnsent" href="#wall/sent">Sent</a>
+	<a id="btnpublic" href="#wall/public">Public</a>
+	<a id="btncompose" href="#compose" class="current">Compose</a>
+</div>
+</footer>
+
+<script type="text/javascript">
+
+	$(window).resize(function(){
+	  var numOfCards = $(".postcardDraftList > li").length;
+      var windowHeight =  $(window).height();
+      var windowWidth = $(window).width();
+      var buttonH = windowHeight*0.36;
+      var buttonV = windowHeight*0.36*1.5;
+      if(buttonV<240){
+        buttonV = 240;
+        buttonH = buttonV/1.5;
+      }
+      $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
+      $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
+      $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
+  });
+</script>

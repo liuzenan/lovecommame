@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" manifest="cache.manifest">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="width">
+  <!-- iOS Device Startup Images -->
+<!-- iPhone/iPod Touch Portrait – 320 x 460 (standard resolution) -->
+<link rel="apple-touch-startup-image" href="assets/img/splash.png" media="screen and (max-device-width: 320px)" />
+
+<!-- iPhone/iPod Touch Portrait – 640 x 920 pixels (high-resolution) -->
+<link rel="apple-touch-startup-image" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" href="assets/img/splash-640.png" />
+
+<!-- For iPad Landscape 1024x748 -->
+  <!-- Note: iPad landscape startup image has to be exactly 748x1024 pixels (portrait, with contents rotated).-->
+<link rel="apple-touch-startup-image" sizes="1024x748" href="assets/img/splash-1024.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" />
+
+<!-- For iPad Portrait 768x1004 -->
+<link rel="apple-touch-startup-image" sizes="768x1004" href="assets/img/splash-768.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)"/> 
+  <link rel="apple-touch-icon" href="assets/img/icon2x.png"/>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <title>Love, me</title>
+  <!-- Application styles. -->
+  <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body>
+  <!-- Main container. -->
+  <div role="main" id="main"></div>
+
+  <!-- Application source. -->
+<script type="text/javascript">
+
+ var _gaq = _gaq || [];
+ _gaq.push(['_setAccount', 'UA-33643139-3']);
+ _gaq.push(['_trackPageview']);
+
+ (function() {
+   var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+   ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+ })();
+
+</script>
+  <script data-main="/mobile/app/config" src="assets/js/libs/require.js"></script>
+</body>
+</html>

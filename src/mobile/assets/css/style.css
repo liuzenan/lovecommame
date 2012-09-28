@@ -1,0 +1,842 @@
+/* Universal Definition */
+
+/*
+
+purple: #ec008c
+green: #8dc73f
+light green: #9ddd46
+
+*/
+
+@font-face{
+	font-family: 'Rancho';
+	src: url(../font/Rancho-Regular.ttf);
+}
+
+/*layout fix*/
+*, *:after, *:before{
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
+input[type="text"], input[type="password"],input[type="email"], textarea{
+	-webkit-appearance: none;
+	-moz-apprearance: none;
+	-o-apprearance: none;
+	apprearance: none;
+	border-radius: 0;
+	outline: none;
+}
+
+/* cross page definitions */
+
+html,body, #main{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+html{
+	background: url(../img/basic_background.gif) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	background-attachment:fixed;
+}
+
+.footer{
+	height: 10%;
+}
+
+#layout{
+	min-height: 100%;
+	position: relative;
+}
+
+footer{
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 30px;
+}
+
+/* Typography */
+h1, h2, a, p, a:visited, a:hover, button, form, label{
+    font-family: 'Rancho', cursive;
+    font-weight: 400;
+    margin: 0;
+    text-decoration: none;
+}
+
+
+h2{
+	font-size: 1.5em;
+}
+
+.header h1{
+	background:url(../img/title.png) no-repeat left bottom;
+	background-size: 108px 48px;
+	text-indent: -9999px;
+}
+
+ul{
+	list-style: none outside none;
+}
+
+/*navigations*/
+
+
+.navigation{
+	width: 290px;
+	margin: 0 auto;
+}
+
+.navigation a{
+	text-shadow: 1px 1px 0px rgba(0,0,0,0.7);
+    filter: dropshadow(rgba(0,0,0,0.7), offx=1, offy=1);
+	color: #74B9B4;
+	font-size: 1.2em;
+	line-height: 0.8em;
+	display: block;
+	float: left;
+	text-align: center;
+	border-right: 1px solid rgba(255,255,255,0.7);
+	margin: 5px;
+	padding-right: 10px;
+}
+
+.navigation a:last-child{
+	margin-right: 0;
+	padding-right: 0;
+	border-right: none;
+}
+
+.navigation a.current{
+	color: white;
+}
+
+footer{
+	height: 40px;
+}
+
+/* css button */
+
+.button {
+    display: inline-block;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#35b7ba), color-stop(100%,#2c9294));
+    background: -moz-linear-gradient(center top, #35b7ba 0%, #2c9294 100%);
+    -webkit-box-shadow: 0px 1px 0px #2eced0 inset;
+    -moz-box-shadow: 0px 1px 0px #2eced0 inset;
+    box-shadow: 0px 1px 0px #2eced0 inset;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    text-shadow: 0px 1px 0px #52c5c7;
+    padding: 7px 10px;
+    border-color: #1e6d6f;
+    border-width: 1px;
+    border-style: solid;
+    color: #105354;
+}
+.button:hover {
+    text-shadow: 0px 1px 0px #185f60;
+    color: #ffffff;
+}
+.button:active {
+    -webkit-box-shadow: 1px 1px 5px 1px #207c7d inset;
+    -moz-box-shadow: 1px 1px 5px 1px #207c7d inset;
+    box-shadow: 1px 1px 5px 1px #207c7d inset;
+}
+
+
+/* login page */
+
+.login.layout,
+.signup.layout{
+	width: 80%;
+	margin: 0 auto;
+}
+
+.login.header{
+	position: relative;
+}
+
+.login.header h1{
+	font-size: 4em;
+	line-height: 1em;
+}
+
+.login.header a{
+	color: #537874;
+	font-size: 1.4em;
+	margin-bottom: 30px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+.login.header{
+	padding: 10px 0 30px 0;
+}
+
+.login form{
+	font-size: 1.2em;
+	color: #32625f;
+}
+
+.login form label{
+	font-size: 1em;
+	color: #32625f;
+}
+
+.login form input{
+    -webkit-box-shadow: 
+      inset 0 0 4px  rgba(0,0,0,0.2),
+            0 0 8px rgba(0,0,0,0.2); 
+    -moz-box-shadow: 
+      inset 0 0 4px  rgba(0,0,0,0.2),
+            0 0 8px rgba(0,0,0,0.2); 
+    box-shadow: 
+      inset 0 0 4px  rgba(0,0,0,0.2),
+            0 0 8px rgba(0,0,0,0.2); 
+	width: 100%;
+	margin: 0 0 20px 0;
+	display: block;
+	border-radius: 5px;
+	-moz-border-radius:5px;
+	-webkit-border-radius: 5px;
+	border: 1px solid #3e7b77;
+	padding:10px;
+	font-size: 20px;
+	background-color: rgba(105,151,147,0.9);
+	color: white;
+}
+
+.login form input:focus{
+	background-color: rgba(105,151,147,0.8);
+	outline: none;
+	box-shadow: 0 0 5px #3f7c78;
+}
+
+.login form input[type="checkbox"]{
+	width: 20px;
+	display: inline-block;
+	margin: 0 10px 0 0;
+}
+
+.login form button{
+	margin-top: 10px;
+	width: 100%;
+}
+
+.login.container {
+	padding-bottom: 30px;
+}
+
+/* wall */
+
+.wall.layout{
+	width: 100%;
+	height: 100%;
+}
+
+.wall.header{
+	position: relative;
+	width: 90%;
+	height: 20%;
+	margin-left: 10%;
+}
+
+.wall.header h1{
+	position: absolute;
+	width: 120px;
+	top: 50%;
+	margin-top: -0.3em;
+	font-size: 3em;
+	line-height: 1em;
+}
+
+
+#postcardList{
+	padding-left: 10%;
+	height: 70%;
+	position: relative;
+	margin-top: 15px;
+}
+
+.postcardWallList{
+	margin:0;
+	width: 10000px;
+	padding: 0;
+	height: 100%;
+	position: relative;
+	overflow: visible;
+}
+
+
+.wall ul.postcardWallList li{
+	width: 240px;
+	height: 180px;
+	float: left;
+	overflow: visible;
+}
+
+p.wall.postcard.text {
+    color: #222222;
+    display: block;
+    font-size: 12px;
+    margin-left: 10%;
+    margin-top: 40%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 200;
+}
+
+
+.postcard.container{
+	position: relative;
+	padding: 2px;
+	width: 90%;
+	height: 90%;
+	z-index: 1;
+	-webkit-perspective: 1000;
+	-moz-perspective: 1000;
+	-o-perspective: 1000;
+	perspective: 1000;
+}
+
+.postcard.card{
+	width: 100%;
+	height: 100%;
+	-webkit-transform-style: preserve-3d;
+	-webkit-transition: all 0.5s ease-in;
+	-moz-transform-style: preserve-3d;
+	-moz-transition: all 0.5s ease-in;
+	-o-transform-style: preserve-3d;
+	-o-transition: all 0.5s ease-in;
+	transform-style: preserve-3d;
+	transition: all 0.5s ease-in;
+	-webkit-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7); 
+	-moz-box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7); 
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7); 
+	border: 1px solid white;
+	display: block;
+}
+
+.postcard.card.flip{
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+}
+
+.postcard.image{
+	width: 100%;
+	height: 100%;
+}
+
+.postcard.face {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;
+	background: white;
+}
+
+.postcard.back.face  {
+	display: block;
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
+	transform: rotateY(180deg);
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	padding: 10px;
+	color: white;
+	text-align: center;
+}
+
+
+.postcard.envelop.front.face{
+	background: url(../img/front_white.png) no-repeat center center;
+	background-size: 100% 100%;
+
+}
+
+.postcard.envelop.back.face{
+	background: url(../img/back_white.png) no-repeat center center;
+	background-size: 100% 100%;
+}
+
+.front.face{
+	background-color: white !important;
+}
+
+.back.face{
+	background-color: white !important;
+}
+
+/* compose */
+
+.layout.compose{
+	height: 100%;
+}
+
+#composeContainer{
+	width: 100%;
+	height: 100%;
+}
+
+#composeContainer div.clearfix{
+	height: 100%;
+	min-width: 660px !important;
+}
+
+#composeContainer div.clearfix > div{
+	float: left;
+	margin:20px;
+}
+
+.compose.draft.title {
+    padding: 0;
+}
+
+.postcardDraftList .draft.postcard.container{
+	height: 100% !important; 
+	width: 100% !important;
+	margin: 0;
+}
+
+.compose.draft, .compose.draft.container {
+    padding: 0;
+}
+
+ul.postcardDraftList {
+    margin: 0;
+    padding-left: 0;
+}
+
+.postcardDraftList li {
+    float: left;
+    margin-right: 20px;
+}
+
+.compose.title{
+	font-size: 3em;
+	color: white;
+}
+
+.postcard.card.compose.new{
+	display: block;
+	margin-top: 5%;
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+	background: white url(../img/retina_dust.png);
+	text-align: center;
+	padding: 25% 0;
+	font-size: 1.6em;
+	color: white;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.postcard.card.compose.new,
+.compose.draft.container{
+	margin-top: 10px;
+}
+
+/* display */
+
+.layout .options{
+    margin-left: 10%;
+    padding: 50px 0 30px 0;
+}
+
+.layout .options a{
+	color: white;
+	text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.4);
+	float:left;
+	border-right: 1px #999 solid;
+	line-height: 0.7em;
+	padding: 0 10px 0 10px;
+}
+
+.layout .options a:first-child{
+	padding-left: 0;
+}
+
+.layout .options a:last-child{
+	border-right: none;
+}
+
+
+#displaypostcard{
+	width: 100%;
+	padding-left: 10%;
+	margin-top: -20px;
+}
+
+
+.viewpostcard.container {
+    width: 100%;
+}
+
+/* compose text */
+
+.layout.create{
+	height: 100%;
+}
+
+.create.options{
+	margin-left: 10%;
+	height: 20%;
+}
+
+.create.postcard.editor{
+	height: 80%;
+	width: 100%;
+	margin:0;
+}
+
+.create.options, .create.postcard.editor > div{
+    position: relative;
+}
+
+.create.options button{
+	background: none;
+	border: none;
+	cursor  : pointer;
+    font-size: 1.5em;
+    position: absolute;
+    color: white;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+    bottom: -0.2em;
+    padding: 0 10px;
+}
+
+.create.options button:first-child{
+	padding-left: 0;
+}
+
+
+.send {
+    left: 118px;
+}
+
+.save {
+    left: 58px;
+}
+
+.discard {
+    left: 0;
+}
+
+.create.postcard.editor > div {
+    height: 100%;
+    width: 100%;
+}
+
+#createPostcardWrap {
+    height: 80%;
+    position: relative;
+}
+
+.create.textcontrol,
+.create.photocontrol{
+	height: 20%;
+}
+
+.create.photocontrol{
+	display: none;
+}
+
+.create.postcard.container {
+    height: 100%;
+    margin: 0 10%;
+    padding-right: 100px;
+}
+
+.create.postcard.card {
+    height: 94%;
+    margin: 2% 0;
+    width: 100%;
+}
+
+.create.postcard.front.face {
+    padding: 2%;
+    width: 100%;
+    height: 100%;
+}
+
+
+.create.postcard.textWrap {
+    border-right: 1px solid black;
+    float: left;
+    height: 100%;
+    padding-right: 2%;
+    width: 60%;
+}
+
+.front.face.style1{
+	background: url(../img/pstyle/1/paper.png);
+}
+
+.front.face.style2{
+	background: url(../img/pstyle/2/paper.png);
+}
+
+.front.face.style3{
+	background: url(../img/pstyle/3/paper.png);
+}
+
+.front.face.style4{
+	background: url(../img/pstyle/4/paper.png);
+}
+
+.textWrap, .addressWrap{
+	float: left;
+}
+
+.postcard.content {
+    border: none;
+    height: 80%;
+    overflow: hidden;
+    width: 100%;
+    resize: none;
+	font-size: 14px;
+	line-height: 30px;
+	background: transparent url(../img/postcardline.png);
+}
+
+
+.postcard.content.style1{
+	text-align: center;
+	font-family: "Times New Roman", Times, serif;
+	color: #666;
+}
+
+
+.postcard.content.style2{
+	font-family: "MS Sans Serif", Geneva, sans-serif;
+	color: #777;
+}
+
+
+.postcard.content.style3{
+	font-family: Georgia, serif;
+	color: #777;
+}
+
+
+.postcard.content.style4{
+	font-family: "Palatino Linotype", serif;
+	color: #777;
+}
+
+
+p.create {
+    height: 10%;
+    text-align: right;
+}
+
+.stamp{
+    display: block;
+    height: 40%;
+    background: url(../img/pstyle/1/stamp.png) no-repeat top right;
+}
+
+.stamp.style1{
+	background: url(../img/pstyle/1/stamp.png) no-repeat top right;
+}
+
+.stamp.style2{
+	background: url(../img/pstyle/2/stamp.png) no-repeat top right;
+}
+
+
+.stamp.style3{
+	background: url(../img/pstyle/3/stamp.png) no-repeat top right;
+}
+
+
+.stamp.style4{
+	background: url(../img/pstyle/4/stamp.png) no-repeat top right;
+}
+
+
+.chop{
+	display: block;
+	height: 100%;
+	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+	background-size: 100px !important;
+	margin-right: 40px;
+}
+
+.chop.style1{
+	background:url(../img/pstyle/1/chop.png) no-repeat top right;
+}
+
+.chop.style2{
+	background:url(../img/pstyle/2/chop.png) no-repeat top right;
+}
+
+.chop.style3{
+	background:url(../img/pstyle/3/chop.png) no-repeat top right;
+}
+
+.chop.style4{
+	background:url(../img/pstyle/4/chop.png) no-repeat top right;
+}
+
+
+
+.create.postcard.addressWrap {
+    height: 100%;
+    padding-left: 2%;
+    width: 40%;
+}
+
+.create.postcard.addressWrap label{
+	font-size: 1em;
+	color: #333;
+}
+
+.create.postcard.addressWrap input {
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #999;
+	font-size: 0.8em;
+	background: none;
+}
+
+.create.textcontrol {
+    padding: 10px 0 0 10%;
+}
+
+.create.postcard.back.face > div{
+	width: 100% !important;
+	height: 100% !important;
+}
+
+#uploadimage{
+	width: 100%;
+	height: 100%;
+	background: none;
+	border: none;
+	font-size: 1.6em;
+	color: white;
+}
+
+#flipback{
+left: 10px;
+bottom: 9%;
+margin-bottom: 2px;
+z-index: 99;
+}
+
+
+#uploadimage.overlaybutton.small{
+left: 5px;
+top: 5%;
+font-size: 1em;
+width: 70px;
+height: 30px;
+background: rgba(0, 0, 0, 0.4);
+border: 1px solid white;
+}
+
+.overlaybutton{
+color: white;
+text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.overlaybutton.small{
+width: 100px;
+height: 30px;
+position: absolute;
+background: rgba(0, 0, 0, 0.4);
+border-radius: 10px;
+border: 1px solid white;
+}
+
+#postcardCanvas{
+	width: 200px;
+	height: 150px;
+}
+
+#imageinput{
+	visibility:hidden;
+	position:absolute;
+	top:-50;
+	left:-50;
+}
+
+#canvasWrapper {
+    height: 100%;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+canvas.imageCanvas{
+	left: 0;
+	position: absolute;
+	top: 0;
+	min-height: 100% !important;
+	min-width: 100% !important;
+	width: 100%;
+	height: auto;
+}
+
+/* archive */
+
+
+ul.postcardArchiveList {
+    display: block;
+    margin: 1em auto;
+    padding: 0;
+    position: relative;
+}
+
+.postcardArchiveList li {
+    float: left;
+    width: 50%;
+}
+
+.archive.postcard.container {
+    float: left;
+    margin: 0 2% 0 8%;
+    width: 70%;
+}
+
+.postcardArchiveList form {
+    display: block;
+    float: left;
+    margin-top: -4px;
+    width: 20%;
+}

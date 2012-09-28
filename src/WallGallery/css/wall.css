@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+body, div, h1, h2, h3, p, ul, ol, li, img, header, section, aside, footer, button {
+	margin: 0; padding: 0; border: 0; list-style: none;
+}
+
+h1, h2, h3 {
+	font-family: Georgia, Palatino, Palatino Linotype, Times, Times New Roman, serif;
+	font-weight: normal;
+} 
+
+body{
+	overflow: hidden;
+}
+
+header#wall_top{
+	height: 70px;
+	width: 100%;
+	display: block;
+}
+	.wall_top_cont{
+		margin: 0 auto;
+		padding-top: 30px;
+		padding-left: 40px;
+	}
+
+	div.scroll{
+		overflow: hidden;
+	}
+	
+	div.wall_gallery{
+		float: left;
+		width: 10000px;
+		height: 700px;
+		overflow: hidden;
+		margin: 0;
+		padding-top: 10px;
+		padding-left: 40px;	
+
+	}
+	
+	div.column{
+		float: left;
+		height: 700px;
+		width: 395px;
+	}
+	
+	div.post_card{
+		float: left;
+		width: 375px;
+		height: 250px;
+		margin: 10px 10px 10px 10px;
+	}
+	
+		div.post_card img {
+			width: 100%;
+			height: 100%;
+			box-shadow: 2px 5px 10px #c6c6bf;
+		}
+	.
