@@ -453,9 +453,8 @@ p.sent.postcard.text{
 	height: 100%;
 }
 
-#composeContainer div.clearfix{
+#composeContainer>div{
 	height: 100%;
-	min-width: 660px !important;
 }
 
 #composeContainer div.clearfix > div{
@@ -650,20 +649,20 @@ ul.postcardDraftList {
     width: 60%;
 }
 
-.front.face.style1{
-	background: url(../img/pstyle/1/paper.png);
+.backwrap.style1{
+	background: white url(../img/pstyle/1/paper.png);
 }
 
-.front.face.style2{
-	background: url(../img/pstyle/2/paper.png);
+.backwrap.style2{
+	background: white url(../img/pstyle/2/paper.png);
 }
 
-.front.face.style3{
-	background: url(../img/pstyle/3/paper.png);
+.backwrap.style3{
+	background: white url(../img/pstyle/3/paper.png);
 }
 
-.front.face.style4{
-	background: url(../img/pstyle/4/paper.png);
+.backwrap.style4{
+	background: white url(../img/pstyle/4/paper.png);
 }
 
 .textWrap, .addressWrap{
@@ -855,12 +854,14 @@ border: 1px solid white;
 }
 
 #canvasWrapper {
-    height: 100%;
+    height: 98%;
     left: 0;
     overflow: hidden;
     position: absolute;
     top: 0;
-    width: 100%;
+    width: 98%;
+    z-index: -1;
+    margin: 1%;
 }
 
 canvas.imageCanvas{

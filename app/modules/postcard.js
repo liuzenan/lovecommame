@@ -106,11 +106,22 @@
     }
   });
 
+  Postcard.Collection.Public = Postcard.Collection.extend({
+    parse: function(object){
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        return object.public;
+      }
+      else{
+        // get from all postcard collection
+      }
+    }
+  })
+
   //TODO
   Postcard.Collection.All = Postcard.Collection.extend({
     parse: function(object){
       if($.cookie("token") != null && $.cookie("uid") != null){
-        var temp = object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft);
+        var temp = object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft).concat(object.public);
 
         // store postcard collection locally
         localStorage.setItem('all_postcard', JSON.stringify(temp));
@@ -161,6 +172,10 @@
 
   Postcard.Views.SentItem = Postcard.Views.Item.extend({
     template: "tpl_postcard_sent"
+  });
+
+  Postcard.Views.PublicItem = Postcard.Views.Item.extend({
+    template: "tpl_postcard_public"
   });
 
   Postcard.Views.List = Backbone.View.extend({
@@ -240,6 +255,34 @@ Postcard.Views.SentList = Postcard.Views.List.extend({
     }
   });
 
+
+Postcard.Views.PublicList = Postcard.Views.List.extend({
+  className: "postcardPublic",
+
+    beforeRender: function(){
+      this.$el.children().remove();
+      this.collection.each(function(postcard){
+        this.insertView(new Postcard.Views.PublicItem({
+          model: postcard
+        }));
+      }, this);
+    },
+
+    afterRender: function(){
+      this.resizePostcard();
+      var current = this;
+      $(window).resize(function(){
+        current.resizePostcard();
+      })
+      if(app.router.scroller){
+        app.router.scroller.refresh();
+      }
+    }
+  
+});
+
+
+
 Postcard.Views.ArchiveItem = Backbone.View.extend({
   tagName:"li",
   template: "tpl_postcard_archive",
@@ -247,6 +290,7 @@ Postcard.Views.ArchiveItem = Backbone.View.extend({
     return this.model.toJSON();
   }
 });
+
 
 
 Postcard.Views.ArchiveList = Postcard.Views.List.extend({
@@ -277,11 +321,6 @@ Postcard.Views.DraftItem = Backbone.View.extend({
 });
 
 
-Postcard.Views.PublicList = Postcard.Views.List.extend({
-  className: "postcardPublic",
-  
-});
-
 
 Postcard.Views.DraftList = Postcard.Views.List.extend({
   className: "postcardDraftList clearfix",
@@ -306,11 +345,18 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       buttonV = 240;
       buttonH = buttonV/1.5;
     }
+
+    $("div.compose.new").css("width", buttonV+"");
       $(".compose.face").css("height", buttonH+"");
       $(".compose.face").css("width", buttonV+"");
       $("ul.postcardDraftList li").height(buttonH);
       $("ul.postcardDraftList li").width(buttonV);
-      $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
+      $("#composeContainer>div").width((buttonV+20)*(numOfCards+2)+100);
+
+
+   if(app.router.scroller){
+        app.router.scroller.refresh();
+    }
   }
 });
 
@@ -378,13 +424,15 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       var currentbutton = ev.target;
       var currentStyle = $(currentbutton).attr("id");
       console.log(currentStyle);
-      $(".create.postcard.front.face").removeClass("style1 style2 style3 style4")
-      $(".create.postcard.front.face").addClass(currentStyle);
-      $(".stamp").removeClass("style1 style2 style3 style4");
+      $("p.create, label.postcard, input").removeClass("style style1 style2 style3 style4");
+      $("p.create, label.postcard, input").addClass(currentStyle);
+      $(".create.postcard.backwrap").removeClass("style style1 style2 style3 style4")
+      $(".create.postcard.backwrap").addClass(currentStyle);
+      $(".stamp").removeClass("style style1 style2 style3 style4");
       $(".stamp").addClass(currentStyle);
-      $(".chop").removeClass("style1 style2 style3 style4");
+      $(".chop").removeClass("style style1 style2 style3 style4");
       $(".chop").addClass(currentStyle);
-      $(".postcard.content").removeClass("style1 style2 style3 style4");
+      $(".postcard.content").removeClass("style style1 style2 style3 style4");
       $(".postcard.content").addClass(currentStyle);
     },
 
@@ -758,7 +806,8 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       $("#imageinput").live('change', function(e){
         console.log("inside change");
         $("#canvasWrapper").children().remove();
-        uploadPhoto(e.target.files)
+        uploadPhoto(e.target.files);
+        $("#canvasWrapper").css("z-index", "0")
       });
 
 

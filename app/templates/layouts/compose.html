@@ -1,4 +1,5 @@
 <div id="composeContainer">
+	<div>
 	<div class="clearfix">
 		<div class="compose new">
 		<h1 class="compose new title">New Postcard</h1>
@@ -11,6 +12,8 @@
 		<div class="compose draft container">
 		</div>
 	</div>
+	</div>
+		
 	</div>
 
 </div>
@@ -37,10 +40,11 @@
         buttonV = 240;
         buttonH = buttonV/1.5;
       }
+      $(".compose.new").css("width", buttonV+"");
       $(".compose.face").css("height", buttonH+"");
       $(".compose.face").css("width", buttonV+"");
       $("ul.postcardDraftList li").height(buttonH)
       $("ul.postcardDraftList li").width(buttonV);
-      $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
+      $("#composeContainer>div").width((buttonV+20)*(numOfCards+2)+100);
   });
 </script>

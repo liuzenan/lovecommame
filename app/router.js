@@ -28,14 +28,14 @@ define([
 
     index: function() {
       this.reset();
-      app.useLayout("login").setViews({
+      app.useLayout("login").setView({
         ".container" : new User.Views.Login({model: this.user})
       }).render();
     },
 
     signup: function() {
       this.reset();
-      app.useLayout("signup").setViews({
+      app.useLayout("signup").setView({
         ".container" : new User.Views.Signup({model: this.user})
       }).render();
     },
@@ -51,10 +51,9 @@ define([
       }
       else{        
         this.allPos = JSON.parse(localStorage.getItem("all_postcard"));
-        alert(this.allPos);
       }
       var current = this;
-      app.useLayout("wall").setViews({
+      app.useLayout("wall").setView({
         '.postcardList' : new Postcard.Views.WallList({collection: this.recPos})
       }).render().then(function(){
 
@@ -82,8 +81,6 @@ define([
         });
       }
       else{
-        alert(JSON.stringify(this.allPos));
-        alert(this.allPos.where({status: 1}));
       }  
     },
 
@@ -106,7 +103,7 @@ define([
     sentWall:function(){
       this.reset();
       var current = this;
-      app.useLayout("wall").setViews({
+      app.useLayout("wall").setView({
         '.postcardList' : new Postcard.Views.SentList({collection: this.senPos})
       }).render().then(function(el){
 current.setScroller('postcardList');
@@ -122,20 +119,25 @@ current.setScroller('postcardList');
         });
       }
       else{
-        alert("sentwall");
       }
     },
 
     publicWall : function(){
       this.reset();
+      var current= this;
         $(".navigation>a").removeClass("current");
         $("#btnpublic").addClass("current");
+        app.useLayout("wall").setView({
+          '.postcardList' : new Postcard.Views.PublicList({collection: this.pubPos})
+        }).render().then(function(el){
+          current.setScroller('postcardList');
+        });
     },
 
     archive : function(){
       this.reset();
       var current = this;
-      app.useLayout("archive").setViews({
+      app.useLayout("archive").setView({
         '#archiveList' : new Postcard.Views.ArchiveList({collection: this.arcPos})
       }).render();
       console.log("archive render");
@@ -149,21 +151,20 @@ current.setScroller('postcardList');
         });
       }
       else{
-        alert("archive");
       }  
     },
 
     viewPostcard: function(type,id){
       var current = this;
       if(type=="sent"){
-        app.useLayout("viewsent").setViews({
+        app.useLayout("viewsent").setView({
           '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
         }).render().then(function(el){
           current.setScroller('displaypostcard');
         });        
 
       }else{
-        app.useLayout("viewpostcard").setViews({
+        app.useLayout("viewpostcard").setView({
           '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
         }).render().then(function(el){
           current.setScroller('displaypostcard');
@@ -174,7 +175,7 @@ current.setScroller('postcardList');
     compose: function(){
       this.reset();
       var current = this;
-      app.useLayout("compose").setViews({
+      app.useLayout("compose").setView({
         '.container' : new Postcard.Views.DraftList({collection: this.draPos})
       }).render().then(function(el){
        // console.log("after render");
@@ -200,20 +201,21 @@ current.setScroller('postcardList');
         });
       }
       else{
-        alert("draft");
       }  
+
+      current.setScroller('composeContainer');
     },
 
     composeText: function(id){
       var current = this;
       if(id==0){
         this.newPos = new Postcard.Model();
-        app.useLayout("create").setViews({
+        app.useLayout("create").setView({
           '.editor' : new Postcard.Views.EditText({model: this.newPos})
         }).render();
       }else{
         this.newPos = this.draPos.get(id);
-        app.useLayout("create").setViews({
+        app.useLayout("create").setView({
           '.editor' : new Postcard.Views.EditText({model:this.newPos})
         }).render();
       }
@@ -251,6 +253,8 @@ current.setScroller('postcardList');
       this.arcPos = new Postcard.Collection.Archive();
       //draft postcards
       this.draPos = new Postcard.Collection.Draft();
+
+      this.pubPos = new Postcard.Collection.Public();
       //create new postcards
       this.newPos = new Postcard.Model();
       //contacts

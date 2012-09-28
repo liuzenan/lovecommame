@@ -4,7 +4,7 @@
 			<img class="display postcard image" src="/<%= photo.uri %>" alt=""/>
 		</div>
 		<div class="display postcard back face style<%= body.body_effect %>">
-			<div class="display postcard backwrap">
+			<div class="display postcard backwrap style<% if(status==0){%><%= body.body_effect %><% } %>">
 			<div class="display postcard textWrap">
 				<p class="display postcard text style<%= body.body_effect %>"><%= body.content %></p>
 			</div>
