@@ -126,7 +126,6 @@
         // store postcard collection locally
         localStorage.setItem('all_postcard', JSON.stringify(temp));
 
-        alert(temp.length);
 
         return temp;
       }
@@ -257,7 +256,7 @@ Postcard.Views.SentList = Postcard.Views.List.extend({
 
 
 Postcard.Views.PublicList = Postcard.Views.List.extend({
-  className: "postcardPublic",
+  className: "postcardWallList",
 
     beforeRender: function(){
       this.$el.children().remove();
@@ -474,7 +473,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       if($.cookie("token") != null && $.cookie("uid") != null){
 
         if($("#createPostcardWrap").attr("data-pid") == -1){
-          alert("new card");
           // save the postcard as a draft version
           // top, left, width, height, photo_effect should be recorded
           $.ajax({
@@ -498,7 +496,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
 
             success: function(response){
-              alert(response);
               
               // add postcard into draft collection
               var new_postcard = new Postcard.Model({
@@ -519,7 +516,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
                 public_card: 0
               });
 
-              alert("adding new postcard to collection");
 
               // adding the new draft into collections
               app.router.allPos.add(new_postcard);
@@ -528,7 +524,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
               // renew the locally stored data
               localStorage.setItem('all_postcard', app.router.allPos.toJSON());
 
-              alert(localStorage.getItem('all_postcard'));
 
               // going back to draft list
               app.router.go("wall");
@@ -539,7 +534,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           });
         }
         else{
-          alert("old card");
           // save the postcard as a draft version
           // top, left, width, height, photo_effect should be recorded
           $.ajax({
@@ -689,7 +683,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             public_card: 0},
 
           success: function(response){
-            alert(response);
             
             // add postcard into sent collection
             var new_postcard = new Postcard.Model({
@@ -733,15 +726,12 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
     afterRender: function(){
 
-      alert("start geolocation");
       // detecting geo-location
 
       if(navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function(position){
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
-
-          alert("Location: " + lat + " / " + lng);
         }, function(){
           alert("Sorry we cannot find your location right now :(");
         });

@@ -125,8 +125,7 @@ current.setScroller('postcardList');
     publicWall : function(){
       this.reset();
       var current= this;
-        $(".navigation>a").removeClass("current");
-        $("#btnpublic").addClass("current");
+
         app.useLayout("wall").setViews({
           '.postcardList' : new Postcard.Views.PublicList({collection: this.pubPos})
         }).render().then(function(el){
@@ -142,6 +141,9 @@ current.setScroller('postcardList');
       }
       else{
       }
+
+      $(".navigation>a").removeClass("current");
+      $("#btnpublic").addClass("current");
 
     },
 
@@ -174,7 +176,16 @@ current.setScroller('postcardList');
           current.setScroller('displaypostcard');
         });        
 
-      }else{
+      }else if(type="public"){
+        app.useLayout("viewpublic").setViews({
+          '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
+        }).render().then(function(el){
+          current.setScroller('displaypostcard');
+        });        
+
+
+
+    }else{
         app.useLayout("viewpostcard").setViews({
           '.viewpostcard' : new Postcard.Views.Detail({model: this.allPos.get(id)})
         }).render().then(function(el){

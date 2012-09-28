@@ -308,7 +308,8 @@ footer{
 }
 
 p.wall.postcard.text,
-p.sent.postcard.text{
+p.sent.postcard.text,
+p.public.postcard.text{
     color: #222222;
     display: block;
     font-size: 12px;
@@ -379,7 +380,7 @@ p.sent.postcard.text{
 	height: 100%;
 	background: white;
 	margin: 0;
-	padding:0;
+	padding: 5px;
 }
 
 .postcard.back.face  {
