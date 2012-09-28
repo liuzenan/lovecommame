@@ -195,11 +195,11 @@
       if(containerHeight<containerWidth){
         childlist.height(containerHeight*0.7);
         childlist.width(containerHeight*0.7*1.5);
-        $(".postcardWallList").width(numOfCards*containerHeight*0.7*1.5+200);
+        $(".postcardWallList").width(numOfCards*containerHeight*0.7*1.5+100);
       }else{
         childlist.height((containerHeight*0.7)/2);
         childlist.width((containerHeight*0.7)/2*1.5);
-        $(".postcardWallList").width(((numOfCards+1)/2)*containerHeight*0.7*1.5+200);
+        $(".postcardWallList").width(((numOfCards+1)/2)*(containerHeight*0.7/2)*1.5+100);
       }
   }
 });

@@ -44,6 +44,7 @@ assets/img/splash-640.png
 assets/img/splash-768.png
 assets/img/splash-1024.png
 assets/img/postcardline.png
+assets/img/title.png
 assets/js/libs/almond.js
 assets/js/libs/backbone.js
 assets/js/libs/jquery.js
@@ -62,4 +63,3 @@ assets/font/Rancho-Regular.ttf
 NETWORK:
 ../api.php
 http://www.google-analytics.com/ga.js
-*

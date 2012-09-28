@@ -274,12 +274,13 @@ footer{
 
 
 #postcardList{
+	padding-left: 10%;
 	height: 70%;
 	position: relative;
+	margin-top: 15px;
 }
 
 .postcardWallList{
-	padding-left: 10%;
 	margin:0;
 	width: 10000px;
 	padding: 0;
