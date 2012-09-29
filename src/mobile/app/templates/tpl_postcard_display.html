@@ -1,0 +1,21 @@
+<div class="display postcard container" data-pid="<%= pid %>">
+	<div  class="display postcard card">
+		<div class="display postcard front face">
+			<img class="display postcard image" src="/<%= photo.uri %>" alt=""/>
+		</div>
+		<div class="display postcard back face style<%= body.body_effect %>">
+			<div class="display postcard backwrap style<% if(status==0){%><%= body.body_effect %><% } %>">
+			<div class="display postcard textWrap">
+				<p class="display postcard text style<%= body.body_effect %>"><%= body.content %></p>
+			</div>
+			<div class="display postcard addressWrap">
+				<span class="stamp style<%= body.body_effect %>">
+					<span class="chop style<%= body.body_effect %>"></span>
+				</span>
+				<p class="display postcard text address">From: <%= uid_from.uname %><br><%= uid_from.mail %></p>
+			</div>
+			</div>
+		</div>	
+ 	</div>
+</div>
+	

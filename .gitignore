@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 dist/
 npm-debug.log
 .lock-wscript
 build/node_modules/grunt/node_modules/glob/build
+=======
+/nbproject/private/
+>>>>>>> ec070df21e2507a7943b35a32de8abdd75b4c951

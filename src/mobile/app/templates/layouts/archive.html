@@ -1,0 +1,19 @@
+<div id="archiveList" class="postcardList">
+	
+</div>
+<footer class="footer">
+<div class="navigation clearfix">
+	<a id="btnarchive" href="#archive" class="current">Archive</a>
+	<a id="btninbox" href="#wall">Inbox</a>
+	<a id="btnsent" href="#wall/sent">Sent</a>
+	<a id="btnpublic" href="#wall/public">Public</a>
+	<a id="btncompose" href="#compose">Compose</a>
+</div>
+</footer>
+
+<script type="text/javascript">
+	$(window).resize(function(){
+		var postcardArc = $(".archive.postcard.card");
+   		postcardArc.height(postcardArc.width()/1.5);
+	});
+</script>

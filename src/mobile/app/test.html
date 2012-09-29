@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="http://wcetdesigns.com/assets/javascript/jquery/cookie-plugin.js"></script>
+		<script>
+			function remember_me(){
+				var c = $("#check"); //INPUT CHECKBOX
+
+				//IF CHECKBOX IS SET, COOKIE WILL BE SET
+				if(c.is(":checked")){
+					alert("Checked");
+
+					var u = $("#username").val(); //VALUE OF USERNAME
+					var p = $("#password").val(); //VALUE OF PASSWORD
+
+					$.cookie("username", e, { expires: 3650 }); //SETS IN DAYS (10 YEARS)
+					$.cookie("password", p, { expires: 3650 }); //SETS IN DAYS (10 YEARS)
+				}
+			}	
+			//NEXT PAGE LOAD, THE USERNAME & PASSWORD WILL BE SHOWN IN THEIR FIELDS
+			function load_em(){
+				alert("load");
+
+				var e = $.cookie("username"); //'USERNAME' COOKIE
+				var p = $.cookie("password"); //'PASSWORD' COOKIE
+
+				$("#username").val(e); //FILLS WITH 'USERNAME' COOKIE
+				$("#password").val(p); //FILLS WITH 'PASSWORD' COOKIE
+			}
+		</script>
+	</head>
+<body onLoad="load_em()">
+<input id="username"><br>
+<input id="password" type="password"><br>
+<input id="check" type="checkbox"> Remember Me<br>
+<input onClick="remember_me()" type="button" value="Demo">
+
+</body>
+</html>
