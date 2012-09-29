@@ -388,7 +388,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           }
         });
       });
-
       // mark as read if the postcard used to be unread
       if(this.model.get("status") == 1){
         $.ajax({
