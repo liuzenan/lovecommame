@@ -1,14 +1,19 @@
 <div id="composeContainer">
+	<div>
 	<div class="clearfix">
 		<div class="compose new">
 		<h1 class="compose new title">New Postcard</h1>
-		<a class="postcard card compose new" href="#compose/text/0">Compose</a>
+		<div class="compose face">
+			<a class="postcard card compose new" href="#compose/text/0">Compose</a>
+		</div>
 	</div>
 	<div class="compose draft">
 		<h1 class="compose draft title">Saved Drafts</h1>
 		<div class="compose draft container">
 		</div>
 	</div>
+	</div>
+		
 	</div>
 
 </div>
@@ -26,7 +31,7 @@
 <script type="text/javascript">
 
 	$(window).resize(function(){
-	  var numOfCards = $(".postcardDraftList > li").length;
+	  var numOfCards = $(".postcardDraftList li").length;
       var windowHeight =  $(window).height();
       var windowWidth = $(window).width();
       var buttonH = windowHeight*0.36;
@@ -35,8 +40,11 @@
         buttonV = 240;
         buttonH = buttonV/1.5;
       }
-      $("a.compose.new").css("height", buttonH+"px").css("width", buttonV+"px");
-      $("ul.postcardDraftList>li").css("height", buttonH+"px").css("width", buttonV+"px");
-      $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
+      $(".compose.new").css("width", buttonV+"");
+      $(".compose.face").css("height", buttonH+"");
+      $(".compose.face").css("width", buttonV+"");
+      $("ul.postcardDraftList li").height(buttonH)
+      $("ul.postcardDraftList li").width(buttonV);
+      $("#composeContainer>div").width((buttonV+20)*(numOfCards+2)+100);
   });
 </script>

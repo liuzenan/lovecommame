@@ -1,11 +1,13 @@
 <div class="wall postcard container">
 		<a class="wall postcard card" href="#postcard/wall/<%= pid %>">
 			<% if(status == 2) { %>
-			<div class="wall postcard front face">
+			<div class="wall postcard read front face">
 				<img class="wall postcard image" src="/<%= photo.uri %>" alt=""/>
 			</div>
-			<div class="wall postcard back face">
-				<p class="wall postcard text">from: <%= uid_from.uname %></p>
+			<div class="wall postcard read back face">
+				<div class="wall postcard backwrap">
+					<p class="wall postcard text">from: <%= uid_from.uname %></p>
+				</div>
 			</div>
 			<% } else { %>
 			<div class="wall postcard envelop front face">

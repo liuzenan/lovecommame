@@ -106,16 +106,26 @@
     }
   });
 
+  Postcard.Collection.Public = Postcard.Collection.extend({
+    parse: function(object){
+      if($.cookie("token") != null && $.cookie("uid") != null){
+        return object.public;
+      }
+      else{
+        // get from all postcard collection
+      }
+    }
+  })
+
   //TODO
   Postcard.Collection.All = Postcard.Collection.extend({
     parse: function(object){
       if($.cookie("token") != null && $.cookie("uid") != null){
-        var temp = object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft);
+        var temp = object.draft.concat(object.sent).concat(object.read).concat(object.unread).concat(object.draft).concat(object.public);
 
         // store postcard collection locally
         localStorage.setItem('all_postcard', JSON.stringify(temp));
 
-        alert(temp.length);
 
         return temp;
       }
@@ -161,6 +171,10 @@
 
   Postcard.Views.SentItem = Postcard.Views.Item.extend({
     template: "tpl_postcard_sent"
+  });
+
+  Postcard.Views.PublicItem = Postcard.Views.Item.extend({
+    template: "tpl_postcard_public"
   });
 
   Postcard.Views.List = Backbone.View.extend({
@@ -240,6 +254,34 @@ Postcard.Views.SentList = Postcard.Views.List.extend({
     }
   });
 
+
+Postcard.Views.PublicList = Postcard.Views.List.extend({
+  className: "postcardWallList",
+
+    beforeRender: function(){
+      this.$el.children().remove();
+      this.collection.each(function(postcard){
+        this.insertView(new Postcard.Views.PublicItem({
+          model: postcard
+        }));
+      }, this);
+    },
+
+    afterRender: function(){
+      this.resizePostcard();
+      var current = this;
+      $(window).resize(function(){
+        current.resizePostcard();
+      })
+      if(app.router.scroller){
+        app.router.scroller.refresh();
+      }
+    }
+  
+});
+
+
+
 Postcard.Views.ArchiveItem = Backbone.View.extend({
   tagName:"li",
   template: "tpl_postcard_archive",
@@ -247,6 +289,7 @@ Postcard.Views.ArchiveItem = Backbone.View.extend({
     return this.model.toJSON();
   }
 });
+
 
 
 Postcard.Views.ArchiveList = Postcard.Views.List.extend({
@@ -277,6 +320,7 @@ Postcard.Views.DraftItem = Backbone.View.extend({
 });
 
 
+
 Postcard.Views.DraftList = Postcard.Views.List.extend({
   className: "postcardDraftList clearfix",
 
@@ -300,11 +344,18 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       buttonV = 240;
       buttonH = buttonV/1.5;
     }
-      $("a.compose.new").css("height", buttonH+"");
-      $("a.compose.new").css("width", buttonV+"");
+
+    $("div.compose.new").css("width", buttonV+"");
+      $(".compose.face").css("height", buttonH+"");
+      $(".compose.face").css("width", buttonV+"");
       $("ul.postcardDraftList li").height(buttonH);
       $("ul.postcardDraftList li").width(buttonV);
-      $("#composeContainer>div").width((buttonV+20)*(numOfCards+1)+100);
+      $("#composeContainer>div").width((buttonV+20)*(numOfCards+2)+100);
+
+
+   if(app.router.scroller){
+        app.router.scroller.refresh();
+    }
   }
 });
 
@@ -327,11 +378,27 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       });
 
       // select delete button
-      $('a[value="delete"]').bind("click", function(e){
-        jQuery.alerts.okButton = ' Yes ';
-        jQuery.alerts.cancelButton = ' No ';                  
-        jConfirm('Do you want to delete this postcard?','', function(r){});
+      $('a[title="archive"]').bind("click", function(e){
+        $.ajax({
+          type: "PUT",
+          url: "http://54.251.37.19/api.php/postcard/" + $(".display.postcard.container").attr("data-pid") + "/archive/",
+          data: {token: $.cookie("token")},
+          success: function(ev){
+            app.router.go("wall");
+          }
+        });
       });
+
+      // mark as read if the postcard used to be unread
+      if(this.model.get("status") == 1){
+        $.ajax({
+          type: "PUT",
+          url: "http://54.251.37.19/api.php/postcard/" + this.model.get("pid") + "/read/",
+          data: {token: $.cookie("token")},
+          success: function(ev){
+          }
+        });
+      }
     }
   });
 
@@ -354,13 +421,15 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       var currentbutton = ev.target;
       var currentStyle = $(currentbutton).attr("id");
       console.log(currentStyle);
-      $(".create.postcard.front.face").removeClass("style1 style2 style3 style4")
-      $(".create.postcard.front.face").addClass(currentStyle);
-      $(".stamp").removeClass("style1 style2 style3 style4");
+      $("p.create, label.postcard, input").removeClass("style style1 style2 style3 style4");
+      $("p.create, label.postcard, input").addClass(currentStyle);
+      $(".create.postcard.backwrap").removeClass("style style1 style2 style3 style4")
+      $(".create.postcard.backwrap").addClass(currentStyle);
+      $(".stamp").removeClass("style style1 style2 style3 style4");
       $(".stamp").addClass(currentStyle);
-      $(".chop").removeClass("style1 style2 style3 style4");
+      $(".chop").removeClass("style style1 style2 style3 style4");
       $(".chop").addClass(currentStyle);
-      $(".postcard.content").removeClass("style1 style2 style3 style4");
+      $(".postcard.content").removeClass("style style1 style2 style3 style4");
       $(".postcard.content").addClass(currentStyle);
     },
 
@@ -402,7 +471,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       if($.cookie("token") != null && $.cookie("uid") != null){
 
         if($("#createPostcardWrap").attr("data-pid") == -1){
-          alert("new card");
           // save the postcard as a draft version
           // top, left, width, height, photo_effect should be recorded
           $.ajax({
@@ -426,7 +494,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
 
             success: function(response){
-              alert(response);
               
               // add postcard into draft collection
               var new_postcard = new Postcard.Model({
@@ -447,7 +514,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
                 public_card: 0
               });
 
-              alert("adding new postcard to collection");
 
               // adding the new draft into collections
               app.router.allPos.add(new_postcard);
@@ -456,7 +522,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
               // renew the locally stored data
               localStorage.setItem('all_postcard', app.router.allPos.toJSON());
 
-              alert(localStorage.getItem('all_postcard'));
 
               // going back to draft list
               app.router.go("wall");
@@ -467,7 +532,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           });
         }
         else{
-          alert("old card");
           // save the postcard as a draft version
           // top, left, width, height, photo_effect should be recorded
           $.ajax({
@@ -617,7 +681,6 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
             public_card: 0},
 
           success: function(response){
-            alert(response);
             
             // add postcard into sent collection
             var new_postcard = new Postcard.Model({
@@ -661,18 +724,25 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
 
     afterRender: function(){
 
-      alert("start geolocation");
       // detecting geo-location
+
       if(navigator.geolocation){
-        console.log("1");
         navigator.geolocation.getCurrentPosition(function(position){
           var lat = position.coords.latitude;
           var lng = position.coords.longitude;
-          console.log("2"); 
-          var geocoder = new window.google.maps.Geocoder();
+        }, function(){
+          alert("Sorry we cannot find your location right now :(");
+        });
+      }
 
-          console.log("3");
-          var latlng = new window.google.maps.LatLng(lat, lng);
+// the following is with google map 
+// but it hardly works      
+/*      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(position){
+          var lat = position.coords.latitude;
+          var lng = position.coords.longitude;
+          var geocoder = new google.maps.Geocoder();
+          var latlng = new google.maps.LatLng(lat, lng);
           geocoder.geocode({'latLng': latlng}, function(results, status){
             if (status == window.google.maps.GeocoderStatus.OK) {
               if (results[1]) {
@@ -684,7 +754,7 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
           alert("Sorry we cannot find your location right now :(");
         });
       }
-
+*/
       var postcard = $(this.el).find('.create.postcard.container');
       var postcardH = postcard.height();
       var postcardW = postcardH*1.5;
@@ -724,10 +794,30 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       $("#imageinput").live('change', function(e){
         console.log("inside change");
         $("#canvasWrapper").children().remove();
-        uploadPhoto(e.target.files)
+        uploadPhoto(e.target.files);
+        $("#canvasWrapper").css("z-index", "0")
       });
 
+      console.log(this.model);
+      console.log(this.model.get("status"));
 
+      if(this.model.get("status")==0){
+        $("#canvasWrapper").children().remove();
+        var newimage = new Image();
+        newimage.src = "/" + this.model.get("photo").uri;
+        console.log(newimage.src);
+        var thiscanvas = convertImageToCanvas(newimage);
+        $("#uploadimage").addClass("small");
+        $("#uploadimage").html("Change");
+        $("#canvasWrapper").append(thiscanvas);
+        $(".preset-button").removeAttr("disabled");
+        $(".preset-button").live("click", function(){
+            console.log("clicked button");
+        });
+
+        $("#canvasWrapper").css("z-index", "0")
+
+      };
 
       function uploadPhoto(files){
         console.log("uploadphoto");
@@ -758,9 +848,15 @@ Postcard.Views.DraftList = Postcard.Views.List.extend({
       canvas.setAttribute("id","imageCanvas");
       image.onload = function(){
         console.log("width: "+ image.width + " ,height: "+ image.height);
-        canvas.width = image.width;
-        canvas.height = image.height;
-        canvas.getContext("2d").drawImage(image, 0, 0);
+        var wwidth = $("#canvasWrapper").width();
+        var wheight= $("#canvasWrapper").height();
+        canvas.width = wwidth;
+        canvas.height = wheight;
+        if((wwidth/wheight)>(image.width/image.height)){
+          canvas.getContext("2d").drawImage(image, 0, 0, wwidth, (wwidth/image.width)*image.height);
+        }else{
+          canvas.getContext("2d").drawImage(image, 0, 0, (wheight/image.height)*image.width, wheight);
+        }
         console.log(canvas.getContext("2d").getImageData(0,0, 20, 20));
       };
       return canvas;

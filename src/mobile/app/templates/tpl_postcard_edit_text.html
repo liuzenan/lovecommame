@@ -6,26 +6,31 @@
 <div id="createPostcardWrap" data-pid="<%= pid %>">
 	<div class="create postcard container">
 		<div class="create postcard card">
-			<div class="create postcard front face style<% if(status==0){%><%= body.body_effect %><% } %> clearfix">
+			<div class="create postcard front face clearfix">
+				<div class="create postcard backwrap style<% if(status==0){%><%= body.body_effect %><% } %>">
 				<form class="create postcard textWrap">
 					<textarea name="content" class="create postcard content style<% if(status==0){%><%= body.body_effect %><% } %>" placeholder="Dear friend:"><% if(status==0){%><%= body.content %><% } %></textarea>
-					<p class="create postcard text signature">Love, me</p>
+					<p class="create postcard text signature style<% if(status==0){%><%= body.body_effect %><% } %>">Love, me</p>
 				</form>
 				<div class="create postcard addressWrap">
 					<span class="stamp style<% if(status==0){%><%= body.body_effect %><% } %>">
 						<span class="chop style<% if(status==0){%><%= body.body_effect %><% } %>"></span>
 					</span>
-					<label for="name">Send to:</label>
-					<input type="text" name="name" placeholder="Name">
-					<input type="email" name="email" placeholder="Email address">
+					<label for="name" class="postcard text style<% if(status==0){%><%= body.body_effect %><% } %>">Send to:</label>
+					<input type="text" name="name" placeholder="Name" class="postcard text style<% if(status==0){%><%= body.body_effect %><% } %>">
+					<input type="email" name="email" placeholder="Email address" class="postcard text style<% if(status==0){%><%= body.body_effect %><% } %>">
+				</div>					
 				</div>
 			</div>
 			<div class="create postcard back face">
+				<div class="create postcard backwrap">
 				<button id="uploadimage" class="overlaybutton">Touch to add photo</button>
 				<input type="file" id="imageinput" accept="image/*"/>
 				<div id="canvasWrapper" data-image="<% if(status==0){%><%= body.body_effect %><% } %>">
 					
 				</div>
+				</div>
+
 			</div>
 		</div>
 		<button id="flipback" class="flipback overlaybutton small">Turn over</button>

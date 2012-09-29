@@ -4,7 +4,9 @@
 				<img class="sent postcard image" src="/<%= photo.uri %>" alt=""/>
 			</div>
 			<div class="sent postcard back face">
-				<p class="sent postcard text">send to: <% if (type==0) {%> <%= mail_to%>  <% }else{ %>  <%= uid_to.name %> <% } %> </p>
+				<div class="sent postcard backwrap">
+					<p class="sent postcard text">send to: <% if(type==0||type=="0"){%><%= mail_to %><% }else{ %><%= uid_to.uname %><% } %> </p>
+				</div>
 			</div>
 	 	</a>
 </div>
